@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "no-var": "warn",
+    "eqeqeq": "warn",
+    "dot-notation": "warn",
+    "no-unused-vars": "warn",
+    "react/destructuring-assignment": "warn",
+    "react/jsx-pascal-case": "warn",
+    "react/no-direct-mutation-state": "warn",
+    "react/jsx-no-useless-fragment": "warn",
+    "react/no-unused-state": "warn",
+    "react/jsx-key": "warn",
+    "react/self-closing-comp": "warn",
+    "react/jsx-curly-brace-presence": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
