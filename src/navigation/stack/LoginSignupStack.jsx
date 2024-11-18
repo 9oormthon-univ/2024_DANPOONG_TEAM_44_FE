@@ -31,7 +31,7 @@ function LoginSignupStack() {
         options={({ navigation }) => ({
           title: '',
           headerLeft: () => (
-            <View style={{ marginRight: 10 }}>
+            <View style={{ marginLeft: 10 }}>
               <BackIcon onPress={() => navigation.goBack()} />
             </View>
           ),
