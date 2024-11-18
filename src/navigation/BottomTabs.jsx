@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/home/Home';
-import HouseInfoScreen from '../screens/houseInfo/HouseInfo';
-import CommunityScreen from '../screens/community/Community';
-import MyPageScreen from '../screens/myPage/MyPage';
-
+import {
+  HomeStack,
+  HouseInfoStack,
+  CommunityStack,
+  MyPageStack,
+} from './stack/index';
 import HomeIcon from '../assets/icons/homeIcon';
 import HouseInfoIcon from '../assets/icons/houseInfoIcon';
 import CommunityIcon from '../assets/icons/communityIcon';
@@ -40,28 +41,28 @@ function BottomTabs() {
     >
       <Tab.Screen
         name="홈"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color }) => <HomeIcon color={color} />,
         }}
       />
       <Tab.Screen
         name="집정보"
-        component={HouseInfoScreen}
+        component={HouseInfoStack}
         options={{
           tabBarIcon: ({ color }) => <HouseInfoIcon color={color} />,
         }}
       />
       <Tab.Screen
         name="커뮤니티"
-        component={CommunityScreen}
+        component={CommunityStack}
         options={{
           tabBarIcon: ({ color }) => <CommunityIcon color={color} />,
         }}
       />
       <Tab.Screen
         name="마이페이지"
-        component={MyPageScreen}
+        component={MyPageStack}
         options={{
           tabBarIcon: ({ color }) => <MyPageIcon color={color} />,
         }}
