@@ -21,6 +21,14 @@ const leave = `
   </svg>
 `;
 
+const user_mini = `
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9Z" fill="#0080FF"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.97095 15.7568C3.85157 12.2846 6.80473 11.3593 9.07563 11.3593C11.2472 11.3593 13.9606 12.8399 14.9391 15.6878C13.3441 17.1251 11.2324 18 8.91629 18C6.6375 18 4.55653 17.1531 2.97095 15.7568Z" fill="#D9D9D9"/>
+    <circle cx="9.0001" cy="6.72813" r="3.23301" fill="#D9D9D9"/>
+  </svg>
+`;
+
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
 );
@@ -30,6 +38,8 @@ export const WriteIcon = ({ onPress }) => (
 export const LeaveIcon = ({ onPress }) => (
   <SvgXml xml={leave} onPress={onPress} />
 );
+
+export const UserMini = () => <SvgXml xml={user_mini} />;
 
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
