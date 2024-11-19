@@ -16,6 +16,7 @@ function LoginSignupStack() {
         headerTitleStyle: { fontSize: 24 },
         headerShadowVisible: false,
         headerBackVisible: false,
+        headerShown: false,
       }}
     >
       <Stack.Screen
