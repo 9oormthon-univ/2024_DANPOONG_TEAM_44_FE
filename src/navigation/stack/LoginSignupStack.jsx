@@ -16,7 +16,6 @@ function LoginSignupStack() {
         headerTitleStyle: { fontSize: 24 },
         headerShadowVisible: false,
         headerBackVisible: false,
-        headerShown: false,
       }}
     >
       <Stack.Screen
@@ -24,6 +23,7 @@ function LoginSignupStack() {
         component={Start}
         options={{
           title: '',
+          headerShown: false,
         }}
       />
       <Stack.Screen
