@@ -38,7 +38,7 @@ function CommunityStack() {
         name="WritePost"
         component={WritePost}
         options={({ navigation }) => ({
-          title: '글 작성',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -52,7 +52,7 @@ function CommunityStack() {
         name="ViewPost"
         component={ViewPost}
         options={({ navigation }) => ({
-          title: '글 보기',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
