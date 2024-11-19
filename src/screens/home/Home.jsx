@@ -23,7 +23,7 @@ function Home() {
       <View style={styles.card}>
         <Text style={styles.sectionTitleMiddle}>사용자님을 위한 서비스</Text>
         <View style={styles.serviceContainer}>
-          <TouchableOpacity style={styles.serviceButton} onPress={() => navigation.navigate('RealestateInfo')}>
+          <TouchableOpacity style={styles.serviceButton} onPress={() => navigation.navigate('RealEstateInfo')}>
             <Image source={require('../../assets/images/home1.png')} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>부동산 정보</Text>
           </TouchableOpacity>
