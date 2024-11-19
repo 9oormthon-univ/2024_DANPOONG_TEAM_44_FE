@@ -52,7 +52,7 @@ function ViewPost() {
         <TouchableOpacity
           style={styles.connectButton}
           onPress={() =>
-            navigation.navigate('Chat', { id, author: post.author })
+            navigation.navigate('Chat', { id, author: post.authorName })
           }
         >
           <Text style={styles.connectButtonText}>사용자와 연결</Text>

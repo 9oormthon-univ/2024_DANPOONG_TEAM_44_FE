@@ -60,3 +60,25 @@ export const posts = [
     ],
   },
 ];
+
+export const messages = [
+  {
+    id: 1,
+    text: '안녕하세요!',
+    timestamp: '15:19 PM',
+    isMe: true,
+  },
+  {
+    id: 2,
+    text: '단풍로 아파트',
+    timestamp: '15:19 PM',
+    isMe: true,
+  },
+  { id: 3, text: '2층 맞나요?', timestamp: '15:19 PM', isMe: true },
+  { id: 4, text: '네!', timestamp: '15:20 PM', isMe: false },
+  { id: 5, text: '어쩌구', timestamp: '15:20 PM', isMe: false },
+  { id: 6, text: '~~~~~', timestamp: '15:20 PM', isMe: true },
+  { id: 7, text: 'ㄱㄱㄱㄱㄱ', timestamp: '15:20 PM', isMe: true },
+  { id: 8, text: '맞습니다!', timestamp: '15:21 PM', isMe: false },
+  { id: 9, text: '좋은 선택입니다.', timestamp: '15:22 PM', isMe: true },
+];

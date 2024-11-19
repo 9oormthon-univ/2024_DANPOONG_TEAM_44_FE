@@ -7,7 +7,7 @@ import {
   ViewPost,
   Chat,
 } from '../../screens/community/index';
-import { BackIcon, WriteIcon, MenuIcon } from '../../assets/icons/iconSvg';
+import { BackIcon, WriteIcon, LeaveIcon } from '../../assets/icons/iconSvg';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,8 +65,8 @@ function CommunityStack() {
       <Stack.Screen
         name="Chat"
         component={Chat}
-        options={({ navigation }) => ({
-          title: '사용자명',
+        options={({ navigation, route }) => ({
+          title: route.params?.author || '사용자명',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -74,8 +74,8 @@ function CommunityStack() {
             </View>
           ),
           headerRight: () => (
-            <View style={{ marginLeft: 10 }}>
-              <MenuIcon onPress={() => navigation.goBack()} />
+            <View style={{ marginTop: 7 }}>
+              <LeaveIcon onPress={() => navigation.goBack()} />
             </View>
           ),
         })}
