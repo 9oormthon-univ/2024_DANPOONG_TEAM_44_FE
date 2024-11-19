@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,13 +10,71 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { UploadGIcon, PlaceGIcon } from '../../assets/icons/iconSvg';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import {
+  UploadGIcon,
+  UploadBIcon,
+  PlaceGIcon,
+  PlaceBIcon,
+} from '../../assets/icons/iconSvg';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 
 function WritePost() {
   const navigation = useNavigation();
+  const [fileData, setFileData] = useState([]);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [isLocationUploaded, setIsLocationUploaded] = useState(false);
 
   useHideBottomTabs(navigation);
+
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('사진 업로드를 위해 권한이 필요합니다.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      if (result.assets.length > 2) {
+        alert('사진은 최대 2개까지만 선택할 수 있습니다.');
+        return;
+      }
+
+      const newFileData = await Promise.all(
+        result.assets.map(async asset => {
+          const base64Content = await FileSystem.readAsStringAsync(asset.uri, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+
+          return {
+            fileName: asset.uri.split('/').pop(),
+            fileContent: base64Content,
+          };
+        }),
+      );
+
+      setFileData(newFileData);
+      setIsUploaded(true);
+    }
+  };
+
+  const resetSelectionAndPickImage = async () => {
+    setFileData([]);
+    setIsUploaded(false);
+    await pickImage();
+  };
+
+  const uploadLocation = () => {
+    // 임시
+    setIsLocationUploaded(true);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -34,11 +92,23 @@ function WritePost() {
         />
 
         <View style={styles.uploadContainer}>
-          <TouchableOpacity style={styles.uploadButton}>
-            <UploadGIcon />
+          <TouchableOpacity
+            style={[
+              styles.uploadButton,
+              isUploaded && styles.uploadButtonActive,
+            ]}
+            onPress={resetSelectionAndPickImage}
+          >
+            {isUploaded ? <UploadBIcon /> : <UploadGIcon />}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.uploadButton}>
-            <PlaceGIcon />
+          <TouchableOpacity
+            style={[
+              styles.uploadButton,
+              isLocationUploaded && styles.uploadButtonActive,
+            ]}
+            onPress={uploadLocation}
+          >
+            {isLocationUploaded ? <PlaceBIcon /> : <PlaceGIcon />}
           </TouchableOpacity>
         </View>
 
@@ -122,15 +192,8 @@ const styles = StyleSheet.create({
     width: '45%',
     height: 100,
   },
-  uploadText: {
-    fontSize: 16,
-    color: '#868686',
-    marginTop: 12,
-  },
-  imageText: {
-    fontSize: 16,
-    color: '#868686',
-    marginTop: 24,
+  uploadButtonActive: {
+    backgroundColor: '#DFEDFF',
   },
   submitButton: {
     width: 180,
