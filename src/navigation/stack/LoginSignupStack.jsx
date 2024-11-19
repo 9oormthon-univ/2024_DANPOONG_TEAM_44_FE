@@ -23,6 +23,7 @@ function LoginSignupStack() {
         component={Start}
         options={{
           title: '',
+          headerShown: false,
         }}
       />
       <Stack.Screen
