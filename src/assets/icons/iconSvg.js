@@ -28,6 +28,20 @@ const input = `
   </svg>
 `;
 
+const upload_g = `
+  <svg width="41" height="43" viewBox="0 0 41 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 21.9561V35.0449C3 37.8492 5.27331 40.1225 8.07757 40.1225H32.9224C35.7267 40.1225 38 37.8492 38 35.0449V21.9561" stroke="#A5A8AD" stroke-width="5" stroke-linecap="round"/>
+    <path d="M20.6823 28.275V3M20.6823 3L13.9375 10.8984M20.6823 3L27.6094 10.8984" stroke="#A5A8AD" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+`;
+
+const place_g = `
+  <svg width="40" height="53" viewBox="0 0 40 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6.2956 34.6968L6.29552 34.6967C3.02933 29.6048 1.5 25.127 1.5 21.2266C1.5 15.4178 3.31881 10.7304 6.90029 7.04241L6.90035 7.04235C10.5005 3.33469 14.8377 1.5 20 1.5C25.1623 1.5 29.4995 3.33469 33.0997 7.04235L33.0997 7.04241C36.6812 10.7304 38.5 15.4178 38.5 21.2266C38.5 25.127 36.9707 29.6048 33.7045 34.6967L33.7044 34.6968C30.6133 39.517 26.0586 44.7461 20 50.3826C13.9414 44.7461 9.38675 39.517 6.2956 34.6968Z" fill="#A5A8AD" stroke="#A5A8AD" stroke-width="3"/>
+    <path d="M31.0466 20.124C31.0466 26.1563 26.1565 31.0464 20.1243 31.0464C14.092 31.0464 9.2019 26.1563 9.2019 20.124C9.2019 14.0918 14.092 9.20166 20.1243 9.20166C26.1565 9.20166 31.0466 14.0918 31.0466 20.124Z" fill="#F5F5F5" stroke="#A5A8AD" stroke-width="3"/>
+  </svg>
+`;
+
 const user_mini = `
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9Z" fill="#0080FF"/>
@@ -47,6 +61,9 @@ export const LeaveIcon = ({ onPress }) => (
 );
 
 export const InputIcon = () => <SvgXml xml={input} />;
+export const UploadGIcon = () => <SvgXml xml={upload_g} />;
+export const PlaceGIcon = () => <SvgXml xml={place_g} />;
+
 export const UserMini = () => <SvgXml xml={user_mini} />;
 
 BackIcon.propTypes = {
