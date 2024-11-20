@@ -7,8 +7,8 @@ import {
   MyPost,
   AreaSetting,
 } from '../../screens/myPage/index';
-import { ViewPost } from '../../screens/community';
-import { BackIcon } from '../../assets/icons/iconSvg';
+import { ViewPost, Chat } from '../../screens/community';
+import { BackIcon, LeaveIcon } from '../../assets/icons/iconSvg';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,6 +75,24 @@ function MyPageStack() {
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
               <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={Chat}
+        options={({ navigation, route }) => ({
+          title: route.params?.author || '사용자명',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+          headerRight: () => (
+            <View style={{ marginTop: 7 }}>
+              <LeaveIcon onPress={() => navigation.goBack()} />
             </View>
           ),
         })}

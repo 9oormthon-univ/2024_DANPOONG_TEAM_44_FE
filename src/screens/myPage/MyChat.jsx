@@ -1,10 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, FlatList, StyleSheet } from 'react-native';
+import ChatItem from '../../components/community/ChatItem';
+import { chats } from '../../constants/mockData';
 
 function MyChat() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text>MyChat</Text>
+      <FlatList
+        data={chats}
+        renderItem={({ item }) => (
+          <ChatItem
+            name={item.name}
+            lastMessage={item.lastMessage}
+            unreadCount={item.unreadCount}
+            onPress={() =>
+              navigation.navigate('Chat', {
+                id: item.id,
+                author: item.name,
+              })
+            }
+          />
+        )}
+        keyExtractor={item => item.id}
+        contentContainerStyle={styles.listContainer}
+      />
     </View>
   );
 }
@@ -14,8 +36,9 @@ export default MyChat;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#FFFFFF',
+  },
+  listContainer: {
+    paddingVertical: 5,
   },
 });

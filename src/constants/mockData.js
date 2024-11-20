@@ -90,3 +90,30 @@ export const userData = {
   postCount: 5,
   chatCount: 4,
 };
+
+export const chats = [
+  {
+    id: 1,
+    name: '김단풍',
+    lastMessage: '채팅 내용1',
+    unreadCount: 2,
+  },
+  {
+    id: 2,
+    name: '김단풍',
+    lastMessage: '채팅 내용2',
+    unreadCount: 5,
+  },
+  {
+    id: 3,
+    name: '김단풍',
+    lastMessage: '채팅 내용3',
+    unreadCount: 1,
+  },
+  {
+    id: 4,
+    name: '김단풍',
+    lastMessage: '채팅 내용4',
+    unreadCount: 0,
+  },
+];
