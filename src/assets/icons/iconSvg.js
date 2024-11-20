@@ -72,10 +72,24 @@ const user_middle = `
     <circle cx="25.0001" cy="18.6893" r="8.98058" fill="#D9D9D9"/>
 `;
 
+const user_big = `
+  <svg width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M75 37.5C75 58.2107 58.2107 75 37.5 75C16.7893 75 0 58.2107 0 37.5C0 16.7893 16.7893 0 37.5 0C58.2107 0 75 16.7893 75 37.5Z" fill="#0080FF"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3789 65.6533C16.0482 51.1856 28.353 47.3301 37.8151 47.3301C46.8631 47.3301 58.1694 53.4996 62.2463 65.3661C55.6006 71.3548 46.8017 75 37.1514 75C27.6564 75 18.9855 71.4711 12.3789 65.6533Z" fill="#D9D9D9"/>
+    <circle cx="37.5002" cy="28.034" r="13.4709" fill="#D9D9D9"/>
+  </svg>
+`;
+
 const moveTop = `
   <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="26" cy="26" r="26" fill="#0080FF" fill-opacity="0.8"/>
     <path d="M26.7247 18L24.3155 18L15 34L18.7342 34L25.4197 21.8862L25.6606 21.8862L32.2658 34L36 34L26.7247 18Z" fill="#EDF0F5"/>
+  </svg>
+`;
+
+const next = `
+  <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.110396 12.5269L10.026 7.18774V6.28632L0.110396 0.924056V2.61132L7.73775 6.74858L0.110396 10.8396V12.5269Z" fill="#868686"/>
   </svg>
 `;
 
@@ -86,7 +100,9 @@ export const UploadBIcon = () => <SvgXml xml={upload_b} />;
 export const PlaceBIcon = () => <SvgXml xml={place_b} />;
 export const UserMini = () => <SvgXml xml={user_mini} />;
 export const UserMiddle = () => <SvgXml xml={user_middle} />;
+export const UserBig = () => <SvgXml xml={user_big} />;
 export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
+export const NextIcon = () => <SvgXml xml={next} />;
 
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />

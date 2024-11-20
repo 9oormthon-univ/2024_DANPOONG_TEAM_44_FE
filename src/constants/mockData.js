@@ -82,3 +82,11 @@ export const messages = [
   { id: 8, text: '맞습니다!', timestamp: '15:21 PM', isMe: false },
   { id: 9, text: '좋은 선택입니다.', timestamp: '15:22 PM', isMe: true },
 ];
+
+export const userData = {
+  id: '1',
+  name: '김단풍',
+  location: '서울시 단풍로 44',
+  postCount: 5,
+  chatCount: 4,
+};
