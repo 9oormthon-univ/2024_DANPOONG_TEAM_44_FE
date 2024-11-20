@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabs from './src/navigation/BottomTabs';
 import LoginSignupStack from './src/navigation/stack/LoginSignupStack';
+import Splash from './src/screens/Splash';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [splashVisible, setSplashVisible] = useState(true);
 
   useEffect(() => {
     const checkAuthStatus = async () => {
-      // 임시 연결 true: 로그인 완료(홈화면으로) false: 로그인 미완료(Start 화면으로)
+      // 카카오 로그인 구현 시 수정 (현재는 임시로 true로 설정)
       setIsAuthenticated(true);
     };
     checkAuthStatus();
   }, []);
+
+  if (splashVisible) {
+    return <Splash onSplashEnd={() => setSplashVisible(false)} />;
+  }
 
   return (
     <NavigationContainer>

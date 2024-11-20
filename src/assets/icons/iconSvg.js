@@ -70,8 +70,23 @@ const user_middle = `
     <path d="M50 25C50 38.8071 38.8071 50 25 50C11.1929 50 0 38.8071 0 25C0 11.1929 11.1929 0 25 0C38.8071 0 50 11.1929 50 25Z" fill="#0080FF"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M8.25269 43.7688C10.6989 34.1237 18.9021 31.5533 25.2101 31.5533C31.2422 31.5533 38.7797 35.6664 41.4976 43.5774C37.0672 47.5698 31.2012 49.9999 24.7677 49.9999C18.4377 49.9999 12.6571 47.6473 8.25269 43.7688Z" fill="#D9D9D9"/>
     <circle cx="25.0001" cy="18.6893" r="8.98058" fill="#D9D9D9"/>
+`;
+
+const moveTop = `
+  <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="26" cy="26" r="26" fill="#0080FF" fill-opacity="0.8"/>
+    <path d="M26.7247 18L24.3155 18L15 34L18.7342 34L25.4197 21.8862L25.6606 21.8862L32.2658 34L36 34L26.7247 18Z" fill="#EDF0F5"/>
   </svg>
 `;
+
+export const InputIcon = () => <SvgXml xml={input} />;
+export const UploadGIcon = () => <SvgXml xml={upload_g} />;
+export const PlaceGIcon = () => <SvgXml xml={place_g} />;
+export const UploadBIcon = () => <SvgXml xml={upload_b} />;
+export const PlaceBIcon = () => <SvgXml xml={place_b} />;
+export const UserMini = () => <SvgXml xml={user_mini} />;
+export const UserMiddle = () => <SvgXml xml={user_middle} />;
+export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
@@ -82,15 +97,6 @@ export const WriteIcon = ({ onPress }) => (
 export const LeaveIcon = ({ onPress }) => (
   <SvgXml xml={leave} onPress={onPress} />
 );
-
-export const InputIcon = () => <SvgXml xml={input} />;
-export const UploadGIcon = () => <SvgXml xml={upload_g} />;
-export const PlaceGIcon = () => <SvgXml xml={place_g} />;
-export const UploadBIcon = () => <SvgXml xml={upload_b} />;
-export const PlaceBIcon = () => <SvgXml xml={place_b} />;
-
-export const UserMini = () => <SvgXml xml={user_mini} />;
-export const UserMiddle = () => <SvgXml xml={user_middle} />;
 
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
