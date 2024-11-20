@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   leaveButton: {
-    backgroundColor: '#FF0000',
+    backgroundColor: '#EE404C',
     opacity: 0.87,
     width: 120,
     height: 50,
