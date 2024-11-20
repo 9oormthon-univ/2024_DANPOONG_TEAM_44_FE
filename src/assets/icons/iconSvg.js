@@ -21,12 +21,72 @@ const leave = `
   </svg>
 `;
 
+const input = `
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="15" fill="#0080FF"/>
+    <path d="M15.7071 5.29289C15.3166 4.90237 14.6834 4.90237 14.2929 5.29289L7.92893 11.6569C7.53841 12.0474 7.53841 12.6805 7.92893 13.0711C8.31946 13.4616 8.95262 13.4616 9.34315 13.0711L15 7.41421L20.6569 13.0711C21.0474 13.4616 21.6805 13.4616 22.0711 13.0711C22.4616 12.6805 22.4616 12.0474 22.0711 11.6569L15.7071 5.29289ZM16 25L16 6H14L14 25H16Z" fill="white"/>
+  </svg>
+`;
+
+const upload_g = `
+  <svg width="41" height="43" viewBox="0 0 41 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 21.9561V35.0449C3 37.8492 5.27331 40.1225 8.07757 40.1225H32.9224C35.7267 40.1225 38 37.8492 38 35.0449V21.9561" stroke="#A5A8AD" stroke-width="5" stroke-linecap="round"/>
+    <path d="M20.6823 28.275V3M20.6823 3L13.9375 10.8984M20.6823 3L27.6094 10.8984" stroke="#A5A8AD" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+`;
+
+const upload_b = `
+  <svg width="41" height="43" viewBox="0 0 41 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 21.9561V35.0449C3 37.8492 5.27331 40.1225 8.07757 40.1225H32.9224C35.7267 40.1225 38 37.8492 38 35.0449V21.9561" stroke="#0080FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M20.6823 28.275V3M20.6823 3L13.9375 10.8984M20.6823 3L27.6094 10.8984" stroke="#0080FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+`;
+
+const place_g = `
+  <svg width="40" height="53" viewBox="0 0 40 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6.2956 34.6968L6.29552 34.6967C3.02933 29.6048 1.5 25.127 1.5 21.2266C1.5 15.4178 3.31881 10.7304 6.90029 7.04241L6.90035 7.04235C10.5005 3.33469 14.8377 1.5 20 1.5C25.1623 1.5 29.4995 3.33469 33.0997 7.04235L33.0997 7.04241C36.6812 10.7304 38.5 15.4178 38.5 21.2266C38.5 25.127 36.9707 29.6048 33.7045 34.6967L33.7044 34.6968C30.6133 39.517 26.0586 44.7461 20 50.3826C13.9414 44.7461 9.38675 39.517 6.2956 34.6968Z" fill="#A5A8AD" stroke="#A5A8AD" stroke-width="3"/>
+    <path d="M31.0466 20.124C31.0466 26.1563 26.1565 31.0464 20.1243 31.0464C14.092 31.0464 9.2019 26.1563 9.2019 20.124C9.2019 14.0918 14.092 9.20166 20.1243 9.20166C26.1565 9.20166 31.0466 14.0918 31.0466 20.124Z" fill="#F5F5F5" stroke="#A5A8AD" stroke-width="3"/>
+  </svg>
+`;
+
+const place_b = `
+  <svg width="40" height="53" viewBox="0 0 40 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6.2956 34.6968L6.29552 34.6967C3.02933 29.6048 1.5 25.127 1.5 21.2266C1.5 15.4178 3.31881 10.7304 6.90029 7.04241L6.90035 7.04235C10.5005 3.33469 14.8377 1.5 20 1.5C25.1623 1.5 29.4995 3.33469 33.0997 7.04235L33.0997 7.04241C36.6812 10.7304 38.5 15.4178 38.5 21.2266C38.5 25.127 36.9707 29.6048 33.7045 34.6967L33.7044 34.6968C30.6133 39.517 26.0586 44.7461 20 50.3826C13.9414 44.7461 9.38675 39.517 6.2956 34.6968Z" fill="#0080FF" stroke="#0080FF" stroke-width="3"/>
+    <path d="M31.0464 20.124C31.0464 26.1563 26.1563 31.0464 20.124 31.0464C14.0918 31.0464 9.20166 26.1563 9.20166 20.124C9.20166 14.0918 14.0918 9.20166 20.124 9.20166C26.1563 9.20166 31.0464 14.0918 31.0464 20.124Z" fill="#DFEDFF" stroke="#0080FF" stroke-width="3"/>
+  </svg>
+
+`;
+
+const user_mini = `
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9Z" fill="#0080FF"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.97095 15.7568C3.85157 12.2846 6.80473 11.3593 9.07563 11.3593C11.2472 11.3593 13.9606 12.8399 14.9391 15.6878C13.3441 17.1251 11.2324 18 8.91629 18C6.6375 18 4.55653 17.1531 2.97095 15.7568Z" fill="#D9D9D9"/>
+    <circle cx="9.0001" cy="6.72813" r="3.23301" fill="#D9D9D9"/>
+  </svg>
+`;
+
+const user_middle = `
+  <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 25C50 38.8071 38.8071 50 25 50C11.1929 50 0 38.8071 0 25C0 11.1929 11.1929 0 25 0C38.8071 0 50 11.1929 50 25Z" fill="#0080FF"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.25269 43.7688C10.6989 34.1237 18.9021 31.5533 25.2101 31.5533C31.2422 31.5533 38.7797 35.6664 41.4976 43.5774C37.0672 47.5698 31.2012 49.9999 24.7677 49.9999C18.4377 49.9999 12.6571 47.6473 8.25269 43.7688Z" fill="#D9D9D9"/>
+    <circle cx="25.0001" cy="18.6893" r="8.98058" fill="#D9D9D9"/>
+`;
+
 const moveTop = `
   <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="26" cy="26" r="26" fill="#0080FF" fill-opacity="0.8"/>
     <path d="M26.7247 18L24.3155 18L15 34L18.7342 34L25.4197 21.8862L25.6606 21.8862L32.2658 34L36 34L26.7247 18Z" fill="#EDF0F5"/>
   </svg>
 `;
+
+export const InputIcon = () => <SvgXml xml={input} />;
+export const UploadGIcon = () => <SvgXml xml={upload_g} />;
+export const PlaceGIcon = () => <SvgXml xml={place_g} />;
+export const UploadBIcon = () => <SvgXml xml={upload_b} />;
+export const PlaceBIcon = () => <SvgXml xml={place_b} />;
+export const UserMini = () => <SvgXml xml={user_mini} />;
+export const UserMiddle = () => <SvgXml xml={user_middle} />;
+export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
@@ -37,8 +97,6 @@ export const WriteIcon = ({ onPress }) => (
 export const LeaveIcon = ({ onPress }) => (
   <SvgXml xml={leave} onPress={onPress} />
 );
-
-export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,

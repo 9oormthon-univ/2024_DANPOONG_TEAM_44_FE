@@ -7,7 +7,7 @@ import {
   ViewPost,
   Chat,
 } from '../../screens/community/index';
-import { BackIcon, WriteIcon, MenuIcon } from '../../assets/icons/iconSvg';
+import { BackIcon, WriteIcon, LeaveIcon } from '../../assets/icons/iconSvg';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +38,7 @@ function CommunityStack() {
         name="WritePost"
         component={WritePost}
         options={({ navigation }) => ({
-          title: '글 작성',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -52,7 +52,7 @@ function CommunityStack() {
         name="ViewPost"
         component={ViewPost}
         options={({ navigation }) => ({
-          title: '글 보기',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -65,8 +65,8 @@ function CommunityStack() {
       <Stack.Screen
         name="Chat"
         component={Chat}
-        options={({ navigation }) => ({
-          title: '사용자명',
+        options={({ navigation, route }) => ({
+          title: route.params?.author || '사용자명',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -74,8 +74,8 @@ function CommunityStack() {
             </View>
           ),
           headerRight: () => (
-            <View style={{ marginLeft: 10 }}>
-              <MenuIcon onPress={() => navigation.goBack()} />
+            <View style={{ marginTop: 7 }}>
+              <LeaveIcon onPress={() => navigation.goBack()} />
             </View>
           ),
         })}
