@@ -10,6 +10,7 @@ import {
 import ImageSlider from '../../components/community/ImageSlider';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { formatDateToSlash } from '../../utils/DateUtils';
+import { UserMiddle } from '../../assets/icons/iconSvg';
 import { posts } from '../../constants/mockData';
 
 function ViewPost() {
@@ -35,13 +36,20 @@ function ViewPost() {
 
       <View style={styles.contentContainer}>
         <View style={styles.infoSection}>
-          <Text style={styles.authText}>{post.authorName}</Text>
-          <Text style={styles.dateText}>
-            {formatDateToSlash(post.createdDate)} {'  '} {post.location}
-          </Text>
+          <UserMiddle />
+          <View style={styles.authorInfo}>
+            <Text style={styles.authText}>{post.authorName}</Text>
+            <View style={styles.dateLocationRow}>
+              <Text style={styles.dateText}>
+                {formatDateToSlash(post.createdDate)}
+              </Text>
+              <Text style={styles.locationText}>{post.location}</Text>
+            </View>
+          </View>
         </View>
 
         <View style={styles.contentPlaceholder}>
+          <Text style={styles.titleText}>{post.title}</Text>
           <Text style={styles.contentText}>{post.content}</Text>
         </View>
 
@@ -76,21 +84,40 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+  },
+  authorInfo: {
+    marginLeft: 10,
+    flex: 1,
   },
   authText: {
     fontSize: 20,
-    color: '#868686',
+    color: '#3F3F3F',
+    marginBottom: 4,
+  },
+  dateLocationRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   dateText: {
     fontSize: 14,
-    color: '#868686',
+    color: '#585858',
+  },
+  locationText: {
+    fontSize: 14,
+    color: '#585858',
+    textAlign: 'right',
   },
   contentPlaceholder: {
     minHeight: 100,
     paddingTop: 20,
     paddingBottom: 42,
+  },
+  titleText: {
+    fontSize: 24,
+    color: '#3F3F3F',
+    marginBottom: 20,
   },
   contentText: {
     fontSize: 16,

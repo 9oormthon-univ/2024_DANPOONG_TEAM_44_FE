@@ -65,6 +65,14 @@ const user_mini = `
   </svg>
 `;
 
+const user_middle = `
+  <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 25C50 38.8071 38.8071 50 25 50C11.1929 50 0 38.8071 0 25C0 11.1929 11.1929 0 25 0C38.8071 0 50 11.1929 50 25Z" fill="#0080FF"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.25269 43.7688C10.6989 34.1237 18.9021 31.5533 25.2101 31.5533C31.2422 31.5533 38.7797 35.6664 41.4976 43.5774C37.0672 47.5698 31.2012 49.9999 24.7677 49.9999C18.4377 49.9999 12.6571 47.6473 8.25269 43.7688Z" fill="#D9D9D9"/>
+    <circle cx="25.0001" cy="18.6893" r="8.98058" fill="#D9D9D9"/>
+  </svg>
+`;
+
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
 );
@@ -82,6 +90,7 @@ export const UploadBIcon = () => <SvgXml xml={upload_b} />;
 export const PlaceBIcon = () => <SvgXml xml={place_b} />;
 
 export const UserMini = () => <SvgXml xml={user_mini} />;
+export const UserMiddle = () => <SvgXml xml={user_middle} />;
 
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
