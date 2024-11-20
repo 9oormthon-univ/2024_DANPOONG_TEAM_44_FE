@@ -31,7 +31,7 @@ function MyPage() {
           <Text style={styles.userName}>{userData.name}</Text>
           <Text style={styles.userSuffix}>님</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('AreaSettings')}>
+        <TouchableOpacity onPress={() => navigation.navigate('AreaSetting')}>
           <Text style={styles.userLocation}>
             {userData.location} {'>'}
           </Text>
