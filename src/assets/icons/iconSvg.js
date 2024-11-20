@@ -21,6 +21,13 @@ const leave = `
   </svg>
 `;
 
+const moveTop = `
+  <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="26" cy="26" r="26" fill="#0080FF" fill-opacity="0.8"/>
+    <path d="M26.7247 18L24.3155 18L15 34L18.7342 34L25.4197 21.8862L25.6606 21.8862L32.2658 34L36 34L26.7247 18Z" fill="#EDF0F5"/>
+  </svg>
+`;
+
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
 );
@@ -30,6 +37,8 @@ export const WriteIcon = ({ onPress }) => (
 export const LeaveIcon = ({ onPress }) => (
   <SvgXml xml={leave} onPress={onPress} />
 );
+
+export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
