@@ -7,6 +7,7 @@ import {
   MyPost,
   AreaSetting,
 } from '../../screens/myPage/index';
+import { ViewPost } from '../../screens/community';
 import { BackIcon } from '../../assets/icons/iconSvg';
 
 const Stack = createNativeStackNavigator();
@@ -59,6 +60,18 @@ function MyPageStack() {
         options={({ navigation }) => ({
           title: '내가 쓴 글',
           headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="ViewPost"
+        component={ViewPost}
+        options={({ navigation }) => ({
+          title: '',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
               <BackIcon onPress={() => navigation.goBack()} />
