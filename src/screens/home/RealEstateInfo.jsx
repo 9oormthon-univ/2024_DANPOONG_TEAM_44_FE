@@ -1,8 +1,11 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const RealEstateInfo = () => {
     const scrollViewRef = useRef(null); // ScrollView에 대한 ref 생성
+    const navigation = useNavigation();
+
 
     const scrollToTop = () => {
         // ScrollView의 ref를 사용하여 위로 스크롤
@@ -68,7 +71,7 @@ const RealEstateInfo = () => {
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('BuildingRegister') }>
         <Text style={styles.buttonText}>시작하기</Text>
       </TouchableOpacity>
 
