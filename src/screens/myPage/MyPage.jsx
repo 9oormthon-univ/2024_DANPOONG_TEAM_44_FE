@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UserBig, NextIcon } from '../../assets/icons/iconSvg';
+import { DeleteAccount, Logout } from '../../components/modal/index';
 import { userData } from '../../constants/mockData';
 
 function MyPage() {
   const navigation = useNavigation();
 
+  const [isLogoutModalVisible, setLogoutModalVisible] = useState(false);
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+
+  const openLogoutModal = () => setLogoutModalVisible(true);
+  const closeLogoutModal = () => setLogoutModalVisible(false);
+
+  const openDeleteModal = () => setDeleteModalVisible(true);
+  const closeDeleteModal = () => setDeleteModalVisible(false);
+
   return (
     <View style={styles.container}>
+      <Logout visible={isLogoutModalVisible} onClose={closeLogoutModal} />
+      <DeleteAccount
+        visible={isDeleteModalVisible}
+        onClose={closeDeleteModal}
+      />
+
       <View style={styles.profileCard}>
         <UserBig />
         <View style={styles.nameContainer}>
@@ -40,11 +56,11 @@ function MyPage() {
       </View>
 
       <View style={styles.optionsContainer}>
-        <TouchableOpacity style={styles.optionButton}>
+        <TouchableOpacity style={styles.optionButton} onPress={openLogoutModal}>
           <Text style={styles.optionText}>로그 아웃</Text>
           <NextIcon />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.optionButton}>
+        <TouchableOpacity style={styles.optionButton} onPress={openDeleteModal}>
           <Text style={styles.optionText}>회원 탈퇴</Text>
           <NextIcon />
         </TouchableOpacity>
