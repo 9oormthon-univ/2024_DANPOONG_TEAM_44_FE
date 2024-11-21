@@ -18,6 +18,7 @@ import {
   OptionLIcon,
 } from '../../assets/icons/iconSvg';
 import DropdownMenu from '../../components/common/DropdownMenu';
+import DeletePost from '../../components/modal/DeletePost';
 import { posts } from '../../constants/mockData';
 
 function ViewPost() {
@@ -26,6 +27,7 @@ function ViewPost() {
   const { id } = route.params || {};
 
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   // 현재 로그인된 사용자 ID (임시)
   const userId = '1';
@@ -56,9 +58,14 @@ function ViewPost() {
 
   const handleDelete = () => {
     setShowDropdown(false);
+    setShowDeleteModal(true);
   };
 
-  // authorId와 userId가 같을 경우에만 옵션 아이콘을 추가 (임시)
+  const confirmDelete = () => {
+    setShowDeleteModal(false);
+    navigation.goBack();
+  };
+
   const rightIcons =
     post.authorId === userId
       ? [
@@ -119,6 +126,12 @@ function ViewPost() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <DeletePost
+        visible={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onLeave={confirmDelete}
+      />
     </SafeAreaView>
   );
 }

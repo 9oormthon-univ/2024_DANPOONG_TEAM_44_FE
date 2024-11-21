@@ -130,6 +130,18 @@ const deleteIcon = `
   </svg>
 `;
 
+const warning = `
+  <svg width="52" height="51" viewBox="0 0 52 51" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect y="0.912109" width="52" height="49.7059" fill="url(#pattern0_752_8685)"/>
+    <defs>
+      <pattern id="pattern0_752_8685" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_752_8685" transform="matrix(0.0078125 0 0 0.00817308 0 -0.0230769)"/>
+      </pattern>
+      <image id="image0_752_8685" width="128" height="128" xlink:href="data:image/png;base64,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"/>
+    </defs>
+  </svg>
+`;
+
 export const BackIcon = () => <SvgXml xml={back} />;
 export const SearchIcon = () => <SvgXml xml={search} />;
 export const WriteIcon = () => <SvgXml xml={write} />;
@@ -148,3 +160,4 @@ export const OptionIcon = () => <SvgXml xml={option} />;
 export const OptionLIcon = () => <SvgXml xml={option_l} />;
 export const EditIcon = () => <SvgXml xml={edit} />;
 export const DeleteIcon = () => <SvgXml xml={deleteIcon} />;
+export const WarningIcon = () => <SvgXml xml={warning} />;
