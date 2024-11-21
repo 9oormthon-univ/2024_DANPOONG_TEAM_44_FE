@@ -6,6 +6,8 @@ import {
   FindAgent,
   MarketPriceCheck,
   Apartment,
+  MultiFamily,
+  OfficeTel,
 } from '../../screens/houseInfo/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
 
@@ -60,6 +62,32 @@ function HouseInfoStack() {
         component={Apartment}
         options={({ navigation }) => ({
           title: '아파트',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="MultiFamily"
+        component={MultiFamily}
+        options={({ navigation }) => ({
+          title: '다세대',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="OfficeTel"
+        component={OfficeTel}
+        options={({ navigation }) => ({
+          title: '오피스텔',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
