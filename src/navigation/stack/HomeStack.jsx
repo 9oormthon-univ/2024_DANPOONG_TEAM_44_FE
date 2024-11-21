@@ -1,7 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home, FavoriteHomes, RealEstateInfo, BuildingRegister, BuildingInfo } from '../../screens/home/index';
+import {
+  Home,
+  FavoriteHomes,
+  RealEstateInfo,
+  BuildingRegister,
+  BuildingInfo,
+} from '../../screens/home/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
 
 const Stack = createNativeStackNavigator();
