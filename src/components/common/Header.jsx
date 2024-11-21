@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { BackIcon } from '../../assets/icons/iconSvg';
+import { BackIconR } from '../../assets/icons/iconSvg';
 
 const Header = ({
   title = null,
@@ -25,7 +25,7 @@ const Header = ({
             if (onBackPress) onBackPress();
           }}
         >
-          <BackIcon />
+          <BackIconR />
         </TouchableOpacity>
       ) : (
         <View style={styles.backButtonPlaceholder} />

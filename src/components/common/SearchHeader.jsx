@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import { BackIcon, SearchIcon } from '../../assets/icons/iconSvg';
+import { BackIconR, SearchIcon } from '../../assets/icons/iconSvg';
 
 const SearchHeader = ({
   placeholder = '검색어 입력',
@@ -19,7 +19,7 @@ const SearchHeader = ({
   return (
     <View style={styles.header}>
       <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
-        <BackIcon />
+        <BackIconR />
       </TouchableOpacity>
       <View style={styles.searchContainer}>
         <TextInput

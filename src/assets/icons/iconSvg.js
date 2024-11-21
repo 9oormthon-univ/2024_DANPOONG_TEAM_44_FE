@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SvgXml } from 'react-native-svg';
 
 const back = `
@@ -142,7 +143,7 @@ const warning = `
   </svg>
 `;
 
-export const BackIcon = () => <SvgXml xml={back} />;
+export const BackIconR = () => <SvgXml xml={back} />;
 export const SearchIcon = () => <SvgXml xml={search} />;
 export const WriteIcon = () => <SvgXml xml={write} />;
 export const LeaveIcon = () => <SvgXml xml={leave} />;
@@ -161,3 +162,11 @@ export const OptionLIcon = () => <SvgXml xml={option_l} />;
 export const EditIcon = () => <SvgXml xml={edit} />;
 export const DeleteIcon = () => <SvgXml xml={deleteIcon} />;
 export const WarningIcon = () => <SvgXml xml={warning} />;
+
+export const BackIcon = ({ onPress }) => (
+  <SvgXml xml={back} onPress={onPress} />
+);
+
+BackIcon.propTypes = {
+  onPress: PropTypes.func.isRequired,
+};
