@@ -31,18 +31,18 @@ function Chat() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <Header
+        title={author}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        rightIcons={[
+          {
+            icon: LeaveIcon,
+            onPress: () => setModalVisible(true),
+          },
+        ]}
+      />
       <ScrollView contentContainerStyle={styles.chatContainer}>
-        <Header
-          title={author}
-          showBackButton={true}
-          onBackPress={() => navigation.goBack()}
-          rightIcons={[
-            {
-              icon: LeaveIcon,
-              onPress: () => setModalVisible(true),
-            },
-          ]}
-        />
         {messages.map((message, index) => {
           const isLastInGroup =
             index === messages.length - 1 ||
@@ -81,5 +81,6 @@ const styles = StyleSheet.create({
   },
   chatContainer: {
     paddingHorizontal: 16,
+    paddingVertical: 8,
   },
 });
