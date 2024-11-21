@@ -5,6 +5,7 @@ import {
   HouseInfo,
   FindAgent,
   MarketPriceCheck,
+  Apartment,
 } from '../../screens/houseInfo/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
 
@@ -46,6 +47,19 @@ function HouseInfoStack() {
         component={MarketPriceCheck}
         options={({ navigation }) => ({
           title: '시세 조회',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Apartment"
+        component={Apartment}
+        options={({ navigation }) => ({
+          title: '아파트',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
