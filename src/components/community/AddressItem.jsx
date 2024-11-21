@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { PlaceBIcon } from '../../assets/icons/iconSvg';
 
-const AdressItem = ({ item, onPress }) => {
+const AddressItem = ({ item, onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => onPress(item.id)}>
       <View style={styles.iconContainer}>
@@ -24,7 +24,7 @@ const AdressItem = ({ item, onPress }) => {
   );
 };
 
-AdressItem.propTypes = {
+AddressItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -34,7 +34,7 @@ AdressItem.propTypes = {
   onPress: PropTypes.func.isRequired,
 };
 
-export default AdressItem;
+export default AddressItem;
 
 const styles = StyleSheet.create({
   container: {

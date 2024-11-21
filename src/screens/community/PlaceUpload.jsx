@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchHeader from '../../components/common/SearchHeader';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
-import AdressItem from '../../components/community/AdressItem';
+import AddressItem from '../../components/community/AddressItem';
 import { adress } from '../../constants/mockData';
 
 function PlaceUpload() {
@@ -43,7 +43,7 @@ function PlaceUpload() {
           />
         }
         renderItem={({ item }) => (
-          <AdressItem item={item} onPress={() => handleSelect(item.id)} />
+          <AddressItem item={item} onPress={() => handleSelect(item.id)} />
         )}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
