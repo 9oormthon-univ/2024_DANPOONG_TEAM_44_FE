@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {
   View,
@@ -12,13 +12,23 @@ import Header from '../../components/common/Header';
 import ImageSlider from '../../components/community/ImageSlider';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { formatDateToSlash } from '../../utils/DateUtils';
-import { UserMiddle } from '../../assets/icons/iconSvg';
+import {
+  UserMiddle,
+  OptionIcon,
+  OptionLIcon,
+} from '../../assets/icons/iconSvg';
+import DropdownMenu from '../../components/common/DropdownMenu';
 import { posts } from '../../constants/mockData';
 
 function ViewPost() {
   const navigation = useNavigation();
   const route = useRoute();
   const { id } = route.params || {};
+
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // 현재 로그인된 사용자 ID (임시)
+  const userId = '1';
 
   const post = posts.find(item => item.id === id);
 
@@ -35,10 +45,45 @@ function ViewPost() {
 
   useHideBottomTabs(navigation);
 
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleEdit = () => {
+    navigation.navigate('WritePost');
+    setShowDropdown(false);
+  };
+
+  const handleDelete = () => {
+    setShowDropdown(false);
+  };
+
+  // authorId와 userId가 같을 경우에만 옵션 아이콘을 추가 (임시)
+  const rightIcons =
+    post.authorId === userId
+      ? [
+          {
+            icon: showDropdown ? OptionLIcon : OptionIcon,
+            onPress: toggleDropdown,
+          },
+        ]
+      : [];
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+        <Header
+          showBackButton={true}
+          onBackPress={() => navigation.goBack()}
+          rightIcons={rightIcons}
+        />
+        {showDropdown && (
+          <DropdownMenu
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onClose={() => setShowDropdown(false)}
+          />
+        )}
         <ImageSlider images={post.images} />
 
         <View style={styles.contentContainer}>

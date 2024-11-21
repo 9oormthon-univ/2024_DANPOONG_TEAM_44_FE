@@ -1,6 +1,7 @@
 export const posts = [
   {
     id: '1',
+    authorId: '1',
     title: '단풍로 오피스텔 양도합니다~',
     location: '서울시 단풍로',
     authorName: '김단풍',
@@ -14,6 +15,7 @@ export const posts = [
   },
   {
     id: '2',
+    authorId: '1',
     title: '원룸 양도합니다!',
     location: '서울시 단풍로',
     authorName: '단풍톤',
@@ -25,6 +27,7 @@ export const posts = [
   },
   {
     id: '3',
+    authorId: '1',
     title: '아파트 ㅇㅇ아파트1',
     location: '서울시 단풍로',
     authorName: '단풍이',
@@ -38,6 +41,7 @@ export const posts = [
   },
   {
     id: '4',
+    authorId: '2',
     title: '아파트 ㅇㅇ아파트2',
     location: '서울시 단풍로',
     authorName: '구름이',
@@ -50,6 +54,7 @@ export const posts = [
   },
   {
     id: '5',
+    authorId: '2',
     title: '아파트 아파트3 아파트3',
     location: '서울시 단풍로',
     authorName: '구름이',

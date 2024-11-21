@@ -100,6 +100,36 @@ const search = `
   </svg>
 `;
 
+const option = `
+  <svg width="6" height="22" viewBox="0 0 6 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="3" cy="3" r="2.5" fill="#868686"/>
+    <circle cx="3" cy="19" r="2.5" fill="#868686"/>
+    <circle cx="3" cy="11" r="2.5" fill="#868686"/>
+  </svg>
+`;
+
+const option_l = `
+  <svg width="6" height="22" viewBox="0 0 6 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="3" cy="3" r="2.5" fill="#AFB1B6" fill-opacity="0.8"/>
+    <circle cx="3" cy="19" r="2.5" fill="#AFB1B6" fill-opacity="0.8"/>
+    <circle cx="3" cy="11" r="2.5" fill="#AFB1B6" fill-opacity="0.8"/>
+  </svg>
+`;
+
+const edit = `
+  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9238 9.1639L21.3091 7.72894L16.339 2.9308L15.0296 4.28708L19.9238 9.1639ZM18.3771 10.7661L8.59404 20.8998L3.62392 16.1016L13.4829 5.88924L18.3771 10.7661ZM9.36535 23.0847C9.26818 23.1854 9.15555 23.2621 9.03482 23.3148C8.86811 23.5026 8.62959 23.633 8.33807 23.6542L1.74498 24.1328C1.12938 24.1774 0.611449 23.6774 0.634438 23.0606L0.880653 16.4548C0.89152 16.1632 1.01307 15.9206 1.19433 15.7474C1.24274 15.6244 1.31564 15.5087 1.41316 15.4077L15.5677 0.745841C15.9652 0.334104 16.6212 0.322554 17.0329 0.720044L23.4941 6.95762C23.9058 7.35511 23.9173 8.01112 23.5199 8.42286L9.36535 23.0847Z" fill="#AFB1B6"/>
+  </svg>
+`;
+
+const deleteIcon = `
+  <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.18994 5.95337H4.01605M27.096 5.95337H24.2698M9.66827 5.95337V2.66436C9.66827 2.01402 10.1955 1.48682 10.8458 1.48682H17.2046C17.8549 1.48682 18.3821 2.01402 18.3821 2.66436V5.95337M9.66827 5.95337H18.3821M9.66827 5.95337H4.01605M18.3821 5.95337H24.2698M4.01605 5.95337L6.25592 26.3439C6.3215 26.9409 6.82584 27.3928 7.42642 27.3928H21.7543C22.3746 27.3928 22.8885 26.9117 22.9293 26.2927L24.2698 5.95337" stroke="#AFB1B6" stroke-width="2.07248" stroke-linecap="round"/>
+    <path d="M11.5525 11.6133V20.5626" stroke="#AFB1B6" stroke-width="2.07248" stroke-linecap="round"/>
+    <path d="M16.9697 11.6133V20.5626" stroke="#AFB1B6" stroke-width="2.07248" stroke-linecap="round"/>
+  </svg>
+`;
+
 export const BackIcon = () => <SvgXml xml={back} />;
 export const SearchIcon = () => <SvgXml xml={search} />;
 export const WriteIcon = () => <SvgXml xml={write} />;
@@ -114,3 +144,7 @@ export const UserMiddle = () => <SvgXml xml={user_middle} />;
 export const UserBig = () => <SvgXml xml={user_big} />;
 export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 export const NextIcon = () => <SvgXml xml={next} />;
+export const OptionIcon = () => <SvgXml xml={option} />;
+export const OptionLIcon = () => <SvgXml xml={option_l} />;
+export const EditIcon = () => <SvgXml xml={edit} />;
+export const DeleteIcon = () => <SvgXml xml={deleteIcon} />;
