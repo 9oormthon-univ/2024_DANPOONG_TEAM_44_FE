@@ -18,6 +18,8 @@ import {
   PlaceGIcon,
   PlaceBIcon,
 } from '../../assets/icons/iconSvg';
+import Header from '../../components/common/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 
 function WritePost() {
@@ -77,71 +79,75 @@ function WritePost() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <TextInput style={styles.input} placeholder="글 제목" />
+    <SafeAreaView style={styles.safeArea}>
+      <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      >
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <TextInput style={styles.input} placeholder="글 제목" />
+          <TextInput
+            style={styles.contentInput}
+            placeholder="내용을 입력하세요."
+            multiline
+          />
 
-        <TextInput
-          style={styles.contentInput}
-          placeholder="내용을 입력하세요."
-          multiline
-        />
+          <View style={styles.uploadContainer}>
+            <TouchableOpacity
+              style={[
+                styles.uploadButton,
+                isUploaded && styles.uploadButtonActive,
+              ]}
+              onPress={resetSelectionAndPickImage}
+            >
+              {isUploaded ? <UploadBIcon /> : <UploadGIcon />}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.uploadButton,
+                isLocationUploaded && styles.uploadButtonActive,
+              ]}
+              onPress={uploadLocation}
+            >
+              {isLocationUploaded ? <PlaceBIcon /> : <PlaceGIcon />}
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.uploadContainer}>
+          <View style={styles.noticeContainer}>
+            <Text style={styles.noticeTitle}>이미지 업로드 시 주의사항!</Text>
+            <Text style={styles.noticeText}>
+              : ex. 이미지는 최대 2개 업로드 가능
+            </Text>
+          </View>
+
           <TouchableOpacity
-            style={[
-              styles.uploadButton,
-              isUploaded && styles.uploadButtonActive,
-            ]}
-            onPress={resetSelectionAndPickImage}
+            style={styles.submitButton}
+            onPress={() => navigation.navigate('Community')}
           >
-            {isUploaded ? <UploadBIcon /> : <UploadGIcon />}
+            <Text style={styles.submitText}>작성완료</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.uploadButton,
-              isLocationUploaded && styles.uploadButtonActive,
-            ]}
-            onPress={uploadLocation}
-          >
-            {isLocationUploaded ? <PlaceBIcon /> : <PlaceGIcon />}
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.noticeContainer}>
-          <Text style={styles.noticeTitle}>이미지 업로드 시 주의사항!</Text>
-          <Text style={styles.noticeText}>
-            : ex. 이미지는 최대 2개 업로드 가능
-          </Text>
-        </View>
-
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => navigation.navigate('Community')}
-        >
-          <Text style={styles.submitText}>작성완료</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 export default WritePost;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
   scrollContainer: {
     alignItems: 'center',
-    paddingTop: 15,
     paddingHorizontal: 32,
-    paddingBottom: 60,
   },
   input: {
     fontSize: 20,

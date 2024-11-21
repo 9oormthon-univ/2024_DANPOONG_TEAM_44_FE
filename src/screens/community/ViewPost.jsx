@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import ImageSlider from '../../components/community/ImageSlider';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { formatDateToSlash } from '../../utils/DateUtils';
@@ -22,51 +24,57 @@ function ViewPost() {
 
   if (!post) {
     return (
-      <View style={styles.container}>
-        <Text>Error : 게시물을 찾을 수 없습니다.</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+        <View style={styles.errorContainer}>
+          <Text>Error : 게시물을 찾을 수 없습니다.</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
   useHideBottomTabs(navigation);
 
   return (
-    <ScrollView style={styles.container}>
-      <ImageSlider images={post.images} />
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+        <ImageSlider images={post.images} />
 
-      <View style={styles.contentContainer}>
-        <View style={styles.infoSection}>
-          <UserMiddle />
-          <View style={styles.authorInfo}>
-            <Text style={styles.authText}>{post.authorName}</Text>
-            <View style={styles.dateLocationRow}>
-              <Text style={styles.dateText}>
-                {formatDateToSlash(post.createdDate)}
-              </Text>
-              <Text style={styles.locationText}>{post.location}</Text>
+        <View style={styles.contentContainer}>
+          <View style={styles.infoSection}>
+            <UserMiddle />
+            <View style={styles.authorInfo}>
+              <Text style={styles.authText}>{post.authorName}</Text>
+              <View style={styles.dateLocationRow}>
+                <Text style={styles.dateText}>
+                  {formatDateToSlash(post.createdDate)}
+                </Text>
+                <Text style={styles.locationText}>{post.location}</Text>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.contentPlaceholder}>
-          <Text style={styles.titleText}>{post.title}</Text>
-          <Text style={styles.contentText}>{post.content}</Text>
-        </View>
+          <View style={styles.contentPlaceholder}>
+            <Text style={styles.titleText}>{post.title}</Text>
+            <Text style={styles.contentText}>{post.content}</Text>
+          </View>
 
-        <View style={[styles.kakaoMap, styles.kakaoText]}>
-          <Text>카카오 맵</Text>
-        </View>
+          <View style={[styles.kakaoMap, styles.kakaoText]}>
+            <Text>카카오 맵</Text>
+          </View>
 
-        <TouchableOpacity
-          style={styles.connectButton}
-          onPress={() =>
-            navigation.navigate('Chat', { id, author: post.authorName })
-          }
-        >
-          <Text style={styles.connectButtonText}>사용자와 연결</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+          <TouchableOpacity
+            style={styles.connectButton}
+            onPress={() =>
+              navigation.navigate('Chat', { id, author: post.authorName })
+            }
+          >
+            <Text style={styles.connectButtonText}>사용자와 연결</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -76,6 +84,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  scrollContainer: {
+    paddingBottom: 20,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   contentContainer: {
     width: '100%',
