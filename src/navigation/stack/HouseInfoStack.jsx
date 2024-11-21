@@ -25,6 +25,7 @@ function HouseInfoStack() {
         options={{
           title: '집 정보',
           headerTitleAlign: 'left',
+          headerShown: false,
         }}
       />
       <Stack.Screen
