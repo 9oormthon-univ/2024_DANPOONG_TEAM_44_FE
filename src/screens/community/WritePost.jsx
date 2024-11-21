@@ -26,6 +26,7 @@ function WritePost() {
   const [fileData, setFileData] = useState([]);
   const [isUploaded, setIsUploaded] = useState(false);
   const [isLocationUploaded, setIsLocationUploaded] = useState(false);
+  const [selectedLocationId, setSelectedLocationId] = useState(null); // 선택된 위치 id 저장
 
   useHideBottomTabs(navigation);
 
@@ -35,8 +36,13 @@ function WritePost() {
     await pickImage(setFileData, setIsUploaded);
   };
 
-  const uploadLocation = () => {
-    setIsLocationUploaded(true);
+  const handleLocationUpload = () => {
+    navigation.navigate('PlaceUpload', {
+      onSelect: id => {
+        setSelectedLocationId(id);
+        setIsLocationUploaded(true);
+      },
+    });
   };
 
   return (
@@ -70,7 +76,7 @@ function WritePost() {
                 styles.uploadButton,
                 isLocationUploaded && styles.uploadButtonActive,
               ]}
-              onPress={uploadLocation}
+              onPress={handleLocationUpload}
             >
               {isLocationUploaded ? <PlaceBIcon /> : <PlaceGIcon />}
             </TouchableOpacity>

@@ -61,6 +61,39 @@ export const posts = [
   },
 ];
 
+export const adress = [
+  {
+    id: '1',
+    title: '단풍아파트1',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '2',
+    title: '단풍아파트2',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '3',
+    title: '단풍아파트3',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '4',
+    title: '단풍아파트4',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '5',
+    title: '단풍아파트5',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+];
+
 export const messages = [
   {
     id: 1,

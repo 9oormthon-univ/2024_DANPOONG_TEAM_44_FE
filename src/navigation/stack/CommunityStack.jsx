@@ -5,6 +5,7 @@ import {
   SearchPost,
   WritePost,
   ViewPost,
+  PlaceUpload,
   Chat,
 } from '../../screens/community/index';
 
@@ -48,6 +49,15 @@ function CommunityStack() {
       <Stack.Screen
         name="ViewPost"
         component={ViewPost}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="PlaceUpload"
+        component={PlaceUpload}
         options={{
           title: '',
           headerShown: false,
