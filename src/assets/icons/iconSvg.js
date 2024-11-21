@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { SvgXml } from 'react-native-svg';
 
 const back = `
@@ -93,6 +92,18 @@ const next = `
   </svg>
 `;
 
+const search = `
+  <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.3714 22.2747C19.8422 22.7796 20.6238 22.7974 21.1172 22.3146C21.6106 21.8317 21.6289 21.0309 21.1581 20.526L19.3714 22.2747ZM12.6239 15.0384L19.3714 22.2747L21.1581 20.526L14.4105 13.2897L12.6239 15.0384Z" fill="#AFB1B6"/>
+    <ellipse cx="8.15657" cy="8.33136" rx="8.15657" ry="8.33136" transform="matrix(0.98373 -0.179653 0.167832 0.985816 0 2.93066)" fill="#AFB1B6"/>
+    <ellipse cx="6.11742" cy="6.24852" rx="6.11742" ry="6.24852" transform="matrix(0.98373 -0.179653 0.167832 0.985816 2.35535 4.61768)" fill="white"/>
+  </svg>
+`;
+
+export const BackIcon = () => <SvgXml xml={back} />;
+export const SearchIcon = () => <SvgXml xml={search} />;
+export const WriteIcon = () => <SvgXml xml={write} />;
+export const LeaveIcon = () => <SvgXml xml={leave} />;
 export const InputIcon = () => <SvgXml xml={input} />;
 export const UploadGIcon = () => <SvgXml xml={upload_g} />;
 export const PlaceGIcon = () => <SvgXml xml={place_g} />;
@@ -103,25 +114,3 @@ export const UserMiddle = () => <SvgXml xml={user_middle} />;
 export const UserBig = () => <SvgXml xml={user_big} />;
 export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 export const NextIcon = () => <SvgXml xml={next} />;
-
-export const BackIcon = ({ onPress }) => (
-  <SvgXml xml={back} onPress={onPress} />
-);
-export const WriteIcon = ({ onPress }) => (
-  <SvgXml xml={write} onPress={onPress} />
-);
-export const LeaveIcon = ({ onPress }) => (
-  <SvgXml xml={leave} onPress={onPress} />
-);
-
-BackIcon.propTypes = {
-  onPress: PropTypes.func.isRequired,
-};
-
-WriteIcon.propTypes = {
-  onPress: PropTypes.func.isRequired,
-};
-
-LeaveIcon.propTypes = {
-  onPress: PropTypes.func.isRequired,
-};
