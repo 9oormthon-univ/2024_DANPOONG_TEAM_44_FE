@@ -19,7 +19,7 @@ function CalculateResult({ route }) {
           어느 정도의 전세가율이 안전한 매물이라고 판단하나요?
         </Text>
         <Text style={styles.infoDescription}>
-          서울 시에서는 70%정도를 적정 비율로 판단하며 80%를 초과할 경우 
+          서울 시에서는 70%정도를 적정 비율로 판단하며 80%를 초과할 경우
           <Text style={styles.warningText}> 위험</Text> 등급으로 판단하고
           있습니다.
         </Text>
