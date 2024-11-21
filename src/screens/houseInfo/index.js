@@ -5,4 +5,4 @@ export { default as Apartment } from './Apartment';
 export { default as MultiFamily } from './MultiFamily';
 export { default as OfficeTel } from './OfficeTel';
 export { default as RentCalculate } from './RentCalculate';
-
+export { default as CalculateResult } from './CalculateResult';
