@@ -4,3 +4,5 @@ export { default as MarketPriceCheck } from './MarketPriceCheck';
 export { default as Apartment } from './Apartment';
 export { default as MultiFamily } from './MultiFamily';
 export { default as OfficeTel } from './OfficeTel';
+export { default as RentCalculate } from './RentCalculate';
+

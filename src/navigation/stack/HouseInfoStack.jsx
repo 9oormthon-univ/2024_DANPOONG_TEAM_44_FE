@@ -8,6 +8,7 @@ import {
   Apartment,
   MultiFamily,
   OfficeTel,
+  RentCalculate,
 } from '../../screens/houseInfo/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
 
@@ -88,6 +89,19 @@ function HouseInfoStack() {
         component={OfficeTel}
         options={({ navigation }) => ({
           title: '오피스텔',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="RentCalculate"
+        component={RentCalculate}
+        options={({ navigation }) => ({
+          title: '계산기',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>

@@ -33,7 +33,7 @@ function HouseInfo() {
             />
             <Text style={styles.iconText}>시세 조회</Text>
           </TouchableOpacity>
-          <View style={styles.separator}></View>
+          <View style={styles.separator} />
           <TouchableOpacity
             style={styles.iconWrapper}
             onPress={() => navigation.navigate('RentCalculate')}
