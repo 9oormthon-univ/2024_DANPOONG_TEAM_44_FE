@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   Community,
+  SearchPost,
   WritePost,
   ViewPost,
   Chat,
@@ -20,6 +21,15 @@ function CommunityStack() {
       <Stack.Screen
         name="Community"
         component={Community}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="SearchPost"
+        component={SearchPost}
         options={{
           title: '',
           headerShown: false,
