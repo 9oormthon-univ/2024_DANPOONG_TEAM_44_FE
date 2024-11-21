@@ -22,7 +22,6 @@ const Header = ({
         <TouchableOpacity
           style={[styles.backButton, { zIndex: 1 }]}
           onPress={() => {
-            console.log('Back button pressed');
             if (onBackPress) onBackPress();
           }}
         >
