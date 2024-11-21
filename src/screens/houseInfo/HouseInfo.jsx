@@ -27,7 +27,10 @@ function HouseInfo() {
             style={styles.iconWrapper}
             onPress={() => navigation.navigate('MarketPriceCheck')}
           >
-            <Image source={require('../../assets/images/homeinfo1.png')} />
+            <Image
+              source={require('../../assets/images/homeinfo1.png')}
+              style={styles.icon1}
+            />
             <Text style={styles.iconText}>시세 조회</Text>
           </TouchableOpacity>
           <View style={styles.separator}></View>
@@ -35,7 +38,10 @@ function HouseInfo() {
             style={styles.iconWrapper}
             onPress={() => navigation.navigate('RentCalculate')}
           >
-            <Image source={require('../../assets/images/homeinfo2.png')} />
+            <Image
+              source={require('../../assets/images/homeinfo2.png')}
+              style={styles.icon1}
+            />
             <Text style={styles.iconText}>계산기</Text>
           </TouchableOpacity>
         </View>
@@ -135,6 +141,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignItems: 'center',
     margin: 16.5,
+  },
+  icon1: {
+    width: 80,
+    height: 80,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   separator: {
     // 시세조회, 계산기 구분선
