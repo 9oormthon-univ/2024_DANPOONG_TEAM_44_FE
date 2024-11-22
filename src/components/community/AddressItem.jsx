@@ -5,7 +5,10 @@ import { PlaceBIcon } from '../../assets/icons/iconSvg';
 
 const AddressItem = ({ item, onPress }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onPress(item.id)}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => onPress(item.id, item.latitude, item.longitude)}
+    >
       <View style={styles.iconContainer}>
         <PlaceBIcon />
       </View>
@@ -30,6 +33,8 @@ AddressItem.propTypes = {
     title: PropTypes.string.isRequired,
     roadAddress: PropTypes.string.isRequired,
     jibunAddress: PropTypes.string.isRequired,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
   }).isRequired,
   onPress: PropTypes.func.isRequired,
 };

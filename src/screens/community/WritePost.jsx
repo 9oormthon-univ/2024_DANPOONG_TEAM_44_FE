@@ -23,10 +23,12 @@ import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 
 function WritePost() {
   const navigation = useNavigation();
-  const [fileData, setFileData] = useState([]);
+  const [, setFileData] = useState([]);
+  const [, setSelectedLocationId] = useState(null);
+  const [, setSelectedLatitude] = useState(null);
+  const [, setSelectedLongitude] = useState(null);
   const [isUploaded, setIsUploaded] = useState(false);
   const [isLocationUploaded, setIsLocationUploaded] = useState(false);
-  const [selectedLocationId, setSelectedLocationId] = useState(null); // 선택된 위치 id 저장
 
   useHideBottomTabs(navigation);
 
@@ -38,8 +40,10 @@ function WritePost() {
 
   const handleLocationUpload = () => {
     navigation.navigate('PlaceUpload', {
-      onSelect: id => {
+      onSelect: ({ id, latitude, longitude }) => {
         setSelectedLocationId(id);
+        setSelectedLatitude(latitude);
+        setSelectedLongitude(longitude);
         setIsLocationUploaded(true);
       },
     });
