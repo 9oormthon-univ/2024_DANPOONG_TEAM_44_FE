@@ -7,7 +7,11 @@ import {
   MarketPriceCheck,
   Apartment,
   MultiFamily,
+  MultiFamilyInfo,
+  MultiFamilyResult,
   OfficeTel,
+  OfficeTelInfo,
+  OfficeTelResult,
   RentCalculate,
   CalculateResult,
   ApartmentInfo,
@@ -119,10 +123,62 @@ function HouseInfoStack() {
         })}
       />
       <Stack.Screen
+        name="MultiFamilyInfo"
+        component={MultiFamilyInfo}
+        options={({ navigation }) => ({
+          title: '다세대정보',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="MultiFamilyResult"
+        component={MultiFamilyResult}
+        options={({ navigation }) => ({
+          title: '다세대결과',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
         name="OfficeTel"
         component={OfficeTel}
         options={({ navigation }) => ({
           title: '오피스텔',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="OfficeTelInfo"
+        component={OfficeTelInfo}
+        options={({ navigation }) => ({
+          title: '오피스텔정보',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="OfficeTelResult"
+        component={OfficeTelResult}
+        options={({ navigation }) => ({
+          title: '오피스텔결과',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>

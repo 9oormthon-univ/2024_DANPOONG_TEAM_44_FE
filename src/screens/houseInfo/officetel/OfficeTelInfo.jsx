@@ -10,26 +10,32 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-const OfficeTel = () => {
+const OfficeTelInfo = () => {
   const navigation = useNavigation();
-  const [city, setCity] = useState('서울시');
-  const [district, setDistrict] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
-  useHideBottomTabs(navigation);
+  const [year, setYear] = useState('');
+  const [mainNumber, setMainNumber] = useState('');
+  const [subNumber, setSubNumber] = useState('');
+  const [buildingName, setBuildingName] = useState('');
+  const route = useRoute();
+  const { city, district, neighborhood } = route.params; // 이전 화면에서 전달된 데이터
 
-  const handleNext = () => {
-    if (!city || !district || !neighborhood) {
+  const handleSearch = () => {
+    if (!year || !mainNumber || !subNumber || !buildingName) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
 
-    navigation.navigate('OfficeTelInfo', {
+    // 모든 데이터를 함께 전달
+    navigation.navigate('OfficeTelResult', {
       city,
       district,
       neighborhood,
+      year,
+      mainNumber,
+      subNumber,
+      buildingName,
     });
   };
 
@@ -48,32 +54,48 @@ const OfficeTel = () => {
           </View>
 
           <View style={styles.inputContainer}>
+            {/* 접수 연도 */}
             <TextInput
               style={styles.input}
-              value={city}
-              onChangeText={setCity}
-              editable={false}
+              placeholder="접수 연도"
+              placeholderTextColor="#B0B0B0"
+              value={year}
+              onChangeText={setYear}
+              keyboardType="numeric"
             />
 
+            {/* 본번 */}
             <TextInput
               style={styles.input}
-              placeholder="구"
+              placeholder="본번"
               placeholderTextColor="#B0B0B0"
-              value={district}
-              onChangeText={setDistrict}
+              value={mainNumber}
+              onChangeText={setMainNumber}
+              keyboardType="numeric"
             />
 
+            {/* 부번 */}
             <TextInput
               style={styles.input}
-              placeholder="동"
+              placeholder="부번"
               placeholderTextColor="#B0B0B0"
-              value={neighborhood}
-              onChangeText={setNeighborhood}
+              value={subNumber}
+              onChangeText={setSubNumber}
+              keyboardType="numeric"
+            />
+
+            {/* 건물명 */}
+            <TextInput
+              style={styles.input}
+              placeholder="건물명"
+              placeholderTextColor="#B0B0B0"
+              value={buildingName}
+              onChangeText={setBuildingName}
             />
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleNext}>
-            <Text style={styles.buttonText}>다음</Text>
+          <TouchableOpacity style={styles.button} onPress={handleSearch}>
+            <Text style={styles.buttonText}>조회하기</Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -81,7 +103,7 @@ const OfficeTel = () => {
   );
 };
 
-export default OfficeTel;
+export default OfficeTelInfo;
 
 const styles = StyleSheet.create({
   container: {
@@ -98,12 +120,12 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 20,
     alignItems: 'center',
+    alignSelf: 'flex-start',
+    marginLeft: 10,
   },
   title: {
     fontSize: 30,
     color: '#333',
-    alignSelf: 'flex-start',
-    marginLeft: 10,
   },
   inputContainer: {
     marginBottom: 40,
@@ -112,7 +134,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#868686',
     fontSize: 20,
-    color: '#333',
+    color: '#868686',
     paddingVertical: 10,
     marginTop: 50,
     margin: 5,
@@ -129,6 +151,5 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 });

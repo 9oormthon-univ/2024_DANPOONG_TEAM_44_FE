@@ -13,7 +13,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
 
-const OfficeTel = () => {
+const MultiFamily = () => {
   const navigation = useNavigation();
   const [city, setCity] = useState('서울시');
   const [district, setDistrict] = useState('');
@@ -26,7 +26,7 @@ const OfficeTel = () => {
       return;
     }
 
-    navigation.navigate('OfficeTelInfo', {
+    navigation.navigate('MultiFamilyInfo', {
       city,
       district,
       neighborhood,
@@ -44,7 +44,7 @@ const OfficeTel = () => {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.header}>
-            <Text style={styles.title}>오피스텔 시세</Text>
+            <Text style={styles.title}>다세대 시세</Text>
           </View>
 
           <View style={styles.inputContainer}>
@@ -81,7 +81,7 @@ const OfficeTel = () => {
   );
 };
 
-export default OfficeTel;
+export default MultiFamily;
 
 const styles = StyleSheet.create({
   container: {

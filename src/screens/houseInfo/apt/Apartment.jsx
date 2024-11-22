@@ -139,32 +139,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-// import React from 'react';
-// import GenericInputScreen from '..GenericInputScreen';
-// import { useNavigation } from '@react-navigation/native';
-
-// const Apartment = () => {
-//   const navigation = useNavigation();
-
-//   const labels = [
-//     { key: 'city', placeholder: '서울시', editable: false },
-//     { key: 'district', placeholder: '구' },
-//     { key: 'neighborhood', placeholder: '동' },
-//   ];
-
-//   const handleNext = formData => {
-//     console.log('Apartment 데이터:', formData);
-//     navigation.navigate('ApartmentInfo', formData);
-//   };
-
-//   return (
-//     <GenericInputScreen
-//       title="아파트 시세"
-//       labels={labels}
-//       onSubmit={handleNext}
-//     />
-//   );
-// };
-
-// export default Apartment;
