@@ -4,12 +4,13 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 
 function AreaSetting() {
@@ -19,6 +20,7 @@ function AreaSetting() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 40,
   },
   label: {
     fontSize: 30,
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 180,
     marginTop: 150,
-    marginBottom: 50,
   },
   buttonText: {
     color: '#ffffff',

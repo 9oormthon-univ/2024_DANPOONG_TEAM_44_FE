@@ -93,6 +93,60 @@ const next = `
   </svg>
 `;
 
+const search = `
+  <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.3714 22.2747C19.8422 22.7796 20.6238 22.7974 21.1172 22.3146C21.6106 21.8317 21.6289 21.0309 21.1581 20.526L19.3714 22.2747ZM12.6239 15.0384L19.3714 22.2747L21.1581 20.526L14.4105 13.2897L12.6239 15.0384Z" fill="#AFB1B6"/>
+    <ellipse cx="8.15657" cy="8.33136" rx="8.15657" ry="8.33136" transform="matrix(0.98373 -0.179653 0.167832 0.985816 0 2.93066)" fill="#AFB1B6"/>
+    <ellipse cx="6.11742" cy="6.24852" rx="6.11742" ry="6.24852" transform="matrix(0.98373 -0.179653 0.167832 0.985816 2.35535 4.61768)" fill="white"/>
+  </svg>
+`;
+
+const option = `
+  <svg width="6" height="22" viewBox="0 0 6 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="3" cy="3" r="2.5" fill="#868686"/>
+    <circle cx="3" cy="19" r="2.5" fill="#868686"/>
+    <circle cx="3" cy="11" r="2.5" fill="#868686"/>
+  </svg>
+`;
+
+const option_l = `
+  <svg width="6" height="22" viewBox="0 0 6 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="3" cy="3" r="2.5" fill="#AFB1B6" fill-opacity="0.8"/>
+    <circle cx="3" cy="19" r="2.5" fill="#AFB1B6" fill-opacity="0.8"/>
+    <circle cx="3" cy="11" r="2.5" fill="#AFB1B6" fill-opacity="0.8"/>
+  </svg>
+`;
+
+const edit = `
+  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9238 9.1639L21.3091 7.72894L16.339 2.9308L15.0296 4.28708L19.9238 9.1639ZM18.3771 10.7661L8.59404 20.8998L3.62392 16.1016L13.4829 5.88924L18.3771 10.7661ZM9.36535 23.0847C9.26818 23.1854 9.15555 23.2621 9.03482 23.3148C8.86811 23.5026 8.62959 23.633 8.33807 23.6542L1.74498 24.1328C1.12938 24.1774 0.611449 23.6774 0.634438 23.0606L0.880653 16.4548C0.89152 16.1632 1.01307 15.9206 1.19433 15.7474C1.24274 15.6244 1.31564 15.5087 1.41316 15.4077L15.5677 0.745841C15.9652 0.334104 16.6212 0.322554 17.0329 0.720044L23.4941 6.95762C23.9058 7.35511 23.9173 8.01112 23.5199 8.42286L9.36535 23.0847Z" fill="#AFB1B6"/>
+  </svg>
+`;
+
+const deleteIcon = `
+  <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.18994 5.95337H4.01605M27.096 5.95337H24.2698M9.66827 5.95337V2.66436C9.66827 2.01402 10.1955 1.48682 10.8458 1.48682H17.2046C17.8549 1.48682 18.3821 2.01402 18.3821 2.66436V5.95337M9.66827 5.95337H18.3821M9.66827 5.95337H4.01605M18.3821 5.95337H24.2698M4.01605 5.95337L6.25592 26.3439C6.3215 26.9409 6.82584 27.3928 7.42642 27.3928H21.7543C22.3746 27.3928 22.8885 26.9117 22.9293 26.2927L24.2698 5.95337" stroke="#AFB1B6" stroke-width="2.07248" stroke-linecap="round"/>
+    <path d="M11.5525 11.6133V20.5626" stroke="#AFB1B6" stroke-width="2.07248" stroke-linecap="round"/>
+    <path d="M16.9697 11.6133V20.5626" stroke="#AFB1B6" stroke-width="2.07248" stroke-linecap="round"/>
+  </svg>
+`;
+
+const warning = `
+  <svg width="52" height="51" viewBox="0 0 52 51" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect y="0.912109" width="52" height="49.7059" fill="url(#pattern0_752_8685)"/>
+    <defs>
+      <pattern id="pattern0_752_8685" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_752_8685" transform="matrix(0.0078125 0 0 0.00817308 0 -0.0230769)"/>
+      </pattern>
+      <image id="image0_752_8685" width="128" height="128" xlink:href="data:image/png;base64,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"/>
+    </defs>
+  </svg>
+`;
+
+export const BackIconR = () => <SvgXml xml={back} />;
+export const SearchIcon = () => <SvgXml xml={search} />;
+export const WriteIcon = () => <SvgXml xml={write} />;
+export const LeaveIcon = () => <SvgXml xml={leave} />;
 export const InputIcon = () => <SvgXml xml={input} />;
 export const UploadGIcon = () => <SvgXml xml={upload_g} />;
 export const PlaceGIcon = () => <SvgXml xml={place_g} />;
@@ -103,25 +157,16 @@ export const UserMiddle = () => <SvgXml xml={user_middle} />;
 export const UserBig = () => <SvgXml xml={user_big} />;
 export const MoveTopIcon = () => <SvgXml xml={moveTop} />;
 export const NextIcon = () => <SvgXml xml={next} />;
+export const OptionIcon = () => <SvgXml xml={option} />;
+export const OptionLIcon = () => <SvgXml xml={option_l} />;
+export const EditIcon = () => <SvgXml xml={edit} />;
+export const DeleteIcon = () => <SvgXml xml={deleteIcon} />;
+export const WarningIcon = () => <SvgXml xml={warning} />;
 
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
 );
-export const WriteIcon = ({ onPress }) => (
-  <SvgXml xml={write} onPress={onPress} />
-);
-export const LeaveIcon = ({ onPress }) => (
-  <SvgXml xml={leave} onPress={onPress} />
-);
 
 BackIcon.propTypes = {
-  onPress: PropTypes.func.isRequired,
-};
-
-WriteIcon.propTypes = {
-  onPress: PropTypes.func.isRequired,
-};
-
-LeaveIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
 };

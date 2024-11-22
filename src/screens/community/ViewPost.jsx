@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {
   View,
@@ -7,10 +7,18 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import ImageSlider from '../../components/community/ImageSlider';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { formatDateToSlash } from '../../utils/DateUtils';
-import { UserMiddle } from '../../assets/icons/iconSvg';
+import {
+  UserMiddle,
+  OptionIcon,
+  OptionLIcon,
+} from '../../assets/icons/iconSvg';
+import DropdownMenu from '../../components/common/DropdownMenu';
+import DeletePost from '../../components/modal/DeletePost';
 import { posts } from '../../constants/mockData';
 
 function ViewPost() {
@@ -18,55 +26,113 @@ function ViewPost() {
   const route = useRoute();
   const { id } = route.params || {};
 
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // 현재 로그인된 사용자 ID (임시)
+  const userId = '1';
+
   const post = posts.find(item => item.id === id);
 
   if (!post) {
     return (
-      <View style={styles.container}>
-        <Text>Error : 게시물을 찾을 수 없습니다.</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+        <View style={styles.errorContainer}>
+          <Text>Error : 게시물을 찾을 수 없습니다.</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
   useHideBottomTabs(navigation);
 
-  return (
-    <ScrollView style={styles.container}>
-      <ImageSlider images={post.images} />
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
-      <View style={styles.contentContainer}>
-        <View style={styles.infoSection}>
-          <UserMiddle />
-          <View style={styles.authorInfo}>
-            <Text style={styles.authText}>{post.authorName}</Text>
-            <View style={styles.dateLocationRow}>
-              <Text style={styles.dateText}>
-                {formatDateToSlash(post.createdDate)}
-              </Text>
-              <Text style={styles.locationText}>{post.location}</Text>
+  const handleEdit = () => {
+    navigation.navigate('WritePost');
+    setShowDropdown(false);
+  };
+
+  const handleDelete = () => {
+    setShowDropdown(false);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    setShowDeleteModal(false);
+    navigation.goBack();
+  };
+
+  const rightIcons =
+    post.authorId === userId
+      ? [
+          {
+            icon: showDropdown ? OptionLIcon : OptionIcon,
+            onPress: toggleDropdown,
+          },
+        ]
+      : [];
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Header
+          showBackButton={true}
+          onBackPress={() => navigation.goBack()}
+          rightIcons={rightIcons}
+        />
+        {showDropdown && (
+          <DropdownMenu
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onClose={() => setShowDropdown(false)}
+          />
+        )}
+        <ImageSlider images={post.images} />
+
+        <View style={styles.contentContainer}>
+          <View style={styles.infoSection}>
+            <UserMiddle />
+            <View style={styles.authorInfo}>
+              <Text style={styles.authText}>{post.authorName}</Text>
+              <View style={styles.dateLocationRow}>
+                <Text style={styles.dateText}>
+                  {formatDateToSlash(post.createdDate)}
+                </Text>
+                <Text style={styles.locationText}>{post.location}</Text>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.contentPlaceholder}>
-          <Text style={styles.titleText}>{post.title}</Text>
-          <Text style={styles.contentText}>{post.content}</Text>
-        </View>
+          <View style={styles.contentPlaceholder}>
+            <Text style={styles.titleText}>{post.title}</Text>
+            <Text style={styles.contentText}>{post.content}</Text>
+          </View>
 
-        <View style={[styles.kakaoMap, styles.kakaoText]}>
-          <Text>카카오 맵</Text>
-        </View>
+          <View style={[styles.kakaoMap, styles.kakaoText]}>
+            <Text>카카오 맵</Text>
+          </View>
 
-        <TouchableOpacity
-          style={styles.connectButton}
-          onPress={() =>
-            navigation.navigate('Chat', { id, author: post.authorName })
-          }
-        >
-          <Text style={styles.connectButtonText}>사용자와 연결</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+          <TouchableOpacity
+            style={styles.connectButton}
+            onPress={() =>
+              navigation.navigate('Chat', { id, author: post.authorName })
+            }
+          >
+            <Text style={styles.connectButtonText}>사용자와 연결</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+
+      <DeletePost
+        visible={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onLeave={confirmDelete}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -76,6 +142,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  scrollContainer: {
+    paddingBottom: 20,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   contentContainer: {
     width: '100%',

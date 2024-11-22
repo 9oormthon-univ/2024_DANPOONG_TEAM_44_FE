@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import CommunityItem from '../../components/community/CommunityItem';
 import { posts } from '../../constants/mockData';
@@ -11,20 +13,23 @@ function MyPost() {
   useHideBottomTabs(navigation);
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={posts}
-        renderItem={({ item }) => (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView>
+        <Header
+          title="내가 쓴 글"
+          showBackButton={true}
+          onBackPress={() => navigation.goBack()}
+        />
+        {posts.map(item => (
           <CommunityItem
+            key={item.id}
             item={item}
             showAuthor={false}
             onPress={() => navigation.navigate('ViewPost', { id: item.id })}
           />
-        )}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContainer}
-      />
-    </View>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

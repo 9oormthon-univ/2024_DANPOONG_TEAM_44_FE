@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import ChatItem from '../../components/community/ChatItem';
 import { chats } from '../../constants/mockData';
@@ -11,9 +13,16 @@ function MyChat() {
   useHideBottomTabs(navigation);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
       <FlatList
         data={chats}
+        ListHeaderComponent={
+          <Header
+            title="내 채팅"
+            showBackButton={true}
+            onBackPress={() => navigation.goBack()}
+          />
+        }
         renderItem={({ item }) => (
           <ChatItem
             name={item.name}
@@ -30,14 +39,14 @@ function MyChat() {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 export default MyChat;
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },

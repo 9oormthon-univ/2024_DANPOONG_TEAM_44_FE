@@ -1,18 +1,47 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
+import Header from '../../components/common/Header';
+import { LeaveIcon } from '../../assets/icons/iconSvg';
 import ChatInput from '../../components/community/ChatInput';
 import ChatMessage from '../../components/community/ChatMessage';
+import LeaveChat from '../../components/modal/LeaveChat';
 import { messages } from '../../constants/mockData';
 
 function Chat() {
+  const [isModalVisible, setModalVisible] = useState(false);
+
   const navigation = useNavigation();
+  const route = useRoute();
 
   useHideBottomTabs(navigation);
 
+  const author = route.params?.author || '사용자명';
+
+  const handleLeaveChat = () => {
+    setModalVisible(false);
+    navigation.goBack();
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
+      <Header
+        title={author}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        rightIcons={[
+          {
+            icon: LeaveIcon,
+            onPress: () => setModalVisible(true),
+          },
+        ]}
+      />
       <ScrollView contentContainerStyle={styles.chatContainer}>
         {messages.map((message, index) => {
           const isLastInGroup =
@@ -32,19 +61,26 @@ function Chat() {
           );
         })}
       </ScrollView>
+
       <ChatInput />
-    </View>
+      <LeaveChat
+        visible={isModalVisible}
+        onClose={handleCloseModal}
+        onLeave={handleLeaveChat}
+      />
+    </SafeAreaView>
   );
 }
 
 export default Chat;
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
   chatContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
 });

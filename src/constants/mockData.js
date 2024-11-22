@@ -1,6 +1,7 @@
 export const posts = [
   {
     id: '1',
+    authorId: '1',
     title: '단풍로 오피스텔 양도합니다~',
     location: '서울시 단풍로',
     authorName: '김단풍',
@@ -14,6 +15,7 @@ export const posts = [
   },
   {
     id: '2',
+    authorId: '1',
     title: '원룸 양도합니다!',
     location: '서울시 단풍로',
     authorName: '단풍톤',
@@ -25,6 +27,7 @@ export const posts = [
   },
   {
     id: '3',
+    authorId: '1',
     title: '아파트 ㅇㅇ아파트1',
     location: '서울시 단풍로',
     authorName: '단풍이',
@@ -38,6 +41,7 @@ export const posts = [
   },
   {
     id: '4',
+    authorId: '2',
     title: '아파트 ㅇㅇ아파트2',
     location: '서울시 단풍로',
     authorName: '구름이',
@@ -50,6 +54,7 @@ export const posts = [
   },
   {
     id: '5',
+    authorId: '2',
     title: '아파트 아파트3 아파트3',
     location: '서울시 단풍로',
     authorName: '구름이',
@@ -58,6 +63,39 @@ export const posts = [
     images: [
       'https://cdn.woodkorea.co.kr/news/photo/202008/48341_58008_847.jpg',
     ],
+  },
+];
+
+export const adress = [
+  {
+    id: '1',
+    title: '단풍아파트1',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '2',
+    title: '단풍아파트2',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '3',
+    title: '단풍아파트3',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '4',
+    title: '단풍아파트4',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
+  },
+  {
+    id: '5',
+    title: '단풍아파트5',
+    roadAddress: '서울시 단풍로 44번길',
+    jibunAddress: '서울 단풍동 11-23',
   },
 ];
 
