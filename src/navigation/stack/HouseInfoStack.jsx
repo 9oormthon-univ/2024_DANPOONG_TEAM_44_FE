@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   HouseInfo,
@@ -14,6 +14,7 @@ import {
   ApartmentResult,
 } from '../../screens/houseInfo/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createNativeStackNavigator();
 
@@ -95,7 +96,12 @@ function HouseInfoStack() {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
-              <BackIcon onPress={() => navigation.goBack()} />
+              <TouchableOpacity
+                onPress={() => navigation.navigate('HouseInfo')}
+              >
+                {/* 아이콘 변경 */}
+                <Icon name="home" size={24} color="#000" />
+              </TouchableOpacity>
             </View>
           ),
         })}

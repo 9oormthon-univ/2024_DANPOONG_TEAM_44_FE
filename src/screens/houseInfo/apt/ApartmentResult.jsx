@@ -122,11 +122,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
     color: '#333',
   },
   infoBox: {
-    backgroundColor: '#F5F5F5',
     borderRadius: 10,
     padding: 15,
     marginBottom: 20,
@@ -135,17 +133,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
     marginBottom: 5,
+    margin: 15,
   },
   boldText: {
-    fontWeight: 'bold',
     color: '#333',
+    marginLeft: 10,
   },
   section: {
     marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
     marginBottom: 10,
     color: '#333',
   },
