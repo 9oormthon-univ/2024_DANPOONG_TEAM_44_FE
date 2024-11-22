@@ -14,7 +14,7 @@ import {
   ApartmentResult,
 } from '../../screens/houseInfo/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import HomeIcon from '../../assets/icons/homeIcon';
 
 const Stack = createNativeStackNavigator();
 
@@ -92,15 +92,14 @@ function HouseInfoStack() {
         name="ApartmentResult"
         component={ApartmentResult}
         options={({ navigation }) => ({
-          title: '아파트시세',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
               <TouchableOpacity
                 onPress={() => navigation.navigate('HouseInfo')}
               >
-                {/* 아이콘 변경 */}
-                <Icon name="home" size={24} color="#000" />
+                <HomeIcon color="#000" />
               </TouchableOpacity>
             </View>
           ),

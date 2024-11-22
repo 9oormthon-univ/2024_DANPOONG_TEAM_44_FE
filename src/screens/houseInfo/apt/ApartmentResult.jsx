@@ -9,13 +9,16 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
+import { useNavigation } from '@react-navigation/native';
 
 const ApartmentResult = () => {
+  const navigation = useNavigation();
   const [isDetailedView, setIsDetailedView] = useState(false);
   const route = useRoute();
-  //   const { year, mainNumber, subNumber, buildingName } = route.params;
   const { buildingName } = route.params;
   const { city, district, neighborhood } = route.params;
+  useHideBottomTabs(navigation);
 
   const handleDetailsToggle = () => {
     setIsDetailedView(!isDetailedView);

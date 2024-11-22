@@ -11,13 +11,14 @@ import {
   Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
 
 const Apartment = () => {
   const navigation = useNavigation();
-
   const [city, setCity] = useState('서울시');
   const [district, setDistrict] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
+  useHideBottomTabs(navigation);
 
   const handleNext = () => {
     if (!city || !district || !neighborhood) {
