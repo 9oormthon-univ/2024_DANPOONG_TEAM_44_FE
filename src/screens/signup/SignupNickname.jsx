@@ -5,25 +5,42 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import Config from 'react-native-config';
 
 function Signupnickname() {
   const navigation = useNavigation();
 
-  const [nickname, setNickname] = useState('');
+  const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   // 닉네임 중복 검사 함수
-  const checkNickname = () => {
-    const existingNicknames = ['user1', 'test123', 'nickname']; // 중복된 닉네임 예시 데이터
+  const checkNickname = async () => {
+    try {
+      const response = await fetch(`http://${Config.SERVER_URL}/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }),
+      });
+      console.log('응답 상태:', response.status);
 
-    if (existingNicknames.includes(nickname)) {
-      setErrorMessage('중복되는 이름이나 닉네임을 사용할 수 없습니다.');
-    } else {
-      setErrorMessage('');
-      navigation.navigate('SignupArea'); // 관심 지역 화면으로 이동
+      if (response.ok) {
+        const result = await response.json();
+        if (result.isAvailable) {
+          setErrorMessage('');
+          navigation.navigate('SignupArea', { username });
+        } else {
+          setErrorMessage('중복되는 닉네임입니다. 다른 닉네임을 입력해주세요.');
+        }
+      } else {
+        throw new Error('서버 오류');
+      }
+    } catch (error) {
+      console.error('닉네임 중복 확인 오류:', error);
+      Alert.alert('오류', '닉네임 중복 확인 중 문제가 발생했습니다.');
     }
   };
   return (
@@ -34,12 +51,9 @@ function Signupnickname() {
         style={styles.input}
         placeholder="본명이나 닉네임을 입력하세요."
         placeholderTextColor="#999"
+        onChangeText={setUsername}
       />
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('SignupArea')}
-      >
+      <TouchableOpacity style={styles.button} onPress={checkNickname}>
         <Text style={styles.buttonText}>다음(1/3)</Text>
       </TouchableOpacity>
     </SafeAreaView>
