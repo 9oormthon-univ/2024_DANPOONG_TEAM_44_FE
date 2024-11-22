@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 30,
     marginBottom: 43,
-    width: 350,
+    width: '90%',
     display: 'flex',
   },
   card2: {
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFF6FC',
     borderRadius: 15,
     padding: 30,
-    width: 350,
+    width: '90%',
     display: 'flex',
     // marginBottom: 43,
   },
