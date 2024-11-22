@@ -10,30 +10,33 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ApartmentInfo = () => {
+  const navigation = useNavigation();
   const [year, setYear] = useState('');
   const [mainNumber, setMainNumber] = useState('');
   const [subNumber, setSubNumber] = useState('');
   const [buildingName, setBuildingName] = useState('');
+  const route = useRoute();
+  const { city, district, neighborhood } = route.params; // 이전 화면에서 전달된 데이터
 
   const handleSearch = () => {
     if (!year || !mainNumber || !subNumber || !buildingName) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
-    // 검색 로직 추가
-    console.log(
-      '접수 연도:',
+
+    // 모든 데이터를 함께 전달
+    navigation.navigate('ApartmentResult', {
+      city,
+      district,
+      neighborhood,
       year,
-      '본번:',
       mainNumber,
-      '부번:',
       subNumber,
-      '건물명:',
       buildingName,
-    );
-    alert(`입력된 정보: ${year}, ${mainNumber}, ${subNumber}, ${buildingName}`);
+    });
   };
 
   return (

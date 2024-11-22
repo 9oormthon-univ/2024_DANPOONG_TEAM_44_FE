@@ -7,3 +7,4 @@ export { default as OfficeTel } from './officetel/OfficeTel';
 export { default as RentCalculate } from './RentCalculate';
 export { default as CalculateResult } from './CalculateResult';
 export { default as ApartmentInfo } from './apt/ApartmentInfo';
+export { default as ApartmentResult } from './apt/ApartmentResult';

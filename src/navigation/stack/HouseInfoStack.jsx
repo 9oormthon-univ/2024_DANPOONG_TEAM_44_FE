@@ -11,6 +11,7 @@ import {
   RentCalculate,
   CalculateResult,
   ApartmentInfo,
+  ApartmentResult,
 } from '../../screens/houseInfo/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
 
@@ -76,6 +77,19 @@ function HouseInfoStack() {
       <Stack.Screen
         name="ApartmentInfo"
         component={ApartmentInfo}
+        options={({ navigation }) => ({
+          title: '아파트시세',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="ApartmentResult"
+        component={ApartmentResult}
         options={({ navigation }) => ({
           title: '아파트시세',
           headerTitleAlign: 'center',

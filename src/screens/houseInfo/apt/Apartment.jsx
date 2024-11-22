@@ -24,16 +24,12 @@ const Apartment = () => {
       alert('모든 항목을 입력해주세요.');
       return;
     }
-    // 다음 단계로 이동 로직
-    console.log(
-      'City:',
+
+    navigation.navigate('ApartmentInfo', {
       city,
-      'District:',
       district,
-      'Neighborhood:',
       neighborhood,
-    );
-    alert(`입력된 정보: ${city} ${district} ${neighborhood}`);
+    });
   };
 
   return (
@@ -80,7 +76,8 @@ const Apartment = () => {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('ApartmentInfo')}
+            onPress={handleNext}
+            // onPress={() => navigation.navigate('ApartmentInfo')}
           >
             <Text style={styles.buttonText}>다음</Text>
           </TouchableOpacity>
