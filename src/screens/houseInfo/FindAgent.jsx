@@ -1,45 +1,63 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { WebView } from 'react-native-webview';
+import Config from 'react-native-config';
+import Constants from 'expo-constants';
+const { kakaoRedirectUri, kakaoClientId, serverUrl, kakaoJsKey } =
+  Constants.expoConfig.extra;
+
+console.log('KAKAO_REDIRECT_URI:', kakaoRedirectUri);
+console.log('KAKAO_CLIENT_ID:', kakaoClientId);
+console.log('SERVER_URL:', serverUrl);
+console.log('KAKAO_JS_KEY:', kakaoJsKey);
 
 const KakaoMap = () => {
   const kakaoMapHtml = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY"></script>
-        <style>
-          html, body { margin: 0; padding: 0; height: 100%; }
-          #map { width: 100%; height: 100%; }
-        </style>
-      </head>
-      <body>
-        <div id="map"></div>
-        <script>
-          var mapContainer = document.getElementById('map');
-          var mapOption = {
-            center: new kakao.maps.LatLng(37.5665, 126.9780), // 서울시청 좌표
-            level: 3 // 확대 레벨
-          };
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${Config.KAKAO_JS_KEY}&libraries=services"></script>
+    <style>
+      html, body { margin: 0; padding: 0; height: 100%; }
+      #map { width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="map" style="width:100%;height:100%;"></div>
+    <script>
+      try {
+        // 지도 생성
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+          center: new kakao.maps.LatLng(37.5665, 126.9780),
+          level: 3
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-          var map = new kakao.maps.Map(mapContainer, mapOption);
-
-          var marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(37.5665, 126.9780),
-            map: map
-          });
-
-          var infoWindow = new kakao.maps.InfoWindow({
-            content: '<div style="padding:10px;">서울특별시청</div>',
-            position: new kakao.maps.LatLng(37.5665, 126.9780)
-          });
-          infoWindow.open(map, marker);
-        </script>
-      </body>
-    </html>
-  `;
+        // 장소 검색
+        var ps = new kakao.maps.services.Places();
+        ps.keywordSearch('부동산 중개소', function(data, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            data.forEach(place => {
+              var coords = new kakao.maps.LatLng(place.y, place.x);
+              var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+              });
+            });
+          } else {
+            console.error('검색 결과 없음');
+          }
+        });
+      } catch (error) {
+        console.error('Error loading map:', error);
+      }
+    </script>
+  </body>
+</html>
+`;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,8 +65,11 @@ const KakaoMap = () => {
         <WebView
           source={{ html: kakaoMapHtml }}
           style={styles.map}
-          javaScriptEnabled
+          javaScriptEnabled={true}
           originWhitelist={['*']}
+          onMessage={event => {
+            console.log('WebView Message:', event.nativeEvent.data);
+          }}
         />
       </View>
       <View style={styles.infoBox}>
@@ -68,6 +89,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
+    justifyContent: 'center',
   },
   mapContainer: {
     flex: 2,
