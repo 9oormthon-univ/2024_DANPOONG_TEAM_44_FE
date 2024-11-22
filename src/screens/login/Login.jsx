@@ -6,27 +6,41 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import Config from 'react-native-config';
 
 function Login() {
+  const navigation = useNavigation();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = () => {
-    const navigation = useNavigation();
-    // 예시
-    const validId = '123';
-    const validPassword = '123';
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(`${Config.SERVER_URL}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ loginId: id, password: password }),
+      });
 
-    if (id === validId && password === validPassword) {
-      setErrorMessage(''); // 오류 메시지를 초기화하고 성공 동작을 추가할 수 있음
-      alert('로그인 성공');
-      navigation.navigate('Home'); // 홈 화면으로 이동 (예시)
-    } else {
-      setErrorMessage('아이디 또는 패스워드가 일치하지 않습니다.');
+      if (response.ok) {
+        const data = await response.json();
+        console.log('로그인 성공:', data);
+
+        // 로그인 성공 처리
+        Alert.alert('로그인 성공', `환영합니다, ${data.username}!`);
+        navigation.navigate('Home'); // 홈 화면으로 이동
+      } else if (response.status === 401) {
+        // 인증 실패 처리
+        setErrorMessage('아이디 또는 비밀번호가 잘못되었습니다.');
+      } else {
+        throw new Error('서버 오류');
+      }
+    } catch (error) {
+      console.error('로그인 오류:', error);
+      Alert.alert('오류', '로그인 요청 중 문제가 발생했습니다.');
     }
   };
 
