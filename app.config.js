@@ -12,6 +12,7 @@ export default {
     },
     ios: {
       newArchEnabled: true,
+      bundleIdentifier: 'com.zipcock.app',
     },
     android: {
       newArchEnabled: true,
