@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 
 const BuildingInfo = () => {
   return (
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 10,
     color: '#000',
-    alignSelf:'flex-start'
+    alignSelf: 'flex-start',
   },
   infoBox: {
     backgroundColor: '#EDF0F5',
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 18,
     color: '#4D4D4D',
-    marginTop:10,
+    marginTop: 10,
     marginBottom: 10,
   },
   button: {

@@ -18,7 +18,9 @@ function BuildingRegister() {
 
   const handleSearch = () => {
     // 조회 로직 추가 가능
-    alert(`조회 요청\n시/군/구: ${city}\n동/읍/면: ${district}\n번: ${block}\n지: ${lot}`);
+    alert(
+      `조회 요청\n시/군/구: ${city}\n동/읍/면: ${district}\n번: ${block}\n지: ${lot}`,
+    );
   };
 
   return (
@@ -55,8 +57,11 @@ function BuildingRegister() {
           onChangeText={setLot}
         />
       </View>
- {/* onPress={handleSearch} */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('BuildingInfo')}>
+      {/* onPress={handleSearch} */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('BuildingInfo')}
+      >
         <Text style={styles.buttonText}>조회하기</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -79,7 +84,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     alignSelf: 'flex-start',
     marginLeft: 20,
-
   },
   inputContainer: {
     width: '87%',
@@ -93,13 +97,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomWidth: 1,
     borderBottomColor: '#868686',
-    alignItems:'center',
+    alignItems: 'center',
     marginTop: 35,
     marginBottom: 15,
     fontSize: 20,
     color: '#000',
     paddingHorizontal: 10,
-    
   },
   button: {
     backgroundColor: '#007AFF',
