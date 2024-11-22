@@ -42,6 +42,7 @@ const ApartmentResult = () => {
               </Text>
             </View>
             <View style={styles.section}>
+              <View style={styles.divider} />
               <Text style={styles.sectionTitle}>상세정보</Text>
               <Text style={styles.infoText}>건축년도:</Text>
               <Text style={styles.infoText}>임대면적:</Text>
@@ -49,6 +50,7 @@ const ApartmentResult = () => {
               <Text style={styles.infoText}>전월세 구분:</Text>
               <Text style={styles.infoText}>보증금:</Text>
               <Text style={styles.infoText}>임대료:</Text>
+              <View style={styles.divider} />
             </View>
             <TouchableOpacity
               style={styles.button}
@@ -77,6 +79,7 @@ const ApartmentResult = () => {
               </Text>
             </View>
             <View style={styles.section}>
+              <View style={styles.divider} />
               <Text style={styles.sectionTitle}>상세정보</Text>
               <Text style={styles.infoText}>건축년도:</Text>
               <Text style={styles.infoText}>임대면적:</Text>
@@ -86,10 +89,12 @@ const ApartmentResult = () => {
               <Text style={styles.infoText}>임대료:</Text>
             </View>
             <View style={styles.section}>
+              <View style={styles.divider} />
               <Text style={styles.sectionTitle}>추가정보</Text>
               <Text style={styles.infoText}>신규갱신여부:</Text>
               <Text style={styles.infoText}>종전 보증금:</Text>
               <Text style={styles.infoText}>종전 임대료:</Text>
+              <View style={styles.divider} />
             </View>
             <View style={styles.mapPreview}>
               <Image
@@ -121,19 +126,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     color: '#333',
   },
   infoBox: {
     borderRadius: 10,
-    padding: 15,
-    marginBottom: 20,
+    padding: 10,
   },
   infoText: {
-    fontSize: 16,
+    fontSize: 20,
     color: '#555',
-    marginBottom: 5,
-    margin: 15,
+    marginLeft: 15,
+    padding: 10,
   },
   boldText: {
     color: '#333',
@@ -143,18 +147,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: 22,
+    padding: 10,
+    alignSelf: 'flex-start',
     color: '#333',
   },
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc', // 원하는 색상
+    marginVertical: 10,
+  },
   button: {
-    backgroundColor: '#E8F0FF',
+    backgroundColor: '#E0E9F5',
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 30,
     alignItems: 'center',
+    alignSelf: 'center',
+    width: '50%',
   },
   buttonText: {
-    color: '#007AFF',
+    color: '#585858',
     fontSize: 16,
   },
   mapPreview: {
