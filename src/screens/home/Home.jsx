@@ -3,12 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   Image,
   TouchableOpacity,
   ScrollView,
   Linking,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import { useNavigation } from '@react-navigation/native';
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header title="홈" rightIcons={[]} />
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {/* 메인 이미지 */}
         <View style={styles.mainImagePlaceholder}>
@@ -105,8 +107,6 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
   contentContainer: {

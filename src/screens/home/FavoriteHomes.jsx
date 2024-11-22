@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 
 const FavoriteHomes = () => {
+  const navigation = useNavigation();
+
   // 임시 데이터 예제
   // 찜한 목록 데이터 가져오기 추가 필요
   const favoriteHomes = [
@@ -47,23 +52,34 @@ const FavoriteHomes = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={favoriteHomes}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        showsVerticalScrollIndicator={false} // 스크롤바 숨기기
-      />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <FlatList
+          data={favoriteHomes}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false} // 스크롤바 숨기기
+          ListHeaderComponent={
+            <Header
+              title="내가 찜한 집"
+              showBackButton={true}
+              onBackPress={() => navigation.goBack()}
+            />
+          }
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default FavoriteHomes;
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    backgroundColor: '#fff', // 배경색
+    backgroundColor: '#FFFFFF',
+  },
+  container: {
     padding: 10,
   },
   card: {

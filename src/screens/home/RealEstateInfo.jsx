@@ -8,6 +8,8 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import { MoveTopIcon } from '../../assets/icons/iconSvg';
 
 const RealEstateInfo = () => {
@@ -23,7 +25,8 @@ const RealEstateInfo = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
       <ScrollView
         ref={scrollViewRef} // ref 연결
         contentContainerStyle={styles.scrollContainer}
@@ -110,7 +113,7 @@ const RealEstateInfo = () => {
       <TouchableOpacity style={styles.scrollTopButton} onPress={scrollToTop}>
         <MoveTopIcon />
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
