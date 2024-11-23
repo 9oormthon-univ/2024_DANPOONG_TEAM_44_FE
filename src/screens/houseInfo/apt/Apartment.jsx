@@ -75,11 +75,7 @@ const Apartment = () => {
             />
           </View>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleNext}
-            // onPress={() => navigation.navigate('ApartmentInfo')}
-          >
+          <TouchableOpacity style={styles.button} onPress={handleNext}>
             <Text style={styles.buttonText}>다음</Text>
           </TouchableOpacity>
         </ScrollView>

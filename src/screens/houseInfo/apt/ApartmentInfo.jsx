@@ -27,6 +27,15 @@ const ApartmentInfo = () => {
       return;
     }
 
+    console.log('입력된 데이터:', {
+      rcpt_yr: year,
+      cgg_nm: district,
+      stdg_cd: neighborhood,
+      mno: mainNumber,
+      sno: subNumber,
+      bldg_nm: buildingName,
+    });
+
     // 모든 데이터를 함께 전달
     navigation.navigate('ApartmentResult', {
       city,
