@@ -6,6 +6,7 @@ import { Signup, SignupArea, SignupNickname } from '../../screens/signup/index';
 import { BackIcon } from '../../assets/icons/iconSvg';
 import Login from '../../screens/login/Login';
 import KakaoLogin from '../../screens/login/KakaoLogin';
+import Home from '../../screens/home/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,18 @@ function LoginSignupStack() {
       <Stack.Screen
         name="SignupArea"
         component={SignupArea}
+        options={({ navigation }) => ({
+          title: '',
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <BackIcon onPress={() => navigation.goBack()} />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
         options={({ navigation }) => ({
           title: '',
           headerLeft: () => (
