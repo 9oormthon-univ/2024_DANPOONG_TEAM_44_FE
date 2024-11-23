@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import FavoriteModal from '../../components/modal/FavoriteModal';
 
 function BuildingRegister() {
   const navigation = useNavigation();
