@@ -20,7 +20,10 @@ function HomeStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitleStyle: { fontSize: 24 },
+        headerTitleStyle: {
+          fontSize: 24,
+          fontFamily: 'SpoqaHanSansNeo-Medium',
+        },
         headerShadowVisible: false,
         headerBackVisible: false,
       }}
