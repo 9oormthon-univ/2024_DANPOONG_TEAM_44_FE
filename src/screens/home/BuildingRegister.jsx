@@ -11,16 +11,35 @@ import { useNavigation } from '@react-navigation/native';
 
 function BuildingRegister() {
   const navigation = useNavigation();
-  const [city, setCity] = useState('');
+  const [address, setCity] = useState('');
   const [district, setDistrict] = useState('');
-  const [block, setBlock] = useState('');
-  const [lot, setLot] = useState('');
+  const [bun, setBlock] = useState('');
+  const [ji, setLot] = useState('');
 
   const handleSearch = () => {
-    // 조회 로직 추가 가능
-    alert(
-      `조회 요청\n시/군/구: ${city}\n동/읍/면: ${district}\n번: ${block}\n지: ${lot}`,
-    );
+    if (!address || !district) {
+      alert('시/군/구와 동/읍/면은 필수 입력 항목입니다.');
+      return;
+    }
+
+    // 번과 지 값이 없을 경우 0으로 처리
+    const formattedBun = bun.trim() === '' ? '0000' : bun;
+    const formattedJi = ji.trim() === '' ? '0000' : ji;
+
+    // 데이터 확인
+    console.log({
+      city: address,
+      district,
+      block: formattedBun,
+      lot: formattedJi,
+    });
+
+    navigation.navigate('BuildingInfo', {
+      city: address,
+      district,
+      block: formattedBun,
+      lot: formattedJi,
+    });
   };
 
   return (
@@ -32,7 +51,7 @@ function BuildingRegister() {
           style={styles.input}
           placeholder="시/군/구"
           placeholderTextColor="#B0B0B0"
-          value={city}
+          value={address}
           onChangeText={setCity}
         />
         <TextInput
@@ -46,22 +65,19 @@ function BuildingRegister() {
           style={styles.input}
           placeholder="번"
           placeholderTextColor="#B0B0B0"
-          value={block}
+          value={bun}
           onChangeText={setBlock}
         />
         <TextInput
           style={styles.input}
           placeholder="지"
           placeholderTextColor="#B0B0B0"
-          value={lot}
+          value={ji}
           onChangeText={setLot}
         />
       </View>
       {/* onPress={handleSearch} */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('BuildingInfo')}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleSearch}>
         <Text style={styles.buttonText}>조회하기</Text>
       </TouchableOpacity>
     </SafeAreaView>
