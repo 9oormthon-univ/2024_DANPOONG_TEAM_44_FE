@@ -6,27 +6,54 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import Config from 'react-native-config';
 
 function Login() {
+  const navigation = useNavigation();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = () => {
-    const navigation = useNavigation();
-    // 예시
-    const validId = '123';
-    const validPassword = '123';
+  const handleLogin = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('loginId', id); // 'id'는 변수로 전달받은 값
+      formData.append('password', password); // 'password'도 변수로 전달받은 값
 
-    if (id === validId && password === validPassword) {
-      setErrorMessage(''); // 오류 메시지를 초기화하고 성공 동작을 추가할 수 있음
-      alert('로그인 성공');
-      navigation.navigate('Home'); // 홈 화면으로 이동 (예시)
-    } else {
-      setErrorMessage('아이디 또는 패스워드가 일치하지 않습니다.');
+      console.log('서버 URL:', `${Config.SERVER_URL}/login`);
+      console.log('전송 데이터:', JSON.stringify({ loginId: id, password }));
+
+      const response = await fetch(`http://52.78.38.237/login`, {
+        method: 'POST',
+        headers: {
+          // Content-Type은 생략. fetch가 multipart/form-data를 자동으로 설정합니다.
+        },
+        body: formData, // formData를 body로 설정
+      });
+      // 응답 상태 확인
+      console.log('응답 상태:', response.status);
+
+      if (response.ok) {
+        const responseText = await response.text(); // JSON 대신 텍스트로 처리
+        console.log('로그인 성공:', responseText);
+        // const data = await response.json();
+        // console.log('로그인 성공:', data);
+
+        // // 로그인 성공 처리
+        Alert.alert('로그인 성공', `환영합니다, ${responseText}!`);
+        navigation.navigate('Home'); // 홈 화면으로 이동
+      } else if (response.status === 401) {
+        // 인증 실패 처리
+        setErrorMessage('아이디 또는 비밀번호가 잘못되었습니다.');
+      } else {
+        throw new Error('서버 오류');
+      }
+    } catch (error) {
+      console.error('로그인 오류:', error);
+      Alert.alert('오류', '로그인 요청 중 문제가 발생했습니다.');
     }
   };
 

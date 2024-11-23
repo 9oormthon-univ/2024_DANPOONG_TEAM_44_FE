@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const BuildingInfo = () => {
+  const navigation = useNavigation();
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>건물 정보</Text>
@@ -31,7 +34,10 @@ const BuildingInfo = () => {
         <Text style={styles.infoText}>기타용도:</Text>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('RealEstateCaution')}
+      >
         <Text style={styles.buttonText}>다음</Text>
       </TouchableOpacity>
     </ScrollView>

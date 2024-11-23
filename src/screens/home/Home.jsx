@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -19,12 +19,30 @@ function Home() {
     );
   };
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const slideImages = [
+    require('../../assets/images/home/slide/slide1.png'),
+    require('../../assets/images/home/slide/slide2.png'),
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % slideImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 정리
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        {/* 메인 이미지 */}
+        {/* 슬라이드 이미지 */}
         <View style={styles.mainImagePlaceholder}>
-          <Text style={styles.mainImageText}>슬라이드</Text>
+          <Image
+            source={slideImages[currentImageIndex]}
+            style={styles.mainImage}
+            resizeMode="cover"
+          />
         </View>
 
         {/* 사용자용 서비스 */}
@@ -129,12 +147,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 30,
   },
-  mainImageText: {
-    color: '#B0B0B0',
+  mainImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
   },
   card: {
     // 큰 카드
     backgroundColor: '#007AFF',
+    width: '100%',
     borderRadius: 15,
     padding: 20,
     marginBottom: 20,

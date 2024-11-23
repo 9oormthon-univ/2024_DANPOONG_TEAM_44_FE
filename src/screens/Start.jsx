@@ -7,45 +7,22 @@ import {
   StyleSheet,
   SafeAreaView,
   Image,
-  Alert,
 } from 'react-native';
 // import { login as kakaoLogin, logout as kakaoLogout } from '@react-native-seoul/kakao-login';
 // import { login as kakaoLogin } from '@react-native-seoul/kakao-login';
 // import axios from 'axios';
+// import Config from 'react-native-config';
 
-
-function Start({ navigation }) {
-
-  const handleKakaoLogin = async () => {
-    try {
-      // 카카오 로그인 실행
-      const token = await kakaoLogin();
-      console.log('카카오 로그인 성공:', token.accessToken);
-
-      // 백엔드로 액세스 토큰 전달 (예시)
-      // axios.post('https://your-backend-server.com/auth/kakao', {
-      //   accessToken: token.accessToken,
-      // });
-
-      Alert.alert('로그인 성공', '카카오 로그인 완료');
-      navigation.navigate('Home'); // 로그인 후 홈 화면으로 이동
-    } catch (error) {
-      console.error(error);
-      Alert.alert('로그인 실패', '카카오 로그인 중 오류가 발생했습니다.');
-    }
-  };
-
+const Start = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.iconContainer}>
         <Image source={require('../assets/zip_logo.png')} />
       </View>
 
-      {/* navigate 연결 아직 안됨 */}
       <TouchableOpacity
         style={styles.kakaoButton}
-        onPress={handleKakaoLogin} // 카카오 로그인 연결 
-        // onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('KakaoLogin')}
       >
         {/* 카카오 로그인 버튼 이미지  */}
         <Image
@@ -70,7 +47,7 @@ function Start({ navigation }) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 Start.propTypes = {
   navigation: PropTypes.shape({
