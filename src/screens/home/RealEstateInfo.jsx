@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/common/Header';
+import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { MoveTopIcon } from '../../assets/icons/iconSvg';
 
 const RealEstateInfo = () => {
@@ -23,6 +24,7 @@ const RealEstateInfo = () => {
       animated: true, // 부드럽게 스크롤
     });
   };
+  useHideBottomTabs(navigation);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#DDE6F8',
     width: '100%',
-    marginVertical: 40,
+    marginVertical: 20,
   },
   infoSection: {
     flexDirection: 'row',
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 100,
     height: 100,
-    marginRight: 10,
+    marginLeft: 10,
     marginTop: 10,
     marginBottom: 32,
     alignSelf: 'flex-start',
@@ -177,16 +179,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   infoTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'SpoqaHanSansNeo-Bold',
     color: '#1F6BE5',
     marginBottom: 16,
     marginTop: 10,
   },
   infoText: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#556576',
-    // fontFamily: 'SpoqaHanSansNeo-Medium',
     fontFamily: 'SpoqaHanSansNeo-Regular',
     lineHeight: 20,
   },
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 62,
     marginBottom: 20,
+    marginHorizontal: 30,
   },
   buttonText: {
     color: '#fff',

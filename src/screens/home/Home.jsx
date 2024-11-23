@@ -22,7 +22,7 @@ function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const slideImages = [
     require('../../assets/images/home/slide/slide1.png'),
-    require('../../assets/images/home/slide/slide2.png'),
+    require('../../assets/images/home/slide/slide3.png'),
   ];
 
   useEffect(() => {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   card: {
     // 큰 카드
-    backgroundColor: '#007AFF',
+    backgroundColor: '#228bfc',
     width: '100%',
     borderRadius: 15,
     padding: 10,
@@ -171,12 +171,11 @@ const styles = StyleSheet.create({
     // padding:5,
   },
   sectionTitleMiddle: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#fff',
-    fontFamily: 'SpoqaHanSansNeo-Bold',
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     marginBottom: 20,
     textAlign: 'center',
-    marginLeft: 10,
   },
   serviceContainer: {
     flexDirection: 'row',

@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     color: '#000000',
     marginBottom: 8,
   },
