@@ -13,6 +13,11 @@ export default {
     ios: {
       newArchEnabled: true,
       bundleIdentifier: 'com.zipcock.app',
+      infoPlist: {
+        NSAppTransportSecurity: {
+          NSAllowsArbitraryLoads: true, // 모든 네트워크 요청 허용
+        },
+      },
     },
     android: {
       newArchEnabled: true,

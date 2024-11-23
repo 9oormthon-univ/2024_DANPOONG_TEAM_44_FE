@@ -5,12 +5,31 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "plugin": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "adfsadf"
+        }
+      ]
+    ],
     "splash": {
       "backgroundColor": "#0080FF"
     },
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
+        "NSAppTransportSecurity": {
+          "NSExceptionDomains": {
+            "exp.direct": {
+              "NSIncludesSubdomains": true,
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
+        }
+      },
       "supportsTablet": true,
       "bundleIdentifier": "com.zipcock.app"
     },
