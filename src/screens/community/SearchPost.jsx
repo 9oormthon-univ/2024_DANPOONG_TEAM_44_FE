@@ -5,21 +5,36 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchHeader from '../../components/common/SearchHeader';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import CommunityItem from '../../components/community/CommunityItem';
-import { posts } from '../../constants/mockData';
+import { requestGetFetch } from '../../services/apiService';
 
 function SearchPost() {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   useHideBottomTabs(navigation);
 
-  const handleSearch = () => {
-    const results = posts.filter(
-      post =>
-        post.title.includes(searchQuery) || post.content.includes(searchQuery),
-    );
-    setFilteredPosts(results);
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) {
+      setFilteredPosts([]);
+      return;
+    }
+
+    try {
+      const response = await requestGetFetch(
+        `/posts/search?keyword=${encodeURIComponent(
+          searchQuery,
+        )}&page=0&size=10`,
+      );
+      if (response.success) {
+        setFilteredPosts(response.data.content);
+      } else {
+        setFilteredPosts([]);
+      }
+    } catch (error) {
+      console.error('검색 API 호출 실패:', error);
+      setFilteredPosts([]);
+    }
   };
 
   return (
@@ -40,7 +55,7 @@ function SearchPost() {
             onPress={() => navigation.navigate('ViewPost', { id: item.id })}
           />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.listContainer}
         ListEmptyComponent={
           <View style={styles.noResultsContainer}>
