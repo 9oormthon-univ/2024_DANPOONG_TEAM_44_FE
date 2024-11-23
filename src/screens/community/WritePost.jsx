@@ -20,15 +20,19 @@ import {
 import Header from '../../components/common/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
+import { requestPostFetch } from '../../services/apiService';
 
 function WritePost() {
   const navigation = useNavigation();
-  const [, setFileData] = useState([]);
+  const [fileData, setFileData] = useState([]);
   const [, setSelectedLocationId] = useState(null);
-  const [, setSelectedLatitude] = useState(null);
-  const [, setSelectedLongitude] = useState(null);
+  const [selectedLatitude, setSelectedLatitude] = useState(null);
+  const [selectedLongitude, setSelectedLongitude] = useState(null);
+  const [selectedRoadAddress, setSelectedRoadAddress] = useState(null);
   const [isUploaded, setIsUploaded] = useState(false);
   const [isLocationUploaded, setIsLocationUploaded] = useState(false);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   useHideBottomTabs(navigation);
 
@@ -40,13 +44,46 @@ function WritePost() {
 
   const handleLocationUpload = () => {
     navigation.navigate('PlaceUpload', {
-      onSelect: ({ id, latitude, longitude }) => {
+      onSelect: ({ id, latitude, longitude, roadAddress }) => {
         setSelectedLocationId(id);
         setSelectedLatitude(latitude);
         setSelectedLongitude(longitude);
+        setSelectedRoadAddress(roadAddress);
         setIsLocationUploaded(true);
       },
     });
+  };
+
+  const handleSubmit = async () => {
+    const representativeFile = fileData.length > 0 ? fileData[0] : null;
+    const postData = {
+      title,
+      content,
+      latitude: selectedLatitude,
+      longitude: selectedLongitude,
+      domain: selectedRoadAddress,
+      fileData: fileData.map(file => ({
+        fileName: file.fileName,
+        fileContent: file.fileContent,
+      })),
+      representativeFileData: representativeFile
+        ? {
+            fileName: representativeFile.fileName,
+            fileContent: representativeFile.fileContent,
+          }
+        : {
+            fileName: 'default.jpg',
+            fileContent: 'DEFAULT_BASE64_ENCODED_DATA',
+          },
+    };
+    try {
+      const response = await requestPostFetch('/posts', postData);
+      console.log('게시물 생성 성공:', response);
+      navigation.navigate('Community');
+    } catch (error) {
+      console.log('postData:', postData);
+      console.error('게시물 생성 실패:', error);
+    }
   };
 
   return (
@@ -58,11 +95,18 @@ function WritePost() {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <TextInput style={styles.input} placeholder="글 제목" />
+          <TextInput
+            style={styles.input}
+            placeholder="글 제목"
+            value={title}
+            onChangeText={setTitle}
+          />
           <TextInput
             style={styles.contentInput}
             placeholder="내용을 입력하세요."
             multiline
+            value={content}
+            onChangeText={setContent}
           />
 
           <View style={styles.uploadContainer}>
@@ -93,10 +137,7 @@ function WritePost() {
             </Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={() => navigation.navigate('Community')}
-          >
+          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
             <Text style={styles.submitText}>작성완료</Text>
           </TouchableOpacity>
         </ScrollView>

@@ -18,9 +18,9 @@ function PlaceUpload() {
   const handleSearch = () => {
     searchKakaoPlaces(searchQuery);
   };
-  const handleSelect = (id, latitude, longitude) => {
+  const handleSelect = (id, latitude, longitude, roadAddress) => {
     if (route.params?.onSelect) {
-      route.params.onSelect({ id, latitude, longitude });
+      route.params.onSelect({ id, latitude, longitude, roadAddress });
     }
     navigation.goBack();
   };
@@ -40,7 +40,14 @@ function PlaceUpload() {
         renderItem={({ item }) => (
           <AddressItem
             item={item}
-            onPress={() => handleSelect(item.id, item.latitude, item.longitude)}
+            onPress={() =>
+              handleSelect(
+                item.id,
+                item.latitude,
+                item.longitude,
+                item.roadAddress,
+              )
+            }
           />
         )}
         keyExtractor={item => item.id}

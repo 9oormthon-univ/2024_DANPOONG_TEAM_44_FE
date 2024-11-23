@@ -7,7 +7,9 @@ const AddressItem = ({ item, onPress }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => onPress(item.id, item.latitude, item.longitude)}
+      onPress={() =>
+        onPress(item.id, item.latitude, item.longitude, item.roadAddress)
+      }
     >
       <View style={styles.iconContainer}>
         <PlaceBIcon />
