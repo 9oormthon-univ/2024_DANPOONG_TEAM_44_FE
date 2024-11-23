@@ -19,18 +19,31 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${Config.SERVER_URL}/login`, {
+      const formData = new FormData();
+      formData.append('loginId', id); // 'id'는 변수로 전달받은 값
+      formData.append('password', password); // 'password'도 변수로 전달받은 값
+
+      console.log('서버 URL:', `${Config.SERVER_URL}/login`);
+      console.log('전송 데이터:', JSON.stringify({ loginId: id, password }));
+
+      const response = await fetch(`http://52.78.38.237/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ loginId: id, password: password }),
+        headers: {
+          // Content-Type은 생략. fetch가 multipart/form-data를 자동으로 설정합니다.
+        },
+        body: formData, // formData를 body로 설정
       });
+      // 응답 상태 확인
+      console.log('응답 상태:', response.status);
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('로그인 성공:', data);
+        const responseText = await response.text(); // JSON 대신 텍스트로 처리
+        console.log('로그인 성공:', responseText);
+        // const data = await response.json();
+        // console.log('로그인 성공:', data);
 
-        // 로그인 성공 처리
-        Alert.alert('로그인 성공', `환영합니다, ${data.username}!`);
+        // // 로그인 성공 처리
+        Alert.alert('로그인 성공', `환영합니다, ${responseText}!`);
         navigation.navigate('Home'); // 홈 화면으로 이동
       } else if (response.status === 401) {
         // 인증 실패 처리
