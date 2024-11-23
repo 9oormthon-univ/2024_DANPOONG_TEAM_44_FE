@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/common/Header';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { useNavigation } from '@react-navigation/native';
+import FavoriteModal from '../../components/modal/FavoriteModal';
 
 function BuildingRegister() {
   const navigation = useNavigation();

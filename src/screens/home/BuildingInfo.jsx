@@ -8,15 +8,18 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
+import FavoriteModal from '../../components/modal/FavoriteModal';
 
 const BuildingInfo = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { city, district, block, lot } = route.params; // 앞에서 받은 값 
+  const { city, district, block, lot } = route.params; // 앞에서 받은 값
   const [buildingData, setBuildingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const fullAddress = `${city} ${district}`;
+  const [modalVisible, setModalVisible] = useState(false); // 모달 상태
+  const [id, setId] = useState(''); // 별칭 입력
 
   // http://{SERVER_URL}/building-info
   // GET
@@ -38,15 +41,15 @@ const BuildingInfo = () => {
         }
         const result = await response.json();
         setBuildingData({
-          platPlc: result['data'][0]['platPlc'], // 주소
-          bldNm: result['data'][0]['bldNm'], // 건물명
-          archArea: result['data'][0]['archArea'], // 건축 면적
-          mainPurpsCdNm: result['data'][0]['mainPurpsCdNm'], // 주용도코드
-          etcPurps: result['data'][0]['etcPurps'], // 기타 코드
-          hhldCnt: result['data'][0]['hhldCnt'], // 세대 수
-          fmlyCnt: result['data'][0]['fmlyCnt'], // 가구 수
-          mgmBldrgstPk: result['data'][0]['mgmBldrgstPk'], // 관리 건축물 대장 PK
-          newPlatPlc: result['data'][0]['newPlatPlc'], // 도로명 대지위
+          platPlc: result.data[0].platPlc, // 주소
+          bldNm: result.data[0].bldNm, // 건물명
+          archArea: result.data[0].archArea, // 건축 면적
+          mainPurpsCdNm: result.data[0].mainPurpsCdNm, // 주용도코드
+          etcPurps: result.data[0].etcPurps, // 기타 코드
+          hhldCnt: result.data[0].hhldCnt, // 세대 수
+          fmlyCnt: result.data[0].fmlyCnt, // 가구 수
+          mgmBldrgstPk: result.data[0].mgmBldrgstPk, // 관리 건축물 대장 PK
+          newPlatPlc: result.data[0].newPlatPlc, // 도로명 대지위
         });
         // console.log('받아온 데이터:', result);
       } catch (error) {
@@ -60,6 +63,52 @@ const BuildingInfo = () => {
     };
     fetchBuildingData();
   }, [city, district, block, lot]);
+
+  // 모달 열기
+  const openModal = () => {
+    setBuildingData(buildingData); // 선택된 데이터 설정
+    setModalVisible(true); // 모달 열기
+  };
+
+  // 찜 목록 등록 요청
+  const handleRegisterFavorite = async id => {
+    try {
+      if (!id.trim() === '') {
+        alert('별칭을 입력해주세요!');
+        return;
+      }
+
+      const response = await fetch(`http://52.78.38.237/favorite-offer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          platPlc: buildingData.platPlc,
+          bldNm: buildingData.bldNm,
+          alias: id.trim(),
+        }),
+      });
+      console.log('응답 상태 코드:', response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('서버 응답 에러 텍스트:', errorText);
+        alert('등록 실패: 서버 오류');
+        return;
+      }
+
+      const favoritesData = await response.json();
+      console.log('현재 찜 목록:', favoritesData);
+      alert('찜 목록에 등록되었습니다!');
+      setModalVisible(false);
+      setId('');
+    } catch (error) {
+      console.log(id);
+      console.error('찜 목록 등록 에러:', error);
+      alert('등록 중 오류가 발생했습니다.');
+    }
+  };
 
   // 로딩 상태
   if (loading) {
@@ -114,6 +163,17 @@ const BuildingInfo = () => {
           도로명 대지위: {buildingData.newPlatPlc}
         </Text>
       </View>
+      <TouchableOpacity style={styles.button2} onPress={openModal}>
+        <Text style={styles.buttonTex2}>찜하기</Text>
+      </TouchableOpacity>
+
+      {/* 모달 불러오기 */}
+      <FavoriteModal
+        visible={modalVisible}
+        // buildingData={handleRegisterFavorite}
+        onRegister={handleRegisterFavorite}
+        onClose={() => setModalVisible(false)}
+      />
 
       <TouchableOpacity
         style={styles.button}
@@ -165,8 +225,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
+  button2: {
+    backgroundColor: '#E0E9F5',
+    paddingVertical: 15,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginTop: 10,
+  },
   buttonText: {
     color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  buttonText2: {
+    color: '#585858',
     fontSize: 16,
     fontWeight: 'bold',
   },

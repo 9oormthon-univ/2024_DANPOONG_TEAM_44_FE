@@ -35,7 +35,7 @@ function HouseInfoStack() {
         name="HouseInfo"
         component={HouseInfo}
         options={{
-          title: '집 정보',
+          title: '',
           headerTitleAlign: 'left',
           headerShown: false,
         }}
@@ -44,7 +44,7 @@ function HouseInfoStack() {
         name="FindAgent"
         component={FindAgent}
         options={({ navigation }) => ({
-          title: '주변 중개소 찾기',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -65,7 +65,7 @@ function HouseInfoStack() {
         name="Apartment"
         component={Apartment}
         options={({ navigation }) => ({
-          title: '아파트',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -78,7 +78,7 @@ function HouseInfoStack() {
         name="ApartmentInfo"
         component={ApartmentInfo}
         options={({ navigation }) => ({
-          title: '아파트시세',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -108,7 +108,7 @@ function HouseInfoStack() {
         name="MultiFamily"
         component={MultiFamily}
         options={({ navigation }) => ({
-          title: '다세대',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -121,7 +121,7 @@ function HouseInfoStack() {
         name="MultiFamilyInfo"
         component={MultiFamilyInfo}
         options={({ navigation }) => ({
-          title: '다세대정보',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -134,7 +134,7 @@ function HouseInfoStack() {
         name="MultiFamilyResult"
         component={MultiFamilyResult}
         options={({ navigation }) => ({
-          title: '다세대결과',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -147,7 +147,7 @@ function HouseInfoStack() {
         name="OfficeTel"
         component={OfficeTel}
         options={({ navigation }) => ({
-          title: '오피스텔',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -160,7 +160,7 @@ function HouseInfoStack() {
         name="OfficeTelInfo"
         component={OfficeTelInfo}
         options={({ navigation }) => ({
-          title: '오피스텔정보',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -173,7 +173,7 @@ function HouseInfoStack() {
         name="OfficeTelResult"
         component={OfficeTelResult}
         options={({ navigation }) => ({
-          title: '오피스텔결과',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -186,7 +186,7 @@ function HouseInfoStack() {
         name="RentCalculate"
         component={RentCalculate}
         options={({ navigation }) => ({
-          title: '계산기',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
@@ -199,7 +199,7 @@ function HouseInfoStack() {
         name="CalculateResult"
         component={CalculateResult}
         options={({ navigation }) => ({
-          title: '계산기',
+          title: '',
           headerTitleAlign: 'center',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
