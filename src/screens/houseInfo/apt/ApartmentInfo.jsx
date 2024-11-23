@@ -14,26 +14,25 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ApartmentInfo = () => {
   const navigation = useNavigation();
-  const [year, setYear] = useState('');
-  const [mainNumber, setMainNumber] = useState('');
-  const [subNumber, setSubNumber] = useState('');
-  const [buildingName, setBuildingName] = useState('');
+  const [rcptYr, setYear] = useState('');
+  const [mno, setMainNumber] = useState('');
+  const [sno, setSubNumber] = useState('');
   const route = useRoute();
   const { city, district, neighborhood } = route.params; // 이전 화면에서 전달된 데이터
 
   const handleSearch = () => {
-    if (!year || !mainNumber || !subNumber || !buildingName) {
+    if (!rcptYr || !mno || !sno) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
 
-    console.log('입력된 데이터:', {
-      rcpt_yr: year,
-      cgg_nm: district,
-      stdg_cd: neighborhood,
-      mno: mainNumber,
-      sno: subNumber,
-      bldg_nm: buildingName,
+    console.log('입력된 데이터info:', {
+      city,
+      rcptyr: rcptYr,
+      cggnm: district,
+      stdgcd: neighborhood,
+      mno: mno,
+      sno: sno,
     });
 
     // 모든 데이터를 함께 전달
@@ -41,10 +40,9 @@ const ApartmentInfo = () => {
       city,
       district,
       neighborhood,
-      year,
-      mainNumber,
-      subNumber,
-      buildingName,
+      year: rcptYr,
+      mainNumber: mno,
+      subNumber: sno,
     });
   };
 
@@ -68,7 +66,7 @@ const ApartmentInfo = () => {
               style={styles.input}
               placeholder="접수 연도"
               placeholderTextColor="#B0B0B0"
-              value={year}
+              value={rcptYr}
               onChangeText={setYear}
               keyboardType="numeric"
             />
@@ -78,7 +76,7 @@ const ApartmentInfo = () => {
               style={styles.input}
               placeholder="본번"
               placeholderTextColor="#B0B0B0"
-              value={mainNumber}
+              value={mno}
               onChangeText={setMainNumber}
               keyboardType="numeric"
             />
@@ -88,18 +86,9 @@ const ApartmentInfo = () => {
               style={styles.input}
               placeholder="부번"
               placeholderTextColor="#B0B0B0"
-              value={subNumber}
+              value={sno}
               onChangeText={setSubNumber}
               keyboardType="numeric"
-            />
-
-            {/* 건물명 */}
-            <TextInput
-              style={styles.input}
-              placeholder="건물명"
-              placeholderTextColor="#B0B0B0"
-              value={buildingName}
-              onChangeText={setBuildingName}
             />
           </View>
 

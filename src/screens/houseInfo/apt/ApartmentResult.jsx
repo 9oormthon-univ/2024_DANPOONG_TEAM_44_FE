@@ -23,12 +23,13 @@ const ApartmentResult = () => {
     year,
     mainNumber,
     subNumber,
-    buildingName,
   } = route.params;
 
   const [isDetailedView, setIsDetailedView] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const fullAddress = `${city} ${district} ${neighborhood}`; // 주소 조합
+
   useHideBottomTabs(navigation);
 
   const handleDetailsToggle = () => {
@@ -37,16 +38,30 @@ const ApartmentResult = () => {
 
   // API 요청
   useEffect(() => {
+    // http://openapi.seoul.go.kr:8088/5779767249726b6439326c67705644/xml/tbLnOpendataRentV/1/5/
     const fetchData = async () => {
       try {
+        // http://{SERVER_URL}/lease-price
+        // GET
+        // ex) {SERVER_URL}/lease-price?rcptYr=2024&mno=0046&sno=0004&address=서울특별시 구로구 구로동&pageNo=1
+        // 요청 헤더 : 접수년도, 본번, 부번, 주소(시/구/동), 요청 페이징
         const response = await fetch(
-          `http://openapi.seoul.go.kr:8088/5779767249726b6439326c67705644/xml/tbLnOpendataRentV/1/5/`,
+          `http://52.78.38.237/lease-price?rcptYr=${year}&mno=${mainNumber}&sno=${subNumber}&address=${fullAddress}&pageNo=1`,
         );
         if (!response.ok) {
           throw new Error('API 요청 실패');
         }
         const result = await response.json();
-        setData(result); // 결과 데이터를 상태에 저장
+        // setData(result); // 결과 데이터를 상태에 저장
+        setData({
+          archYr: result["data"][0]["archYr"],
+          rentArea: result["data"][0]["rentArea"],
+          rentSe: result["data"][0]["rentSe"],
+          bfrGrfe: result["data"][0]["bfrGrfe"],
+          bfrRtfe: result["data"][0]["bfrRtfe"],
+          newUpdtYn: result["data"][0]["newUpdtYn"]
+        });
+        // console.log(result["data"][0]["rentArea"]);
       } catch (error) {
         console.error('API 요청 에러:', error);
         alert('데이터를 가져오는 중 문제가 발생했습니다.');
@@ -56,7 +71,7 @@ const ApartmentResult = () => {
     };
 
     fetchData();
-  }, [district, neighborhood, year, mainNumber, subNumber, buildingName]);
+  }, [city, district, neighborhood, year, mainNumber, subNumber]);
 
   // 로딩 처리
   if (loading) {
@@ -93,18 +108,15 @@ const ApartmentResult = () => {
                   style={styles.boldText}
                 >{`${city} ${district} ${neighborhood}`}</Text>
               </Text>
-              <Text style={styles.infoText}>
-                건물명: <Text style={styles.boldText}>{`${buildingName}`}</Text>
-              </Text>
             </View>
             <View style={styles.section}>
               <View style={styles.divider} />
               <Text style={styles.sectionTitle}>상세정보</Text>
-              <Text style={styles.infoText}>건축년도: {data.arch_yr}</Text>
-              <Text style={styles.infoText}>임대면적: {data.rend_area}㎡</Text>
-              <Text style={styles.infoText}>전월세 구분: {data.rent_se}</Text>
-              <Text style={styles.infoText}>보증금: {data.grfe} 만원</Text>
-              <Text style={styles.infoText}>임대료: {data.rtfe} 만원</Text>
+              <Text style={styles.infoText}>건축년도: {data.archYr}</Text>
+              <Text style={styles.infoText}>임대면적: {data.rentArea}㎡</Text>
+              <Text style={styles.infoText}>전월세 구분: {data.rentSe}</Text>
+              <Text style={styles.infoText}>보증금: {data.bfrGrfe} 만원</Text>
+              <Text style={styles.infoText}>임대료: {data.bfrRtfe} 만원</Text>
               <View style={styles.divider} />
             </View>
             <TouchableOpacity
@@ -130,30 +142,27 @@ const ApartmentResult = () => {
                   style={styles.boldText}
                 >{`${city} ${district} ${neighborhood}`}</Text>
               </Text>
-              <Text style={styles.infoText}>
-                건물명: <Text style={styles.boldText}>{`${buildingName}`}</Text>
-              </Text>
             </View>
             <View style={styles.section}>
               <View style={styles.divider} />
               <Text style={styles.sectionTitle}>상세정보</Text>
-              <Text style={styles.infoText}>건축년도: {data.arch_yr}</Text>
-              <Text style={styles.infoText}>임대면적: {data.rend_area}㎡</Text>
-              <Text style={styles.infoText}>전월세 구분: {data.rent_se}</Text>
-              <Text style={styles.infoText}>보증금: {data.grfe} 만원</Text>
-              <Text style={styles.infoText}>임대료: {data.rtfe} 만원</Text>
+              <Text style={styles.infoText}>건축년도: {data.archYr}</Text>
+              <Text style={styles.infoText}>임대면적: {data.rentArea}㎡</Text>
+              <Text style={styles.infoText}>전월세 구분: {data.rentSe}</Text>
+              <Text style={styles.infoText}>보증금: {data.bfrGrfe} 만원</Text>
+              <Text style={styles.infoText}>임대료: {data.bfrRtfe} 만원</Text>
             </View>
             <View style={styles.section}>
               <View style={styles.divider} />
               <Text style={styles.sectionTitle}>추가정보</Text>
               <Text style={styles.infoText}>
-                신규갱신여부: {data.new_updt_yn}
+                신규갱신여부: {data.newUpdtYn}
               </Text>
               <Text style={styles.infoText}>
-                종전 보증금: {data.bfr_grfe} 만원
+                종전 보증금: {data.bfrGrfe} 만원
               </Text>
               <Text style={styles.infoText}>
-                종전 임대료: {data.bfr_rtfe} 만원
+                종전 임대료: {data.bfrRtfe} 만원
               </Text>
 
               <View style={styles.divider} />
