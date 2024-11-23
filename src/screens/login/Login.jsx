@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Config from 'react-native-config';
+// import Config from 'react-native-config';
 
 function Login() {
   const navigation = useNavigation();
@@ -23,7 +23,7 @@ function Login() {
       formData.append('loginId', id); // 'id'는 변수로 전달받은 값
       formData.append('password', password); // 'password'도 변수로 전달받은 값
 
-      console.log('서버 URL:', `${Config.SERVER_URL}/login`);
+      console.log('서버 URL:', `http://52.78.38.237/login`);
       console.log('전송 데이터:', JSON.stringify({ loginId: id, password }));
 
       const response = await fetch(`http://52.78.38.237/login`, {

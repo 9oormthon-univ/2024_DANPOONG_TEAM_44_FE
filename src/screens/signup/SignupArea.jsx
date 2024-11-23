@@ -17,13 +17,13 @@ function SignupArea() {
   const { username } = route.params || {};
 
   // 현재 화면에서 입력받을 데이터
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState('');
+  const [sido, setSido] = useState('');
+  const [sigungu, setSigungu] = useState('');
   const [roadname, setRoadname] = useState('');
 
   const handleNext = () => {
     // 유효성 검사
-    if (!city || !district || !roadname) {
+    if (!sido || !sigungu || !roadname) {
       Alert.alert('오류', '모든 항목을 입력해주세요.');
       return;
     }
@@ -31,8 +31,8 @@ function SignupArea() {
     // Signup 화면으로 데이터 전달
     navigation.navigate('Signup', {
       username,
-      city,
-      district,
+      city: sido,
+      district: sigungu,
       roadname,
     });
   };
@@ -44,18 +44,21 @@ function SignupArea() {
         style={styles.input}
         placeholder="광역시/도"
         placeholderTextColor="#999"
-        onChangeText={setCity}
+        value={sido}
+        onChangeText={setSido}
       />
       <TextInput
         style={styles.input}
         placeholder="시/군/구"
         placeholderTextColor="#999"
-        onChangeText={setDistrict}
+        value={sigungu}
+        onChangeText={setSigungu}
       />
       <TextInput
         style={styles.input}
         placeholder="도로명"
         placeholderTextColor="#999"
+        value={roadname}
         onChangeText={setRoadname}
       />
 

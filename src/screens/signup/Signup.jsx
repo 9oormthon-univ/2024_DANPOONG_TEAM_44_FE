@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   TextInput,
@@ -7,25 +7,30 @@ import {
   SafeAreaView,
   Alert,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import Config from 'react-native-config';
+import { useNavigation, useRoute } from '@react-navigation/native';
+// import Config from 'react-native-config';
 
 function Signup() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { username, city, district, roadname } = route.params;
+  const [loginId, setLoginId] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSignup = async () => {
     try {
-      const response = await fetch(`http://${Config.SERVER_URL}/signup`, {
+      const response = await fetch(`http://52.78.38.237/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          loginId: '아이디',
-          username: '이름',
-          password: '비밀번호',
-          email: '이메일',
-          sido: '입력한 시/도',
-          sigungu: '입력한 시/군/구',
-          roadname: '입력한 도로명',
+          loginId,
+          username,
+          password,
+          email,
+          sido: city,
+          sigungu: district,
+          roadname,
         }),
       });
 
@@ -33,9 +38,12 @@ function Signup() {
         Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
         navigation.navigate('Login'); // 로그인 화면으로 이동
       } else {
-        throw new Error('회원가입 실패');
+        const errorText = await response.text();
+        console.error('회원가입 실패:', errorText);
+        Alert.alert('회원가입 실패', errorText);
       }
     } catch (error) {
+      console.log(loginId);
       console.error('회원가입 오류:', error);
       Alert.alert('오류', '회원가입 중 문제가 발생했습니다.');
     }
@@ -49,26 +57,24 @@ function Signup() {
         style={styles.input}
         placeholder="아이디"
         placeholderTextColor="#999"
+        onChangeText={setLoginId}
       />
       <TextInput
         style={styles.input}
         placeholder="비밀번호"
         placeholderTextColor="#999"
         secureTextEntry
+        onChangeText={setPassword}
       />
       <TextInput
         style={styles.input}
         placeholder="이메일"
         placeholderTextColor="#999"
+        onChangeText={setEmail}
       />
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}
-      >
-        <TouchableOpacity style={styles.button} onPress={handleSignup}>
-          <Text style={styles.buttonText}>완료(3/3)</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+        <Text style={styles.buttonText}>완료(3/3)</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
