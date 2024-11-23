@@ -27,11 +27,9 @@ function ViewPost() {
   const { id } = route.params || {};
 
   const [post, setPost] = useState(null);
+  const [username, setUsername] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-  // 현재 로그인된 사용자 ID (임시)
-  const userName = 'kang'; // 구매자 ID
 
   useHideBottomTabs(navigation);
 
@@ -46,8 +44,18 @@ function ViewPost() {
     }
   };
 
+  const fetchUserInfo = async () => {
+    try {
+      const response = await requestGetFetch('/userInfo');
+      setUsername(response.username);
+    } catch (error) {
+      console.error('사용자 정보 가져오기 실패:', error);
+    }
+  };
+
   useEffect(() => {
     fetchPostDetail();
+    fetchUserInfo();
   }, [id]);
 
   if (!post) {
@@ -90,7 +98,7 @@ function ViewPost() {
   };
 
   const rightIcons =
-    post.authorName === userName
+    post.authorName === username
       ? [
           {
             icon: showDropdown ? OptionLIcon : OptionIcon,
