@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { PlaceBIcon } from '../../assets/icons/iconSvg';
+import { PlaceMiniIcon } from '../../assets/icons/iconSvg';
 
 const AddressItem = ({ item, onPress }) => {
   return (
@@ -12,7 +12,7 @@ const AddressItem = ({ item, onPress }) => {
       }
     >
       <View style={styles.iconContainer}>
-        <PlaceBIcon />
+        <PlaceMiniIcon />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{item.title}</Text>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     color: '#151515',
     marginBottom: 12,
   },
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#FFFFFF',
     color: '#0080FF',
-    fontSize: 16,
+    fontSize: 12,
     paddingVertical: 2,
     borderWidth: 1,
     borderColor: '#0080FF',
@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   roadAddress: {
-    fontSize: 18,
+    fontSize: 12,
     color: '#151515',
     flex: 1,
   },
   jibunAddress: {
-    fontSize: 18,
+    fontSize: 12,
     color: '#585858',
     flex: 1,
   },
