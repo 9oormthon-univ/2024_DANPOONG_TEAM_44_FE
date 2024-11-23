@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {
   View,
@@ -19,33 +19,47 @@ import {
 } from '../../assets/icons/iconSvg';
 import DropdownMenu from '../../components/common/DropdownMenu';
 import DeletePost from '../../components/modal/DeletePost';
-import { posts } from '../../constants/mockData';
+import { requestGetFetch } from '../../services/apiService';
 
 function ViewPost() {
   const navigation = useNavigation();
   const route = useRoute();
   const { id } = route.params || {};
 
+  const [post, setPost] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   // 현재 로그인된 사용자 ID (임시)
-  const userId = '1';
+  const userName = 'kang'; // 구매자 ID
 
-  const post = posts.find(item => item.id === id);
+  useHideBottomTabs(navigation);
+
+  const fetchPostDetail = async () => {
+    try {
+      const response = await requestGetFetch(`/posts/${id}`);
+      if (response.success) {
+        setPost(response.data);
+      }
+    } catch (error) {
+      console.error('게시물 상세 데이터 가져오기 실패:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostDetail();
+  }, [id]);
 
   if (!post) {
     return (
       <SafeAreaView style={styles.container}>
         <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
         <View style={styles.errorContainer}>
-          <Text>Error : 게시물을 찾을 수 없습니다.</Text>
+          <Text>게시물을 불러오는 중입니다...</Text>
         </View>
       </SafeAreaView>
     );
   }
-
-  useHideBottomTabs(navigation);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -67,7 +81,7 @@ function ViewPost() {
   };
 
   const rightIcons =
-    post.authorId === userId
+    post.authorName === userName
       ? [
           {
             icon: showDropdown ? OptionLIcon : OptionIcon,
@@ -75,6 +89,11 @@ function ViewPost() {
           },
         ]
       : [];
+
+  const images =
+    post.imageFileData && post.imageFileData.length > 0
+      ? post.imageFileData
+      : null;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -91,18 +110,26 @@ function ViewPost() {
             onClose={() => setShowDropdown(false)}
           />
         )}
-        <ImageSlider images={post.images} />
+        {images ? (
+          <ImageSlider images={images} />
+        ) : (
+          <View style={styles.placeholderImage}>
+            <Text style={styles.placeholderText}>No Images</Text>
+          </View>
+        )}
 
         <View style={styles.contentContainer}>
           <View style={styles.infoSection}>
             <UserMiddle />
             <View style={styles.authorInfo}>
-              <Text style={styles.authText}>{post.authorName}</Text>
+              <Text style={styles.authText}>{post.authorName || '익명'}</Text>
               <View style={styles.dateLocationRow}>
                 <Text style={styles.dateText}>
                   {formatDateToSlash(post.createdDate)}
                 </Text>
-                <Text style={styles.locationText}>{post.location}</Text>
+                <Text style={styles.locationText}>
+                  {post.domain || '위치 정보 없음'}
+                </Text>
               </View>
             </View>
           </View>
@@ -150,6 +177,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  placeholderImage: {
+    height: 200,
+    backgroundColor: '#D9D9D9',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius: 8,
+  },
+  placeholderText: {
+    fontSize: 16,
+    color: '#868686',
   },
   contentContainer: {
     width: '100%',
