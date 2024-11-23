@@ -5,9 +5,11 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
+import { useNavigation } from '@react-navigation/native';
 
 const formatPrice = value => {
   if (!value) return '';
@@ -15,8 +17,9 @@ const formatPrice = value => {
   return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-// eslint-disable-next-line react/prop-types
-function RentCalculate({ navigation }) {
+function RentCalculate() {
+  const navigation = useNavigation();
+
   const [rentPrice, setRentPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
   const [focusedField, setFocusedField] = useState(null);
@@ -43,6 +46,11 @@ function RentCalculate({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header
+        title="계산기"
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+      />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.inputWrapper}>
           <Text

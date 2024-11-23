@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
+import { useNavigation } from '@react-navigation/native';
 
 const KakaoMap = () => {
+  const navigation = useNavigation();
+
   const kakaoMapHtml = `
     <!DOCTYPE html>
     <html>
@@ -43,6 +48,11 @@ const KakaoMap = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header
+        title="주변 중개소 찾기"
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+      />
       <View style={styles.mapContainer}>
         <WebView
           source={{ html: kakaoMapHtml }}

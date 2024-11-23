@@ -5,12 +5,12 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  SafeAreaView,
   ScrollView,
   Image,
 } from 'react-native';
-import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { HomeIcon } from '../../../assets/icons/iconSvg';
 
 const ApartmentResult = () => {
   const navigation = useNavigation();
@@ -18,14 +18,23 @@ const ApartmentResult = () => {
   const route = useRoute();
   const { buildingName } = route.params;
   const { city, district, neighborhood } = route.params;
-  useHideBottomTabs(navigation);
 
   const handleDetailsToggle = () => {
     setIsDetailedView(!isDetailedView);
   };
 
+  const navigateToHome = () => {
+    navigation.navigate('HouseInfo');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+        onPress={navigateToHome}
+        style={styles.homeIconContainer}
+      >
+        <HomeIcon />
+      </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* 첫 번째 화면 */}
         {!isDetailedView && (
@@ -120,6 +129,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  homeIconContainer: {
+    alignSelf: 'flex-start',
+    margin: 20,
   },
   scrollContainer: {
     paddingHorizontal: 20,

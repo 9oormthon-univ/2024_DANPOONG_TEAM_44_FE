@@ -5,11 +5,12 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../../components/common/Header';
 import { useNavigation } from '@react-navigation/native';
 import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
 
@@ -35,6 +36,8 @@ const MultiFamily = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -93,7 +96,8 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
+    paddingBottom: 20,
   },
   header: {
     marginBottom: 20,

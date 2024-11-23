@@ -3,10 +3,12 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import { useNavigation } from '@react-navigation/native';
 
 function HouseInfo() {
@@ -14,51 +16,54 @@ function HouseInfo() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>집 정보</Text>
-      <View style={styles.card1}>
-        <Text style={styles.cardTitle}>
-          집 시세를 {'\n'}조회하고 싶으신가요?
-        </Text>
-        <Text style={styles.cardSubtitle}>
-          우리집 뿐만 아니라, {'\n'}다른 집 시세를 조회할 수 있어요!
-        </Text>
-        <View style={styles.iconContainer}>
+      <Header title="집 정보" rightIcons={[]} />
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.card1}>
+          <Text style={styles.cardTitle}>
+            집 시세를 {'\n'}조회하고 싶으신가요?
+          </Text>
+          <Text style={styles.cardSubtitle}>
+            우리집 뿐만 아니라, {'\n'}다른 집 시세를 조회할 수 있어요!
+          </Text>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity
+              style={styles.iconWrapper}
+              onPress={() => navigation.navigate('MarketPriceCheck')}
+            >
+              <Image
+                source={require('../../assets/images/homeinfo1.png')}
+                style={styles.icon1}
+              />
+              <Text style={styles.iconText}>시세 조회</Text>
+            </TouchableOpacity>
+            <View style={styles.separator} />
+            <TouchableOpacity
+              style={styles.iconWrapper}
+              onPress={() => navigation.navigate('RentCalculate')}
+            >
+              <Image
+                source={require('../../assets/images/homeinfo2.png')}
+                style={styles.icon1}
+              />
+              <Text style={styles.iconText}>계산기</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.card2}>
+          <Text style={styles.cardTitle2}>주변 중개소를 찾으시나요?</Text>
+          <Text style={styles.cardSubtitle2}>
+            우리집 주변 뿐만 아니라 전국에 {'\n'}위치한 중개소 위치를
+            보여드려요!
+          </Text>
           <TouchableOpacity
-            style={styles.iconWrapper}
-            onPress={() => navigation.navigate('MarketPriceCheck')}
+            style={styles.kakaoButton}
+            onPress={() => navigation.navigate('FindAgent')}
           >
-            <Image
-              source={require('../../assets/images/homeinfo1.png')}
-              style={styles.icon1}
-            />
-            <Text style={styles.iconText}>시세 조회</Text>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <TouchableOpacity
-            style={styles.iconWrapper}
-            onPress={() => navigation.navigate('RentCalculate')}
-          >
-            <Image
-              source={require('../../assets/images/homeinfo2.png')}
-              style={styles.icon1}
-            />
-            <Text style={styles.iconText}>계산기</Text>
+            <Image source={require('../../assets/images/kakaomap.png')} />
           </TouchableOpacity>
         </View>
-      </View>
-
-      <View style={styles.card2}>
-        <Text style={styles.cardTitle2}>주변 중개소를 찾으시나요?</Text>
-        <Text style={styles.cardSubtitle2}>
-          우리집 주변 뿐만 아니라 전국에 {'\n'}위치한 중개소 위치를 보여드려요!
-        </Text>
-        <TouchableOpacity
-          style={styles.kakaoButton}
-          onPress={() => navigation.navigate('FindAgent')}
-        >
-          <Image source={require('../../assets/images/kakaomap.png')} />
-        </TouchableOpacity>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -68,9 +73,12 @@ export default HouseInfo;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  contentContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    paddingVertical: 20,
   },
   title: {
     fontSize: 24,
