@@ -1,14 +1,21 @@
 import React from 'react';
 import {
-  View,
+  // View,
   Text,
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Linking,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 const RealEstateCaution = ({ navigation }) => {
+  const openURL = url => {
+    Linking.openURL(url).catch(err =>
+      console.error('Failed to open URL:', err),
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>부동산 등기</Text>
@@ -16,7 +23,12 @@ const RealEstateCaution = ({ navigation }) => {
       <Text style={styles.warning}>주의사항</Text>
       <Text style={styles.warningDetails}>주의사항 내용입니다.</Text>
       <TouchableOpacity style={styles.linkButton}>
-        <Text style={styles.linkText}>인터넷 등기소 바로가기</Text>
+        <Text
+          style={styles.linkText}
+          onPress={() => openURL('http://www.iros.go.kr/PMainJ.jsp')}
+        >
+          인터넷 등기소 바로가기
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.nextButton}
