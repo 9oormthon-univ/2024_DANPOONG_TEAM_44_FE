@@ -5,19 +5,38 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 const RealEstateTestInfo = ({ navigation }) => {
-  const [answers, setAnswers] = useState([null, null, null]); // 예시 질문 3개
+  const questions = [
+    '전세가율을 확인하셨나요?',
+    '계약 전, 등기부등본을 확인하셨나요?',
+    '등기부등본에서 전세권 우선 순위를 확인하셨나요?',
+    '계약하고자 하는 매물이 다수의 공인중개소에 등록되어있나요?',
+    '건축물 대장에서 각 소유 부분의 소유자와 계약자가 일치 한가요?',
+    '임차주택의 대출 여부 및 정도를 확인하였나요?',
+    '해당 건축물이 건축용도에 맞는 건물인가요?',
+    '집콕 플랫폼에서 알려드리는 4가지 주의사항을 모두 준수 하셨나요?',
+  ];
+
+  const [answers, setAnswers] = useState(Array(questions.length).fill(null));
 
   const handleAnswer = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
   };
+
   const handleSubmit = () => {
-    navigation.navigate('RealEstateResult');
+    const scorePerQuestion = 12.5;
+    const totalScore = answers.reduce(
+      (sum, answer) => (answer === 'yes' ? sum + scorePerQuestion : sum),
+      0,
+    );
+
+    navigation.navigate('RealEstateResult', { score: totalScore });
   };
 
   RealEstateTestInfo.propTypes = {
@@ -28,36 +47,38 @@ const RealEstateTestInfo = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>부동산 적합도</Text>
-      {answers.map((answer, index) => (
-        <View key={index} style={styles.question}>
-          <Text>1. ~적합합니까?</Text>
-          <View style={styles.answerContainer}>
-            <TouchableOpacity
-              style={[
-                styles.answerButtonYes,
-                answer === 'yes' && styles.selected,
-              ]}
-              onPress={() => handleAnswer(index, 'yes')}
-            >
-              <Text style={styles.answerText}>예</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButtonNo,
-                answer === 'no' && styles.selected,
-              ]}
-              onPress={() => handleAnswer(index, 'no')}
-            >
-              <Text style={styles.answerText}>아니오</Text>
-            </TouchableOpacity>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.title}>부동산 적합도</Text>
+        {questions.map((question, index) => (
+          <View key={index} style={styles.question}>
+            <Text>{`${index + 1}. ${question}`}</Text>
+            <View style={styles.answerContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.answerButtonYes,
+                  answers[index] === 'yes' && styles.selected,
+                ]}
+                onPress={() => handleAnswer(index, 'yes')}
+              >
+                <Text style={styles.answerText}>예</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.answerButtonNo,
+                  answers[index] === 'no' && styles.selected,
+                ]}
+                onPress={() => handleAnswer(index, 'no')}
+              >
+                <Text style={styles.answerText}>아니오</Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.divider} />
           </View>
-        </View>
-      ))}
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>평가하기</Text>
-      </TouchableOpacity>
+        ))}
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>평가하기</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -75,6 +96,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     margin: 20,
   },
+  scrollContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
   question: { marginBottom: 20 },
   answerContainer: {
     flexDirection: 'row',
@@ -87,7 +112,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 30,
     alignItems: 'center',
-    width: '40%',
+    width: '30%',
     alignContent: 'center',
     justifyContent: 'center',
     margin: 10,
@@ -97,29 +122,30 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 30,
     alignItems: 'center',
-    width: '40%',
+    width: '30%',
     alignContent: 'center',
     justifyContent: 'center',
     margin: 10,
   },
   selected: { backgroundColor: '#E1E3E6' },
-  answerText: { color: '#333' },
+  answerText: { color: '#333', fontSize: 16 },
   submitButton: {
     backgroundColor: '#007AFF',
     paddingVertical: 15,
     borderRadius: 30,
     alignItems: 'center',
     width: '50%',
-    alignContent: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
     margin: 10,
   },
   divider: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc', // 원하는 색상
+    borderBottomColor: '#ccc',
     marginVertical: 10,
+    padding: 10,
   },
-  buttonText: { color: '#fff', fontSize: 16, textAlign: 'center' },
+  buttonText: { color: '#fff', fontSize: 18, textAlign: 'center' },
 });
 
 export default RealEstateTestInfo;

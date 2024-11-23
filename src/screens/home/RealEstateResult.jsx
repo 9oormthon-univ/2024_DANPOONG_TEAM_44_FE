@@ -8,12 +8,15 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-const RealEstateResult = ({ navigation }) => {
+const RealEstateResult = ({ navigation, route }) => {
+  const { score } = route.params;
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
         김단풍<Text style={styles.title2}>님의 점수는{'\n'}</Text>{' '}
-        <Text style={styles.score}>78</Text><Text style={styles.title2}>점 입니다.</Text>{' '}
+        <Text style={styles.score}>{score}</Text>
+        <Text style={styles.title2}>점 입니다.</Text>{' '}
       </Text>
       <TouchableOpacity
         style={styles.homeButton}
@@ -25,9 +28,15 @@ const RealEstateResult = ({ navigation }) => {
   );
 };
 
+// PropTypes 유효성 검사 추가
 RealEstateResult.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      score: PropTypes.number.isRequired, // score는 반드시 숫자여야 함
+    }).isRequired,
   }).isRequired,
 };
 
@@ -55,7 +64,7 @@ const styles = StyleSheet.create({
     position: 'absolute', // 절대 위치 지정
     bottom: 50, // 하단에서 50px 위로 배치
     // marginTop: 100,
-},
+  },
   buttonText: { color: '#fff', fontSize: 16, textAlign: 'center' },
 });
 
