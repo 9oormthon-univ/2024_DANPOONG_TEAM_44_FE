@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 16,
     color: '#3D3D3D',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   messageContainer: {
     flexDirection: 'row',
@@ -64,8 +65,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   lastMessage: {
-    fontSize: 11,
+    fontSize: 12,
     color: '#636363',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     flex: 1,
   },
   unreadBadge: {
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
   },
   unreadCount: {
     color: '#FFFFFF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     fontSize: 11,
   },
 });

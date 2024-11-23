@@ -150,6 +150,7 @@ function ViewPost() {
               </View>
             </View>
           </View>
+          <View style={styles.divider} />
 
           <View style={styles.contentPlaceholder}>
             <Text style={styles.titleText}>{post.title}</Text>
@@ -223,8 +224,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   authText: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#3F3F3F',
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     marginBottom: 4,
   },
   dateLocationRow: {
@@ -232,12 +234,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  divider: {
+    height: 1,
+    backgroundColor: '#eeeeee',
+    width: '100%',
+    marginVertical: 20,
+  },
   dateText: {
-    fontSize: 14,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#585858',
   },
   locationText: {
-    fontSize: 14,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#585858',
     textAlign: 'right',
   },
@@ -247,17 +257,20 @@ const styles = StyleSheet.create({
     paddingBottom: 42,
   },
   titleText: {
-    fontSize: 24,
+    fontSize: 20,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#3F3F3F',
     marginBottom: 20,
   },
   contentText: {
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#868686',
   },
   kakaoMap: {
     height: 130,
     backgroundColor: '#D9D9D9',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -265,6 +278,7 @@ const styles = StyleSheet.create({
   },
   kakaoText: {
     fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#000000',
   },
   connectButton: {
@@ -277,6 +291,7 @@ const styles = StyleSheet.create({
   },
   connectButtonText: {
     fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#FFFFFF',
   },
 });

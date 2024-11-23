@@ -141,14 +141,17 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 22,
     color: '#000000',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   userSuffix: {
     fontSize: 22,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   userLocation: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   statsContainer: {
     flexDirection: 'row',
@@ -165,14 +168,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   statLabel: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#FFFFFF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginBottom: 5,
   },
   statNumber: {
     fontSize: 32,
-    fontWeight: 'bold',
     color: '#FFFFFF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   optionsContainer: {
     position: 'absolute',
@@ -181,12 +185,13 @@ const styles = StyleSheet.create({
     right: 30,
   },
   optionButton: {
-    paddingVertical: 13,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   optionText: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
 });

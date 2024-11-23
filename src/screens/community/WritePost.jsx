@@ -192,9 +192,12 @@ function WritePost() {
           </View>
 
           <View style={styles.noticeContainer}>
-            <Text style={styles.noticeTitle}>이미지 업로드 시 주의사항!</Text>
+            <Text style={styles.noticeTitle}>이미지 업로드 시 주의사항</Text>
             <Text style={styles.noticeText}>
-              : ex. 이미지는 최대 2개 업로드 가능
+              글 작성시에는 이미지 파일과 위치 정보 업데이트가 필요합니다.
+              이미지 파일의 경우 ‘ 등기부 등본 ‘ 과 ‘ 건축물 대장 표제부 ‘ 를
+              업로드 해야하며 위치 정보는 거래하고자 하는 매물의 위치를 추가해야
+              합니다.
             </Text>
           </View>
 
@@ -228,6 +231,7 @@ const styles = StyleSheet.create({
     color: '#3F3F3F',
     borderBottomWidth: 1,
     borderBottomColor: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     paddingBottom: 14,
     marginBottom: 26,
   },
@@ -235,6 +239,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 220,
     color: '#3F3F3F',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     fontSize: 16,
     textAlignVertical: 'top', // Android
     marginBottom: 32,
@@ -248,12 +253,14 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   noticeTitle: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#0080FF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginBottom: 8,
   },
   noticeText: {
-    fontSize: 15,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#868686',
   },
   uploadContainer: {
@@ -269,7 +276,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F7F8',
     borderRadius: 10,
     width: '45%',
-    height: 100,
+    height: 90,
   },
   uploadButtonActive: {
     backgroundColor: '#DFEDFF',
@@ -284,6 +291,7 @@ const styles = StyleSheet.create({
   },
   submitText: {
     color: '#FFFFFF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     opacity: 0.9,
     fontSize: 16,
   },

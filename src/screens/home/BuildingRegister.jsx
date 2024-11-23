@@ -5,8 +5,13 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
+import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import { useNavigation } from '@react-navigation/native';
 
 function BuildingRegister() {
@@ -15,6 +20,8 @@ function BuildingRegister() {
   const [district, setDistrict] = useState('');
   const [bun, setBlock] = useState('');
   const [ji, setLot] = useState('');
+
+  useHideBottomTabs(navigation);
 
   const handleSearch = () => {
     if (!address || !district) {
@@ -43,43 +50,56 @@ function BuildingRegister() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>건축물대장 표제부</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.container}>
+            <Text style={styles.title}>건축물대장 표제부</Text>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="시/군/구"
-          placeholderTextColor="#B0B0B0"
-          value={address}
-          onChangeText={setCity}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="동/읍/면"
-          placeholderTextColor="#B0B0B0"
-          value={district}
-          onChangeText={setDistrict}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="번"
-          placeholderTextColor="#B0B0B0"
-          value={bun}
-          onChangeText={setBlock}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="지"
-          placeholderTextColor="#B0B0B0"
-          value={ji}
-          onChangeText={setLot}
-        />
-      </View>
-      {/* onPress={handleSearch} */}
-      <TouchableOpacity style={styles.button} onPress={handleSearch}>
-        <Text style={styles.buttonText}>조회하기</Text>
-      </TouchableOpacity>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="시/군/구"
+                placeholderTextColor="#B0B0B0"
+                value={address}
+                onChangeText={setCity}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="동/읍/면"
+                placeholderTextColor="#B0B0B0"
+                value={district}
+                onChangeText={setDistrict}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="번"
+                placeholderTextColor="#B0B0B0"
+                value={bun}
+                onChangeText={setBlock}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="지"
+                placeholderTextColor="#B0B0B0"
+                value={ji}
+                onChangeText={setLot}
+              />
+            </View>
+            {/* onPress={handleSearch} */}
+            <TouchableOpacity style={styles.button} onPress={handleSearch}>
+              <Text style={styles.buttonText}>조회하기</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -87,17 +107,24 @@ function BuildingRegister() {
 export default BuildingRegister;
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   title: {
     fontSize: 28,
     color: '#000',
-    marginBottom: 30,
+    marginBottom: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     alignSelf: 'flex-start',
     marginLeft: 20,
   },
@@ -131,6 +158,5 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    // fontWeight: 'bold',
   },
 });

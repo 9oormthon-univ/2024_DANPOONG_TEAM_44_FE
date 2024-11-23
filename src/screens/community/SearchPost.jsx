@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   noResultsText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
 });
