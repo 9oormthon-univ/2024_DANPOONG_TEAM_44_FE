@@ -21,7 +21,7 @@ function Home() {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const slideImages = [
-    require('../../assets/images/home/slide/slide1.png'),
+    require('../../assets/images/home/slide/slide4.png'),
     require('../../assets/images/home/slide/slide3.png'),
   ];
 
@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
   serviceText: {
     fontSize: 16,
     fontFamily: 'SpoqaHanSansNeo-Bold',
+    textAlign: 'center',
     color: '#1E81CE',
     padding: 5,
     marginTop: 7,

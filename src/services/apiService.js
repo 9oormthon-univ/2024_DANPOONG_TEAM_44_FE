@@ -2,7 +2,7 @@ import { SERVER_URL } from '@env';
 
 const requestFetch = async (url, method, data, headers = {}) => {
   const token =
-    'eyJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6ImFjY2VzcyIsImxvZ2luSWQiOiIxMjM0Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJpYXQiOjE3MzIzOTI1MDEsImV4cCI6MTczMjM5NjEwMX0.4cPIbTzCW4B_Hqbh4S9KNjvGL_wm-zlFc7bDf1kUJv0';
+    'eyJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6ImFjY2VzcyIsImxvZ2luSWQiOiIxMjM0Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJpYXQiOjE3MzIzOTYxOTcsImV4cCI6MTczMjM5OTc5N30.0mAVr5sO25-tmY4TPl41VVzwJ1BpKO2aIKuV5O6_vm4';
 
   try {
     const options = {
