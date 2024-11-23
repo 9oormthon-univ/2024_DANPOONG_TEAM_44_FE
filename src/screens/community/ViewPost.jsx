@@ -160,14 +160,16 @@ function ViewPost() {
             <Text>카카오 맵</Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.connectButton}
-            onPress={() =>
-              navigation.navigate('Chat', { id, author: post.authorName })
-            }
-          >
-            <Text style={styles.connectButtonText}>사용자와 연결</Text>
-          </TouchableOpacity>
+          {post.authorName !== username && (
+            <TouchableOpacity
+              style={styles.connectButton}
+              onPress={() =>
+                navigation.navigate('Chat', { id, author: post.authorName })
+              }
+            >
+              <Text style={styles.connectButtonText}>사용자와 연결</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
 
