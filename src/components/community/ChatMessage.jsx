@@ -58,23 +58,27 @@ const styles = StyleSheet.create({
   textLeft: {
     color: '#494949',
     fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   textRight: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   timestampLeft: {
-    fontSize: 13,
+    fontSize: 10,
     marginTop: 4,
     color: '#000000',
     opacity: 0.25,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     alignSelf: 'flex-start',
   },
   timestampRight: {
-    fontSize: 13,
+    fontSize: 10,
     marginTop: 4,
     color: '#000000',
     opacity: 0.25,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     alignSelf: 'flex-end',
   },
 });

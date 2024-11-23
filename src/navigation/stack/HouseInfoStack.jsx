@@ -56,15 +56,10 @@ function HouseInfoStack() {
       <Stack.Screen
         name="MarketPriceCheck"
         component={MarketPriceCheck}
-        options={({ navigation }) => ({
+        options={{
           title: '',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <BackIcon onPress={() => navigation.goBack()} />
-            </View>
-          ),
-        })}
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="Apartment"

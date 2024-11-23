@@ -4,10 +4,18 @@ import { ScrollView, Image, StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 
+const DEFAULT_IMAGE =
+  'https://cdn.woodkorea.co.kr/news/photo/202008/48341_58008_847.jpg';
+
 const ImageSlider = ({ images }) => {
-  if (!Array.isArray(images) || images.length === 0) {
-    return null;
-  }
+  const imageList =
+    Array.isArray(images) && images.length > 0
+      ? images.map(src =>
+          src.startsWith('data:image') ? src : `data:image/jpeg;base64,${src}`,
+        )
+      : [DEFAULT_IMAGE];
+
+  console.log('Image list:', imageList);
 
   return (
     <ScrollView
@@ -16,7 +24,7 @@ const ImageSlider = ({ images }) => {
       showsHorizontalScrollIndicator={false}
       style={styles.imageScrollContainer}
     >
-      {images.map((src, index) => (
+      {imageList.map((src, index) => (
         <Image
           key={index}
           style={styles.image}

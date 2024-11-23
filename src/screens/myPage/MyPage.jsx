@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/common/Header';
 import { UserBig, NextIcon } from '../../assets/icons/iconSvg';
 import { DeleteAccount, Logout } from '../../components/modal/index';
-import { userData } from '../../constants/mockData';
+import { requestGetFetch } from '../../services/apiService';
 
 function MyPage() {
   const navigation = useNavigation();
 
   const [isLogoutModalVisible, setLogoutModalVisible] = useState(false);
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const openLogoutModal = () => setLogoutModalVisible(true);
   const closeLogoutModal = () => setLogoutModalVisible(false);
 
   const openDeleteModal = () => setDeleteModalVisible(true);
   const closeDeleteModal = () => setDeleteModalVisible(false);
+
+  const fetchUserInfo = async () => {
+    try {
+      const response = await requestGetFetch('/userInfo');
+      if (response) {
+        setUserData(response);
+      }
+    } catch (error) {
+      console.error('사용자 정보 가져오기 실패:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -29,42 +45,56 @@ function MyPage() {
           onClose={closeDeleteModal}
         />
 
-        <View style={styles.profileCard}>
-          <UserBig />
-          <View style={styles.nameContainer}>
-            <Text style={styles.userName}>{userData.name}</Text>
-            <Text style={styles.userSuffix}>님</Text>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('AreaSetting')}>
-            <Text style={styles.userLocation}>
-              {userData.location} {'>'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {userData && (
+          <>
+            <View style={styles.profileCard}>
+              <UserBig />
+              <View style={styles.nameContainer}>
+                <Text style={styles.userName}>{userData.username}</Text>
+                <Text style={styles.userSuffix}>님</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('AreaSetting')}
+              >
+                <Text style={styles.userLocation}>
+                  {`${userData.sido} ${userData.sigungu} ${userData.roadname}`}{' '}
+                  {'>'}
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.statsContainer}>
-          <TouchableOpacity
-            style={styles.statButton}
-            onPress={() => navigation.navigate('MyChat')}
-          >
-            <Text style={styles.statLabel}>내 채팅</Text>
-            <Text style={styles.statNumber}>{userData.chatCount}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.statButton}
-            onPress={() => navigation.navigate('MyPost')}
-          >
-            <Text style={styles.statLabel}>내가 쓴 글</Text>
-            <Text style={styles.statNumber}>{userData.postCount}</Text>
-          </TouchableOpacity>
-        </View>
+            <View style={styles.statsContainer}>
+              <TouchableOpacity
+                style={styles.statButton}
+                onPress={() => navigation.navigate('MyChat')}
+              >
+                <Text style={styles.statLabel}>내 채팅</Text>
+                <Text style={styles.statNumber}>{userData.chatCount || 0}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.statButton}
+                onPress={() => navigation.navigate('MyPost')}
+              >
+                <Text style={styles.statLabel}>내가 쓴 글</Text>
+                <Text style={styles.statNumber}>{userData.postCount || 0}</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
 
         <View style={styles.optionsContainer}>
           <TouchableOpacity
             style={styles.optionButton}
             onPress={openLogoutModal}
           >
-            <Text style={styles.optionText}>로그 아웃</Text>
+            <Text style={styles.optionText}>카카오 로그아웃</Text>
+            <NextIcon />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={openLogoutModal}
+          >
+            <Text style={styles.optionText}>로그아웃</Text>
             <NextIcon />
           </TouchableOpacity>
           <TouchableOpacity
@@ -111,14 +141,17 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 22,
     color: '#000000',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   userSuffix: {
     fontSize: 22,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   userLocation: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   statsContainer: {
     flexDirection: 'row',
@@ -135,14 +168,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   statLabel: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#FFFFFF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginBottom: 5,
   },
   statNumber: {
     fontSize: 32,
-    fontWeight: 'bold',
     color: '#FFFFFF',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   optionsContainer: {
     position: 'absolute',
@@ -151,12 +185,13 @@ const styles = StyleSheet.create({
     right: 30,
   },
   optionButton: {
-    paddingVertical: 13,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   optionText: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
 });

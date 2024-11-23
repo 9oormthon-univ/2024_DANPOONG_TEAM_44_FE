@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   TextInput,
@@ -12,11 +12,34 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/common/Header';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
+import { requestPatchFetch } from '../../services/apiService';
 
 function AreaSetting() {
   const navigation = useNavigation();
+  const [sido, setSido] = useState('');
+  const [sigungu, setSigungu] = useState('');
+  const [roadname, setRoadname] = useState('');
 
   useHideBottomTabs(navigation);
+
+  const handleUpdate = async () => {
+    const requestBody = { sido, sigungu, roadname };
+
+    try {
+      const response = await requestPatchFetch('/changeLocation', requestBody);
+
+      if (
+        typeof response === 'string' &&
+        response.includes('성공적으로 업데이트되었습니다')
+      ) {
+        navigation.navigate('MyPage');
+      } else {
+        console.error('업데이트 실패: 예상하지 못한 서버 응답');
+      }
+    } catch (error) {
+      console.error('지역 정보 업데이트 실패:', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,22 +56,25 @@ function AreaSetting() {
             style={styles.input}
             placeholder="광역시/도"
             placeholderTextColor="#868686"
+            value={sido}
+            onChangeText={setSido}
           />
           <TextInput
             style={styles.input}
             placeholder="시/군/구"
             placeholderTextColor="#868686"
+            value={sigungu}
+            onChangeText={setSigungu}
           />
           <TextInput
             style={styles.input}
             placeholder="도로명"
             placeholderTextColor="#868686"
+            value={roadname}
+            onChangeText={setRoadname}
           />
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('MyPage')}
-          >
+          <TouchableOpacity style={styles.button} onPress={handleUpdate}>
             <Text style={styles.buttonText}>수정하기</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -73,12 +99,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#000000',
     marginLeft: 20,
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     alignSelf: 'flex-start',
   },
   input: {
     borderBottomWidth: 1,
     borderBottomColor: '#868686',
-    fontSize: 20,
+    fontSize: 14,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     paddingBottom: 14,
     width: '87%',
     marginTop: 60,
@@ -94,6 +122,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     fontSize: 16,
   },
 });

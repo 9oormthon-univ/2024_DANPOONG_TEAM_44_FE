@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   message: {
     fontSize: 20,
     color: '#000000',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     textAlign: 'center',
     paddingVertical: 45,
   },
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
+    fontSize: 16,
   },
 });

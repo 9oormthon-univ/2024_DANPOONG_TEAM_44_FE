@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 20,
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     color: '#000000',
   },
   centerTitle: {
