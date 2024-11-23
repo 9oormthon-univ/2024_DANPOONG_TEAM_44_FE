@@ -19,7 +19,7 @@ import {
 } from '../../assets/icons/iconSvg';
 import DropdownMenu from '../../components/common/DropdownMenu';
 import DeletePost from '../../components/modal/DeletePost';
-import { requestGetFetch } from '../../services/apiService';
+import { requestGetFetch, requestDeleteFetch } from '../../services/apiService';
 
 function ViewPost() {
   const navigation = useNavigation();
@@ -66,18 +66,27 @@ function ViewPost() {
   };
 
   const handleEdit = () => {
-    navigation.navigate('WritePost');
+    navigation.navigate('WritePost', { id });
     setShowDropdown(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setShowDropdown(false);
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = () => {
-    setShowDeleteModal(false);
-    navigation.goBack();
+  const confirmDelete = async () => {
+    try {
+      setShowDeleteModal(false);
+      const response = await requestDeleteFetch(`/posts/${id}`);
+      if (response.success) {
+        navigation.navigate('Community');
+      } else {
+        throw new Error('삭제 실패');
+      }
+    } catch (error) {
+      console.error('게시물 삭제 실패:', error);
+    }
   };
 
   const rightIcons =
