@@ -52,15 +52,10 @@ function HomeStack() {
       <Stack.Screen
         name="RealEstateInfo"
         component={RealEstateInfo}
-        options={({ navigation }) => ({
-          title: '부동산 정보',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <BackIcon onPress={() => navigation.goBack()} />
-            </View>
-          ),
-        })}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="BuildingRegister"
