@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 140,
-    height: 120,
+    width: 110,
+    height: 100,
     borderRadius: 8,
     backgroundColor: '#D9D9D9',
   },
@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 17,
     fontFamily: 'SpoqaHanSansNeo-Medium',
     color: '#000000',
     marginBottom: 8,
   },
   location: {
-    fontSize: 13,
+    fontSize: 11,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginBottom: 16,
   },
   footerContainer: {
@@ -107,10 +107,12 @@ const styles = StyleSheet.create({
   author: {
     fontSize: 13,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginLeft: 4,
   },
   date: {
-    fontSize: 13,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#868686',
   },
 });

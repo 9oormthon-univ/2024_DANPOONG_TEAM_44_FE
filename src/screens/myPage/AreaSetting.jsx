@@ -99,12 +99,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#000000',
     marginLeft: 20,
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     alignSelf: 'flex-start',
   },
   input: {
     borderBottomWidth: 1,
     borderBottomColor: '#868686',
-    fontSize: 20,
+    fontSize: 14,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     paddingBottom: 14,
     width: '87%',
     marginTop: 60,
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     fontSize: 16,
   },
 });

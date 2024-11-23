@@ -60,15 +60,10 @@ function HomeStack() {
       <Stack.Screen
         name="BuildingRegister"
         component={BuildingRegister}
-        options={({ navigation }) => ({
-          title: '건축물대장표제부',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <BackIcon onPress={() => navigation.goBack()} />
-            </View>
-          ),
-        })}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="BuildingInfo"

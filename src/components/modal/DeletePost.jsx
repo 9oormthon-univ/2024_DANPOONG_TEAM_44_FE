@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#000000',
     textAlign: 'center',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     paddingVertical: 15,
   },
   buttonContainer: {
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
+    fontSize: 16,
   },
 });

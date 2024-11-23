@@ -3,10 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/common/Header';
 import { useNavigation } from '@react-navigation/native';
 
 function MarketPriceCheck() {
@@ -14,8 +15,14 @@ function MarketPriceCheck() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header
+        title="시세조회"
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+      />
+
       <Text style={styles.headerText}>
-        어떤 형태의 주거공간을{'\n'} 찾고 계신가요?{'\n'}원하시는 매물을
+        어떤 형태의 주거공간을{'\n'}찾고 계신가요?{'\n'}원하시는 매물을
         보여드려요!
       </Text>
 
@@ -83,15 +90,15 @@ export default MarketPriceCheck;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fff',
   },
   headerText: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#868686',
-    alignSelf: 'flex-start',
-    padding: 30,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    lineHeight: 20,
   },
   cardContainer: {
     width: '100%',
@@ -122,11 +129,13 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 30,
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     color: '#fff',
-    margin: 10,
+    marginBottom: 10,
   },
   cardSubtitle: {
     fontSize: 14,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#fff',
     marginBottom: 30,
     marginLeft: 5,
