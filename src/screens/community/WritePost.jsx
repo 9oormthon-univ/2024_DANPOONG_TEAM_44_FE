@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { pickImage } from '../../utils/imageUtils';
 import {
   UploadGIcon,
@@ -20,10 +20,17 @@ import {
 import Header from '../../components/common/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
-import { requestPostFetch } from '../../services/apiService';
+import {
+  requestGetFetch,
+  requestPutFetch,
+  requestPostFetch,
+} from '../../services/apiService';
 
 function WritePost() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { id } = route.params || {};
+
   const [fileData, setFileData] = useState([]);
   const [, setSelectedLocationId] = useState(null);
   const [selectedLatitude, setSelectedLatitude] = useState(null);
@@ -36,13 +43,58 @@ function WritePost() {
 
   useHideBottomTabs(navigation);
 
+  // 게시물 데이터를 불러와 초기값 설정
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (id) {
+        try {
+          const response = await requestGetFetch(`/posts/${id}`);
+          if (response.success) {
+            const post = response.data;
+            setTitle(post.title);
+            setContent(post.content);
+            setSelectedLatitude(post.latitude);
+            setSelectedLongitude(post.longitude);
+            setSelectedRoadAddress(post.domain);
+
+            if (post.latitude || post.longitude || post.domain) {
+              setIsLocationUploaded(true);
+            }
+
+            if (post.imageFileData) {
+              setFileData(
+                post.imageFileData.map((file, index) => ({
+                  fileName: `image_${index}`,
+                  fileContent: file,
+                })),
+              );
+              setIsUploaded(true);
+            }
+          }
+        } catch (error) {
+          console.error('Error occurred:', error);
+        }
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  // 이미지 초기화 및 새 업로드
   const resetSelectionAndPickImage = async () => {
     setFileData([]);
     setIsUploaded(false);
     await pickImage(setFileData, setIsUploaded);
   };
 
-  const handleLocationUpload = () => {
+  // 위치 초기화 및 새 업로드
+  const resetLocationAndUpload = () => {
+    setSelectedLocationId(null);
+    setSelectedLatitude(null);
+    setSelectedLongitude(null);
+    setSelectedRoadAddress(null);
+    setIsLocationUploaded(false);
+
     navigation.navigate('PlaceUpload', {
       onSelect: ({ id, latitude, longitude, roadAddress }) => {
         setSelectedLocationId(id);
@@ -56,12 +108,13 @@ function WritePost() {
 
   const handleSubmit = async () => {
     const representativeFile = fileData.length > 0 ? fileData[0] : null;
+
     const postData = {
-      title,
-      content,
-      latitude: selectedLatitude,
-      longitude: selectedLongitude,
-      domain: selectedRoadAddress,
+      title: title.trim(),
+      content: content.trim(),
+      latitude: selectedLatitude || null,
+      longitude: selectedLongitude || null,
+      domain: selectedRoadAddress || null,
       fileData: fileData.map(file => ({
         fileName: file.fileName,
         fileContent: file.fileContent,
@@ -76,13 +129,21 @@ function WritePost() {
             fileContent: 'DEFAULT_BASE64_ENCODED_DATA',
           },
     };
+
+    if (id) {
+      postData.postId = id;
+    }
+
     try {
-      const response = await requestPostFetch('/posts', postData);
-      console.log('게시물 생성 성공:', response);
-      navigation.navigate('Community');
+      const response = id
+        ? await requestPutFetch('/posts', postData)
+        : await requestPostFetch('/posts', postData);
+
+      if (response.success) {
+        navigation.navigate('Community');
+      }
     } catch (error) {
-      console.log('postData:', postData);
-      console.error('게시물 생성 실패:', error);
+      /* empty */
     }
   };
 
@@ -124,7 +185,7 @@ function WritePost() {
                 styles.uploadButton,
                 isLocationUploaded && styles.uploadButtonActive,
               ]}
-              onPress={handleLocationUpload}
+              onPress={resetLocationAndUpload}
             >
               {isLocationUploaded ? <PlaceBIcon /> : <PlaceGIcon />}
             </TouchableOpacity>
