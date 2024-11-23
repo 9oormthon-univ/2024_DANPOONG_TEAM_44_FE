@@ -21,8 +21,8 @@ function Home() {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const slideImages = [
-    require('../../assets/images/home/slide/slide1.png'),
-    require('../../assets/images/home/slide/slide2.png'),
+    require('../../assets/images/home/slide/slide4.png'),
+    require('../../assets/images/home/slide/slide3.png'),
   ];
 
   useEffect(() => {
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   mainImage: {
     width: '100%',
@@ -154,40 +154,39 @@ const styles = StyleSheet.create({
   },
   card: {
     // 큰 카드
-    backgroundColor: '#007AFF',
+    backgroundColor: '#228bfc',
     width: '100%',
     borderRadius: 15,
-    padding: 20,
-    marginBottom: 20,
+    padding: 10,
+    marginBottom: 10,
     display: 'flex',
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     color: '#000',
-    marginBottom: 10,
+    marginLeft: 10,
+    marginTop: 5,
     alignSelf: 'flex-start',
     // padding:5,
   },
   sectionTitleMiddle: {
-    fontSize: 23,
+    fontSize: 20,
     color: '#fff',
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     marginBottom: 20,
-    alignSelf: 'flex-start',
-    marginLeft: 10,
-    marginTop: 5,
+    textAlign: 'center',
   },
   serviceContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   serviceButton: {
     alignItems: 'center',
-    width: '45%',
-    height: '120%',
-    padding: 10,
+    width: '40%',
+    height: '100%',
     color: '#F5F5F5',
     backgroundColor: '#EDF0F5',
     borderRadius: 15,
@@ -199,7 +198,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   serviceText: {
-    fontSize: 18,
+    fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Bold',
+    textAlign: 'center',
     color: '#1E81CE',
     padding: 5,
     marginTop: 7,
@@ -208,7 +209,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 10,
   },
   publicServiceIcon: {
     width: 100,

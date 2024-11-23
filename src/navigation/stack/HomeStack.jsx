@@ -20,7 +20,10 @@ function HomeStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitleStyle: { fontSize: 24 },
+        headerTitleStyle: {
+          fontSize: 24,
+          fontFamily: 'SpoqaHanSansNeo-Medium',
+        },
         headerShadowVisible: false,
         headerBackVisible: false,
       }}
@@ -49,28 +52,18 @@ function HomeStack() {
       <Stack.Screen
         name="RealEstateInfo"
         component={RealEstateInfo}
-        options={({ navigation }) => ({
-          title: '부동산 정보',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <BackIcon onPress={() => navigation.goBack()} />
-            </View>
-          ),
-        })}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="BuildingRegister"
         component={BuildingRegister}
-        options={({ navigation }) => ({
-          title: '건축물대장표제부',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <BackIcon onPress={() => navigation.goBack()} />
-            </View>
-          ),
-        })}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="BuildingInfo"

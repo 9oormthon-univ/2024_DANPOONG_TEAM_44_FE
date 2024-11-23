@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {
   View,
@@ -19,55 +19,86 @@ import {
 } from '../../assets/icons/iconSvg';
 import DropdownMenu from '../../components/common/DropdownMenu';
 import DeletePost from '../../components/modal/DeletePost';
-import { posts } from '../../constants/mockData';
+import { requestGetFetch, requestDeleteFetch } from '../../services/apiService';
 
 function ViewPost() {
   const navigation = useNavigation();
   const route = useRoute();
   const { id } = route.params || {};
 
+  const [post, setPost] = useState(null);
+  const [username, setUsername] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // 현재 로그인된 사용자 ID (임시)
-  const userId = '1';
+  useHideBottomTabs(navigation);
 
-  const post = posts.find(item => item.id === id);
+  const fetchPostDetail = async () => {
+    try {
+      const response = await requestGetFetch(`/posts/${id}`);
+      if (response.success) {
+        setPost(response.data);
+      }
+    } catch (error) {
+      console.error('게시물 상세 데이터 가져오기 실패:', error);
+    }
+  };
+
+  const fetchUserInfo = async () => {
+    try {
+      const response = await requestGetFetch('/userInfo');
+      setUsername(response.username);
+    } catch (error) {
+      console.error('사용자 정보 가져오기 실패:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostDetail();
+    fetchUserInfo();
+  }, [id]);
 
   if (!post) {
     return (
       <SafeAreaView style={styles.container}>
         <Header showBackButton={true} onBackPress={() => navigation.goBack()} />
         <View style={styles.errorContainer}>
-          <Text>Error : 게시물을 찾을 수 없습니다.</Text>
+          <Text>게시물을 불러오는 중입니다...</Text>
         </View>
       </SafeAreaView>
     );
   }
-
-  useHideBottomTabs(navigation);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
   const handleEdit = () => {
-    navigation.navigate('WritePost');
+    navigation.navigate('WritePost', { id });
     setShowDropdown(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setShowDropdown(false);
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = () => {
-    setShowDeleteModal(false);
-    navigation.goBack();
+  const confirmDelete = async () => {
+    try {
+      setShowDeleteModal(false);
+      const response = await requestDeleteFetch(`/posts/${id}`);
+      if (response.success) {
+        navigation.navigate('Community');
+      } else {
+        throw new Error('삭제 실패');
+      }
+    } catch (error) {
+      console.error('게시물 삭제 실패:', error);
+    }
   };
 
   const rightIcons =
-    post.authorId === userId
+    post.authorName === username
       ? [
           {
             icon: showDropdown ? OptionLIcon : OptionIcon,
@@ -75,6 +106,11 @@ function ViewPost() {
           },
         ]
       : [];
+
+  const images =
+    post.imageFileData && post.imageFileData.length > 0
+      ? post.imageFileData
+      : null;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -91,21 +127,30 @@ function ViewPost() {
             onClose={() => setShowDropdown(false)}
           />
         )}
-        <ImageSlider images={post.images} />
+        {images ? (
+          <ImageSlider images={images} />
+        ) : (
+          <View style={styles.placeholderImage}>
+            <Text style={styles.placeholderText}>No Images</Text>
+          </View>
+        )}
 
         <View style={styles.contentContainer}>
           <View style={styles.infoSection}>
             <UserMiddle />
             <View style={styles.authorInfo}>
-              <Text style={styles.authText}>{post.authorName}</Text>
+              <Text style={styles.authText}>{post.authorName || '익명'}</Text>
               <View style={styles.dateLocationRow}>
                 <Text style={styles.dateText}>
                   {formatDateToSlash(post.createdDate)}
                 </Text>
-                <Text style={styles.locationText}>{post.location}</Text>
+                <Text style={styles.locationText}>
+                  {post.domain || '위치 정보 없음'}
+                </Text>
               </View>
             </View>
           </View>
+          <View style={styles.divider} />
 
           <View style={styles.contentPlaceholder}>
             <Text style={styles.titleText}>{post.title}</Text>
@@ -116,14 +161,16 @@ function ViewPost() {
             <Text>카카오 맵</Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.connectButton}
-            onPress={() =>
-              navigation.navigate('Chat', { id, author: post.authorName })
-            }
-          >
-            <Text style={styles.connectButtonText}>사용자와 연결</Text>
-          </TouchableOpacity>
+          {post.authorName !== username && (
+            <TouchableOpacity
+              style={styles.connectButton}
+              onPress={() =>
+                navigation.navigate('Chat', { id, author: post.authorName })
+              }
+            >
+              <Text style={styles.connectButtonText}>사용자와 연결</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
 
@@ -151,6 +198,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  placeholderImage: {
+    height: 200,
+    backgroundColor: '#D9D9D9',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius: 8,
+  },
+  placeholderText: {
+    fontSize: 16,
+    color: '#868686',
+  },
   contentContainer: {
     width: '100%',
     paddingHorizontal: 32,
@@ -165,8 +224,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   authText: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#3F3F3F',
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     marginBottom: 4,
   },
   dateLocationRow: {
@@ -174,12 +234,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  divider: {
+    height: 1,
+    backgroundColor: '#eeeeee',
+    width: '100%',
+    marginVertical: 20,
+  },
   dateText: {
-    fontSize: 14,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#585858',
   },
   locationText: {
-    fontSize: 14,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#585858',
     textAlign: 'right',
   },
@@ -189,17 +257,20 @@ const styles = StyleSheet.create({
     paddingBottom: 42,
   },
   titleText: {
-    fontSize: 24,
+    fontSize: 20,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#3F3F3F',
     marginBottom: 20,
   },
   contentText: {
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#868686',
   },
   kakaoMap: {
     height: 130,
     backgroundColor: '#D9D9D9',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -207,6 +278,7 @@ const styles = StyleSheet.create({
   },
   kakaoText: {
     fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#000000',
   },
   connectButton: {
@@ -219,6 +291,7 @@ const styles = StyleSheet.create({
   },
   connectButtonText: {
     fontSize: 16,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#FFFFFF',
   },
 });

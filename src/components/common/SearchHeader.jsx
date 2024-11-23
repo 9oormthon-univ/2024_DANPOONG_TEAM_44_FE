@@ -71,9 +71,10 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 12,
     color: '#333333',
     paddingHorizontal: 12,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
   },
   searchButton: {
     paddingHorizontal: 8,

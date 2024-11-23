@@ -11,14 +11,16 @@ function CommunityItem({ item, onPress, showAuthor = true }) {
         <Image
           style={styles.image}
           source={{
-            uri: Array.isArray(item.images) ? item.images[0] : item.images,
+            uri: item.image?.fileData
+              ? `data:image/jpeg;base64,${item.image.fileData}`
+              : 'https://via.placeholder.com/140x120.png?text=No+Image',
           }}
         />
         <View style={styles.textContainer}>
           <Text style={styles.title} numberOfLines={2}>
             {item.title}
           </Text>
-          <Text style={styles.location}>{item.location}</Text>
+          <Text style={styles.location}>{item.domain || '위치 정보 없음'}</Text>
           <View
             style={[styles.footerContainer, !showAuthor && styles.noAuthor]}
           >
@@ -41,13 +43,13 @@ function CommunityItem({ item, onPress, showAuthor = true }) {
 CommunityItem.propTypes = {
   item: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
+    domain: PropTypes.string,
     authorName: PropTypes.string.isRequired,
     createdDate: PropTypes.string.isRequired,
-    images: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.string),
-      PropTypes.string,
-    ]).isRequired,
+    image: PropTypes.shape({
+      fileName: PropTypes.string.isRequired,
+      fileData: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   onPress: PropTypes.func.isRequired,
   showAuthor: PropTypes.bool,
@@ -66,8 +68,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 140,
-    height: 120,
+    width: 110,
+    height: 100,
     borderRadius: 8,
     backgroundColor: '#D9D9D9',
   },
@@ -78,14 +80,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 17,
+    fontFamily: 'SpoqaHanSansNeo-Medium',
     color: '#000000',
     marginBottom: 8,
   },
   location: {
-    fontSize: 13,
+    fontSize: 11,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginBottom: 16,
   },
   footerContainer: {
@@ -104,10 +107,12 @@ const styles = StyleSheet.create({
   author: {
     fontSize: 13,
     color: '#868686',
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     marginLeft: 4,
   },
   date: {
-    fontSize: 13,
+    fontSize: 10,
+    fontFamily: 'SpoqaHanSansNeo-Regular',
     color: '#868686',
   },
 });

@@ -5,43 +5,22 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  Alert,
 } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import Config from 'react-native-config';
 
 function Signupnickname() {
   const navigation = useNavigation();
-
   const [username, setUsername] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
-  // 닉네임 중복 검사 함수
-  const checkNickname = async () => {
-    try {
-      const response = await fetch(`http://${Config.SERVER_URL}/signup`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
-      });
-      console.log('응답 상태:', response.status);
-
-      if (response.ok) {
-        const result = await response.json();
-        if (result.isAvailable) {
-          setErrorMessage('');
-          navigation.navigate('SignupArea', { username });
-        } else {
-          setErrorMessage('중복되는 닉네임입니다. 다른 닉네임을 입력해주세요.');
-        }
-      } else {
-        throw new Error('서버 오류');
-      }
-    } catch (error) {
-      console.error('닉네임 중복 확인 오류:', error);
-      Alert.alert('오류', '닉네임 중복 확인 중 문제가 발생했습니다.');
+  const handleNext = () => {
+    if (!username.trim()) {
+      alert('닉네임을 입력해주세요!');
+      return;
     }
+
+    // 닉네임을 다음 화면으로 전달
+    navigation.navigate('SignupArea', { username });
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -53,7 +32,7 @@ function Signupnickname() {
         placeholderTextColor="#999"
         onChangeText={setUsername}
       />
-      <TouchableOpacity style={styles.button} onPress={checkNickname}>
+      <TouchableOpacity style={styles.button} onPress={handleNext}>
         <Text style={styles.buttonText}>다음(1/3)</Text>
       </TouchableOpacity>
     </SafeAreaView>

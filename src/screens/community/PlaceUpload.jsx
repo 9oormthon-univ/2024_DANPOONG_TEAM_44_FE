@@ -5,27 +5,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchHeader from '../../components/common/SearchHeader';
 import useHideBottomTabs from '../../hooks/useHideBottomTabs';
 import AddressItem from '../../components/community/AddressItem';
-import { adress } from '../../constants/mockData';
+import useKakaoPlaceSearch from '../../hooks/useKakaoPlaceSearch';
 
 function PlaceUpload() {
   const navigation = useNavigation();
   const route = useRoute();
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState(adress);
 
+  const { filteredPosts, searchKakaoPlaces } = useKakaoPlaceSearch();
   useHideBottomTabs(navigation);
 
   const handleSearch = () => {
-    const results = adress.filter(
-      post =>
-        post.title.includes(searchQuery) || post.content.includes(searchQuery),
-    );
-    setFilteredPosts(results);
+    searchKakaoPlaces(searchQuery);
   };
-
-  const handleSelect = id => {
+  const handleSelect = (id, latitude, longitude, roadAddress) => {
     if (route.params?.onSelect) {
-      route.params.onSelect(id);
+      route.params.onSelect({ id, latitude, longitude, roadAddress });
     }
     navigation.goBack();
   };
@@ -43,7 +38,17 @@ function PlaceUpload() {
           />
         }
         renderItem={({ item }) => (
-          <AddressItem item={item} onPress={() => handleSelect(item.id)} />
+          <AddressItem
+            item={item}
+            onPress={() =>
+              handleSelect(
+                item.id,
+                item.latitude,
+                item.longitude,
+                item.roadAddress,
+              )
+            }
+          />
         )}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}

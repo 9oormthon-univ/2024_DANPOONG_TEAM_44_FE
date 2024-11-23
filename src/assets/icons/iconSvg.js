@@ -143,6 +143,13 @@ const warning = `
   </svg>
 `;
 
+const place_mini = `
+  <svg width="27" height="34" viewBox="0 0 27 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4.57343 22.2438L4.57334 22.2436C2.39519 18.9809 1.4141 16.1674 1.4141 13.7671C1.4141 10.1186 2.59706 7.19926 4.92593 4.89501L4.92599 4.89495C7.2761 2.5694 10.1058 1.4141 13.5 1.4141C16.8942 1.4141 19.7239 2.5694 22.074 4.89495L22.0741 4.89501C24.4029 7.19926 25.5859 10.1185 25.5859 13.7671C25.5859 16.1674 24.6048 18.9809 22.4267 22.2436L22.4266 22.2438C20.4101 25.2651 17.447 28.5538 13.5 32.1083C9.55298 28.5538 6.58991 25.2651 4.57343 22.2438Z" fill="#0080FF" stroke="#0080FF" stroke-width="2.82821"/>
+    <path d="M20.5545 13.0525C20.5545 16.6685 17.4872 19.6952 13.5835 19.6952C9.6798 19.6952 6.61253 16.6685 6.61253 13.0525C6.61253 9.43646 9.6798 6.40971 13.5835 6.40971C17.4872 6.40971 20.5545 9.43646 20.5545 13.0525Z" fill="#DFEDFF" stroke="#0080FF" stroke-width="2.82821"/>
+  </svg>
+`;
+
 export const BackIconR = () => <SvgXml xml={back} />;
 export const SearchIcon = () => <SvgXml xml={search} />;
 export const WriteIcon = () => <SvgXml xml={write} />;
@@ -162,6 +169,7 @@ export const OptionLIcon = () => <SvgXml xml={option_l} />;
 export const EditIcon = () => <SvgXml xml={edit} />;
 export const DeleteIcon = () => <SvgXml xml={deleteIcon} />;
 export const WarningIcon = () => <SvgXml xml={warning} />;
+export const PlaceMiniIcon = () => <SvgXml xml={place_mini} />;
 
 export const BackIcon = ({ onPress }) => (
   <SvgXml xml={back} onPress={onPress} />
