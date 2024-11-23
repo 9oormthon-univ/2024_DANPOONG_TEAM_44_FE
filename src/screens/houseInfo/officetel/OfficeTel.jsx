@@ -15,21 +15,21 @@ import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
 
 const OfficeTel = () => {
   const navigation = useNavigation();
-  const [city, setCity] = useState('서울시');
-  const [district, setDistrict] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
+  const [city, setCity] = useState('서울특별시');
+  const [cggNm, setDistrict] = useState('');
+  const [stdgNm, setNeighborhood] = useState('');
   useHideBottomTabs(navigation);
 
   const handleNext = () => {
-    if (!city || !district || !neighborhood) {
+    if (!city || !cggNm || !stdgNm) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
 
-    navigation.navigate('OfficeTelInfo', {
+    navigation.navigate('ApartmentInfo', {
       city,
-      district,
-      neighborhood,
+      district: cggNm,
+      neighborhood: stdgNm,
     });
   };
 
@@ -44,30 +44,33 @@ const OfficeTel = () => {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.header}>
-            <Text style={styles.title}>오피스텔 시세</Text>
+            <Text style={styles.title}>다세대 시세</Text>
           </View>
 
           <View style={styles.inputContainer}>
+            {/* City Input */}
             <TextInput
               style={styles.input}
               value={city}
               onChangeText={setCity}
-              editable={false}
+              editable={false} // 서울시는 고정
             />
 
+            {/* District Input */}
             <TextInput
               style={styles.input}
               placeholder="구"
               placeholderTextColor="#B0B0B0"
-              value={district}
+              value={cggNm}
               onChangeText={setDistrict}
             />
 
+            {/* Neighborhood Input */}
             <TextInput
               style={styles.input}
               placeholder="동"
               placeholderTextColor="#B0B0B0"
-              value={neighborhood}
+              value={stdgNm}
               onChangeText={setNeighborhood}
             />
           </View>

@@ -15,21 +15,21 @@ import useHideBottomTabs from '../../../hooks/useHideBottomTabs';
 
 const Apartment = () => {
   const navigation = useNavigation();
-  const [city, setCity] = useState('서울시');
-  const [district, setDistrict] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
+  const [city, setCity] = useState('서울특별시');
+  const [cggNm, setDistrict] = useState('');
+  const [stdgNm, setNeighborhood] = useState('');
   useHideBottomTabs(navigation);
 
   const handleNext = () => {
-    if (!city || !district || !neighborhood) {
+    if (!city || !cggNm || !stdgNm) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
 
     navigation.navigate('ApartmentInfo', {
       city,
-      district,
-      neighborhood,
+      district: cggNm,
+      neighborhood: stdgNm,
     });
   };
 
@@ -61,7 +61,7 @@ const Apartment = () => {
               style={styles.input}
               placeholder="구"
               placeholderTextColor="#B0B0B0"
-              value={district}
+              value={cggNm}
               onChangeText={setDistrict}
             />
 
@@ -70,16 +70,12 @@ const Apartment = () => {
               style={styles.input}
               placeholder="동"
               placeholderTextColor="#B0B0B0"
-              value={neighborhood}
+              value={stdgNm}
               onChangeText={setNeighborhood}
             />
           </View>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleNext}
-            // onPress={() => navigation.navigate('ApartmentInfo')}
-          >
+          <TouchableOpacity style={styles.button} onPress={handleNext}>
             <Text style={styles.buttonText}>다음</Text>
           </TouchableOpacity>
         </ScrollView>
